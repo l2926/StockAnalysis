@@ -49,7 +49,7 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.ts_code = '000001.sz';
+        where a.ts_code = #{tsCode};;
     </select>
 
     <select id="selectFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
@@ -71,7 +71,7 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.ts_code = '000001.sz';
+        where a.ts_code = #{tsCode};;
     </select>
 
     <select id="selectCompanyInfo" resultType="com.example.springboot.industry.vo.resp.CompanyInfoResp">
@@ -100,7 +100,7 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.ts_code = '000001.sz';
+        where a.ts_code = #{tsCode};
     </select>
 
 
