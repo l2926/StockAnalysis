@@ -84,7 +84,24 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.pct_chg > 9 order by industry_name_l1, total_mv desc;
+        <where>
+            <if test="selectId == 1">
+                a.pct_chg > 9
+            </if>
+            <if test="selectId == 2">
+                a.up10_count5 > 1
+            </if>
+            <if test="selectId == 3">
+                a.up10_count10 > 2
+            </if>
+            <if test="selectId == 4">
+                a.up10_count15 > 2
+            </if>
+            <if test="selectId == 5">
+                a.up10_count20 > 3
+            </if>
+        </where>
+        order by industry_name_l1, total_mv desc;
     </select>
 
     <select id="getFinaMain2" resultType="com.example.springboot.industry.vo.resp.FinaMain2Resp">
@@ -105,7 +122,24 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.pct_chg > 9 order by industry_name_l1, total_mv desc;
+        <where>
+            <if test="selectId == 1">
+                a.pct_chg > 9
+            </if>
+            <if test="selectId == 2">
+                a.up10_count5 > 1
+            </if>
+            <if test="selectId == 3">
+                a.up10_count10 > 2
+            </if>
+            <if test="selectId == 4">
+                a.up10_count15 > 2
+            </if>
+            <if test="selectId == 5">
+                a.up10_count20 > 3
+            </if>
+        </where>
+        order by industry_name_l1, total_mv desc;
     </select>
 
     <select id="getFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
@@ -127,7 +161,24 @@
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
-        where a.pct_chg > 9 order by industry_name_l1, total_mv desc;
+        <where>
+            <if test="selectId == 1">
+                a.pct_chg > 9
+            </if>
+            <if test="selectId == 2">
+                a.up10_count5 > 1
+            </if>
+            <if test="selectId == 3">
+                a.up10_count10 > 2
+            </if>
+            <if test="selectId == 4">
+                a.up10_count15 > 2
+            </if>
+            <if test="selectId == 5">
+                a.up10_count20 > 3
+            </if>
+        </where>
+        order by industry_name_l1, total_mv desc;
     </select>
 
 
@@ -243,8 +294,9 @@
                 a.up10_count20 > 3
             </if>
         </where>
+        order by industry_name_l1, total_mv desc
     </select>
-
+    <!--资金流向-->
     <select id="selectMoneyFlow" resultType="com.example.springboot.analysis.vo.resp.MoneyFlowResp">
         select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,net_mf_amount,a.pb,
                a.pct_chg,c.buy_elg_amount,c.buy_lg_amount,c.buy_md_amount,c.buy_sm_amount,a.trade_date,
@@ -271,8 +323,10 @@
                 a.up10_count20 > 3
             </if>
         </where>
+        order by industry_name_l1, total_mv desc
     </select>
-    
+
+    <!--  开盘啦涨停板  -->
     <select id="selectLimitBoard" resultType="com.example.springboot.analysis.vo.resp.LimitBoardResp">
         select a.ts_code,a.name,a.trade_date,a.lu_time,a.last_time, a.lu_desc,a.theme,a.status,b.total_mv,b.trade_date,
                c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,c.market,b.pb
