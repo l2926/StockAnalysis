@@ -47,13 +47,13 @@ public interface MarketService {
     /**
      * 获取该股票的主营业务2
      */
-    FinaMain2Resp getFinaMain2(MarketReq marketReq);
+    List<FinaMain2Resp> getFinaMain2(MarketReq marketReq);
     /**
      * 获取该股票的主营业务3
      */
-    FinaMain3Resp getFinaMain3(MarketReq marketReq);
+    List<FinaMain3Resp> getFinaMain3(MarketReq marketReq);
     /**
      * 获取该股票的公司信息
      */
-    CompanyInfoResp getCompanyInfo(MarketReq marketReq);
+    List<CompanyInfoResp> getCompanyInfo(MarketReq marketReq);
 }

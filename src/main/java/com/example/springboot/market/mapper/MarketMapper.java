@@ -60,17 +60,17 @@ public interface MarketMapper {
      * @param marketReq
      * @return
      */
-    FinaMain2Resp selectFinaMain2(MarketReq marketReq);
+    List<FinaMain2Resp> selectFinaMain2(MarketReq marketReq);
     /**
      * 主营业务3
      * @param marketReq
      * @return
      */
-    FinaMain3Resp selectFinaMain3(MarketReq marketReq);
+    List<FinaMain3Resp> selectFinaMain3(MarketReq marketReq);
     /**
      * 公司信心
      * @param marketReq
      * @return
      */
-    CompanyInfoResp selectCompanyInfo(MarketReq marketReq);
+    List<CompanyInfoResp> selectCompanyInfo(MarketReq marketReq);
 }

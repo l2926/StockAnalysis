@@ -63,19 +63,19 @@ public class MarketController {
     }
 
     @PostMapping("fina_mian2")
-    public FinaMain2Resp getFinaMain2(@RequestBody MarketReq marketReq){
+    public List<FinaMain2Resp> getFinaMain2(@RequestBody MarketReq marketReq){
         System.out.println("-----fina_main2 market controller----");
         return marketService.getFinaMain2(marketReq);
     }
 
     @PostMapping("fina_mian3")
-    public FinaMain3Resp getFinaMain3(@RequestBody MarketReq marketReq){
+    public List<FinaMain3Resp> getFinaMain3(@RequestBody MarketReq marketReq){
         System.out.println("-----fina_main3 market controller----");
         return marketService.getFinaMain3(marketReq);
     }
 
     @PostMapping("company_info")
-    public CompanyInfoResp getCompanyInfo(@RequestBody MarketReq marketReq){
+    public List<CompanyInfoResp> getCompanyInfo(@RequestBody MarketReq marketReq){
         System.out.println("-----company_info market controller----");
         return marketService.getCompanyInfo(marketReq);
     }

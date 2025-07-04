@@ -267,60 +267,60 @@ public class MarketServiceImpl implements MarketService {
     }
 
     @Override
-    public FinaMain2Resp getFinaMain2(MarketReq marketReq){
+    public List<FinaMain2Resp> getFinaMain2(MarketReq marketReq){
         System.out.println("----fina_main2 market service----");
-        FinaMain2Resp finaMain2Resp = marketMapper.selectFinaMain2(marketReq);
-        finaMain2Resp.setIdx(1);
-        finaMain2Resp.setTotalMv(Double.parseDouble(String.format("%.2f",finaMain2Resp.getTotalMv() / 10000)));
+        List<FinaMain2Resp> finaMain2RespList = marketMapper.selectFinaMain2(marketReq);
+        finaMain2RespList.get(0).setIdx(1);
+        finaMain2RespList.get(0).setTotalMv(Double.parseDouble(String.format("%.2f",finaMain2RespList.get(0).getTotalMv() / 10000)));
         try{
             //计算净资产
-            if(finaMain2Resp.getPb() != 0){
-                finaMain2Resp.setAsset(Double.parseDouble(String.format("%.2f",finaMain2Resp.getTotalMv() / finaMain2Resp.getPb())));
+            if(finaMain2RespList.get(0).getPb() != 0){
+                finaMain2RespList.get(0).setAsset(Double.parseDouble(String.format("%.2f",finaMain2RespList.get(0).getTotalMv() / finaMain2RespList.get(0).getPb())));
             }
         }catch (Exception e){
             System.out.println("pb为0:" + e.getMessage());
         }
-        finaMain2Resp.setPb(0.0);
-        return finaMain2Resp;
+        finaMain2RespList.get(0).setPb(0.0);
+        return finaMain2RespList;
     }
 
     @Override
-    public FinaMain3Resp getFinaMain3(MarketReq marketReq){
+    public List<FinaMain3Resp> getFinaMain3(MarketReq marketReq){
         System.out.println("----fina_main3 market service----");
-        FinaMain3Resp finaMain3Resp = marketMapper.selectFinaMain3(marketReq);
+        List<FinaMain3Resp> finaMain3RespList = marketMapper.selectFinaMain3(marketReq);
 
-        finaMain3Resp.setIdx(1);
-        finaMain3Resp.setTotalMv(Double.parseDouble(String.format("%.2f",finaMain3Resp.getTotalMv() / 10000)));
+        finaMain3RespList.get(0).setIdx(1);
+        finaMain3RespList.get(0).setTotalMv(Double.parseDouble(String.format("%.2f",finaMain3RespList.get(0).getTotalMv() / 10000)));
         try{
             //计算净资产
-            if(finaMain3Resp.getPb() != 0){
-                finaMain3Resp.setAsset(Double.parseDouble(String.format("%.2f",finaMain3Resp.getTotalMv() / finaMain3Resp.getPb())));
+            if(finaMain3RespList.get(0).getPb() != 0){
+                finaMain3RespList.get(0).setAsset(Double.parseDouble(String.format("%.2f",finaMain3RespList.get(0).getTotalMv() / finaMain3RespList.get(0).getPb())));
             }
         }catch (Exception e){
             System.out.println("pb为0:" + e.getMessage());
         }
-        finaMain3Resp.setPb(0.0);
+        finaMain3RespList.get(0).setPb(0.0);
 
-        return finaMain3Resp;
+        return finaMain3RespList;
     }
 
     @Override
-    public CompanyInfoResp getCompanyInfo(MarketReq marketReq){
+    public List<CompanyInfoResp> getCompanyInfo(MarketReq marketReq){
         System.out.println("----company_info market service----");
-        CompanyInfoResp companyInfoResp = marketMapper.selectCompanyInfo(marketReq);
+        List<CompanyInfoResp> companyInfoRespList = marketMapper.selectCompanyInfo(marketReq);
 
-        companyInfoResp.setIdx(1);
-        companyInfoResp.setTotalMv(Double.parseDouble(String.format("%.2f",companyInfoResp.getTotalMv() / 10000)));
+        companyInfoRespList.get(0).setIdx(1);
+        companyInfoRespList.get(0).setTotalMv(Double.parseDouble(String.format("%.2f",companyInfoRespList.get(0).getTotalMv() / 10000)));
         try{
             //计算净资产
-            if(companyInfoResp.getPb() != 0){
-                companyInfoResp.setAsset(Double.parseDouble(String.format("%.2f",companyInfoResp.getTotalMv() / companyInfoResp.getPb())));
+            if(companyInfoRespList.get(0).getPb() != 0){
+                companyInfoRespList.get(0).setAsset(Double.parseDouble(String.format("%.2f",companyInfoRespList.get(0).getTotalMv() / companyInfoRespList.get(0).getPb())));
             }
         }catch (Exception e){
             System.out.println("pb为0:" + e.getMessage());
         }
-        companyInfoResp.setPb(0.0);
+        companyInfoRespList.get(0).setPb(0.0);
 
-        return companyInfoResp;
+        return companyInfoRespList;
     }
 }
