@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springboot.index.mapper.IndexMapper">
+    <select id="selectCount" resultType="Integer">
+        <if test="selectId == 1">
+            select count(*)
+            from stock_list.stock_list
+        </if>
+
+        <if test="selectId == 2">
+            select count(*) from dc_index.`20250109` t
+        </if>
+    </select>
+
+<!--日线-->
+    <select id="selectDaily" resultType="com.example.springboot.index.vo.vo.DailyVo">
+        select *
+        from daily_index.`${symbol}`
+        where trade_date > '2010-01-01'
+        order by trade_date asc;
+    </select>
+
+<!--统计-->
+    <select id="selectAllCommon" resultType="com.example.springboot.index.vo.vo.StatisticCommon">
+        select a.ts_code,pct_chg,index_code_l1,index_code_l2,index_code_l3,total_mv
+        from common_daily.`${tradeDate}` as a inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+        <where>
+            <if test="blockId == 2">
+                market = '主板'
+            </if>
+            <if test="blockId == 3">
+                market = '创业板'
+            </if>
+            <if test="blockId == 4">
+                market = '科创板'
+            </if>
+            <if test="blockId == 5">
+                market = '北交所'
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSwAllIndustry" resultType="com.example.springboot.index.vo.resp.StatisticResp">
+        select index_code,industry_name,level,b.pct_change
+        from stock_list.industry_list as a inner join shenwan_daily.`${tradeDate}` as b on a.index_code = b.ts_code
+        where level = #{level};
+    </select>
+
+<!--统计所有-->
+    <select id="selectSwAllIndustry2" resultType="com.example.springboot.index.vo.resp.StatisticAllResp">
+        select index_code,industry_name,level,b.pb,b.total_mv
+        from stock_list.industry_list as a inner join shenwan_daily.`${tradeDate}` as b on a.index_code = b.ts_code
+        where level = #{level};
+    </select>
+
+<!--  开盘啦概念统计  -->
+    <select id="selectKplConcept" resultType="com.example.springboot.index.vo.resp.KplConceptResp">
+        select * from kpl_concept.`${tradeDate}` t ;
+    </select>
+
+<!--  开盘啦成员统计  -->
+    <select id="selectKplConceptCons" resultType="com.example.springboot.index.vo.resp.KplConceptConsResp">
+        select b.ts_code,a.name as concept_name,c.name,a.desc,a.hot_num,c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
+               b.pct_chg,b.`close`,b.trade_date,b.total_mv,b.pb,c.market
+        from kpl_concept_cons.`${tradeDate}` as a
+                 left join common_daily.`${tradeDate}` as b
+                           on a.con_code = b.ts_code
+                 left join stock_list.industry_member as c
+                           on b.ts_code = c.ts_code
+        where a.name= #{name}
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+    </select>
+
+<!--  东方财富概念统计  -->
+    <select id="selectDcIndex" resultType="com.example.springboot.index.vo.resp.DcIndexResp">
+        select * from dc_index.`${tradeDate}` t ;
+    </select>
+
+<!--  东方财富概念成员统计  -->
+    <select id="selectDcMember" resultType="com.example.springboot.index.vo.resp.DcMemberResp">
+        select a.concept_name,a.con_code,a.name,a.trade_date,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,
+               c.pct_chg,c.pb,c.pe,c.ps,c.amount,c.turnover_rate,c.total_mv
+        from dc_member.`${tradeDate}` as a
+                 left join stock_list.industry_member as b on a.con_code = b.ts_code
+                 left join common_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where a.concept_name=#{name};
+    </select>
+
+
+<!--  主营业务2  -->
+    <select id="selectFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
+        <if test="selectId == 1">
+            select a.name as concept_name,a.con_name as name,a.con_code as ts_code,b.pb,b.total_mv ,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
+            d.province,d.city,d.main_business,d.business_scope,b.trade_date
+            from kpl_concept_cons.`20250109` as a
+            left join common_daily.`20250109` as b on a.con_code = b.ts_code
+            left join stock_list.industry_member as c on b.ts_code = c.ts_code
+            left join stock_list.stock_company as d on c.ts_code = d.ts_code
+            where a.ts_code='000025.KP';
+        </if>
+
+        <if test="selectId == 2">
+            select a.concept_name,a.name,a.con_code as ts_code,b.pb,b.total_mv,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
+            d.province,d.city,d.main_business,d.business_scope,b.trade_date
+            from dc_member.`20250109` as a
+            left join common_daily.`20250109` as b on a.con_code = b.ts_code
+            left join stock_list.industry_member as c on b.ts_code = c.ts_code
+            left join stock_list.stock_company as d on c.ts_code = d.ts_code
+            where a.ts_code='BK1186.DC';
+        </if>
+
+    </select>
+</mapper>
