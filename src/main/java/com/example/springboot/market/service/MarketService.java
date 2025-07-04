@@ -1,5 +1,8 @@
 package com.example.springboot.market.service;
 
+import com.example.springboot.industry.vo.resp.CompanyInfoResp;
+import com.example.springboot.industry.vo.resp.FinaMain2Resp;
+import com.example.springboot.industry.vo.resp.FinaMain3Resp;
 import com.example.springboot.market.vo.req.MarketReq;
 import com.example.springboot.market.vo.resp.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,4 +44,16 @@ public interface MarketService {
      * 获取某股票、某日的资金流向数据
      */
     MoneyFlowResp getMoneyFlow(MarketReq marketReq);
+    /**
+     * 获取该股票的主营业务2
+     */
+    FinaMain2Resp getFinaMain2(MarketReq marketReq);
+    /**
+     * 获取该股票的主营业务3
+     */
+    FinaMain3Resp getFinaMain3(MarketReq marketReq);
+    /**
+     * 获取该股票的公司信息
+     */
+    CompanyInfoResp getCompanyInfo(MarketReq marketReq);
 }
