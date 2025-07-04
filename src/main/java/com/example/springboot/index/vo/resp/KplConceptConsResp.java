@@ -24,7 +24,9 @@ public class KplConceptConsResp {
     private String industryNameL3;
     private Double pctChg;
     private Double close;
-    private String tradeDate;
     private Double pb;
     private String market;
+    private Double totalMv;
+    private Double assets;
+    private String tradeDate;
 }

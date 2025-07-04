@@ -193,6 +193,24 @@ public class IndexServiceImpl implements IndexService {
     public List<KplConceptConsResp> getKplConceptCons(ConceptMemberReq conceptMemberReq){
         System.out.println("----kpl_concept_cons service----");
         List<KplConceptConsResp> kplConceptConsRespList = indexMapper.selectKplConceptCons(conceptMemberReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        kplConceptConsRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+            }
+
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
+
+            if(resp.getTotalMv() != null && resp.getPb() != null && resp.getPb() != 0){
+                resp.setAssets(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }else{
+                resp.setAssets(0.0);
+            }
+        });
         return kplConceptConsRespList;
     }
 
