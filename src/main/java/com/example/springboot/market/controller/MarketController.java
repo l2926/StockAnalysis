@@ -1,5 +1,6 @@
 package com.example.springboot.market.controller;
 
+import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.market.service.MarketService;
 import com.example.springboot.market.vo.req.MarketReq;
 import com.example.springboot.market.vo.resp.*;
@@ -57,5 +58,23 @@ public class MarketController {
     public MoneyFlowResp getMoneyFlow(@RequestBody MarketReq marketReq){
         System.out.println("----money_flow market controller----");
         return marketService.getMoneyFlow(marketReq);
+    }
+
+    @PostMapping("fina_mian2")
+    public FinaMain2Resp getFinaMain2(@RequestBody MarketReq marketReq){
+        System.out.println("-----fina_main2 market controller----");
+        return null;
+    }
+
+    @PostMapping("fina_mian3")
+    public FinaMain2Resp getFinaMain3(@RequestBody MarketReq marketReq){
+        System.out.println("-----fina_main3 market controller----");
+        return null;
+    }
+
+    @PostMapping("company_info")
+    public FinaMain2Resp getCompanyInfo(@RequestBody MarketReq marketReq){
+        System.out.println("-----company_info market controller----");
+        return null;
     }
 }
