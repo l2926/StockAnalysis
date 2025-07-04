@@ -202,6 +202,7 @@
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 
+    <!--  十日行情统计  -->
     <select id="getTenDaysMarket" resultType="com.example.springboot.analysis.vo.resp.TenDaysMarketResp">
         select t.ts_code,
                sl.name,
@@ -256,7 +257,8 @@
 
     <!--  前100市值  -->
     <select id="getTop100" resultType="com.example.springboot.analysis.vo.resp.Top100Resp">
-        select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,a.pct_chg,a.close,a.pe,a.pb,a.ps,a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date
+        select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,a.pct_chg,a.close,a.pe_ttm,a.pb,a.ps_ttm,a.turnover_rate,a.amount,
+               b.market,a.total_mv,a.trade_date,a.up10_count5,a.up10_count20
         from common_daily.`20250109` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
         order by

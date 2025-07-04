@@ -307,6 +307,54 @@ public class AnalysisServiceImpl implements AnalysisService {
     public List<Top100Resp> getTop100(LimitReq limitReq){
         System.out.println("----top100 Service----");
         List<Top100Resp> top100RespList = analysisMapper.getTop100(limitReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        top100RespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null && resp.getPctChg() != 0){
+                resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+            }
+
+            if(resp.getPeTtm() != null && resp.getPeTtm() != 0){
+                resp.setPeTtm(Double.parseDouble(String.format("%.2f",resp.getPeTtm())));
+            }
+
+            if(resp.getPsTtm() != null && resp.getPsTtm() != 0){
+                resp.setPsTtm(Double.parseDouble(String.format("%.2f",resp.getPsTtm())));
+            }
+
+            if(resp.getPb() != null && resp.getPb() != 0){
+                resp.setPb(Double.parseDouble(String.format("%.2f",resp.getPb())));
+            }
+
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
+
+            if(resp.getTurnoverRate() != null){
+                resp.setTurnoverRate(Double.parseDouble(String.format("%.2f",resp.getTurnoverRate())));
+            }
+
+            if(resp.getAmount() != null){
+                resp.setAmount(Double.parseDouble(String.format("%.2f",resp.getAmount() / 100000)));
+            }
+
+            if(resp.getPb() != null && resp.getPb() != 0){
+                resp.setAssets(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+
+            if(resp.getPeTtm() != null && resp.getPeTtm() != 0 && resp.getPsTtm() != null){
+                resp.setProfitRate(Double.parseDouble(String.format("%.2f",resp.getPsTtm() / resp.getPeTtm())));
+            }else{
+                resp.setProfitRate(0.0);
+            }
+
+            if(resp.getPeTtm() != null && resp.getPeTtm() != 0 && resp.getPb() != null){
+                resp.setRoe(Double.parseDouble(String.format("%.2f",resp.getPb() / resp.getPeTtm())));
+            }else{
+                resp.setRoe(0.0);
+            }
+        });
         return top100RespList;
     }
 

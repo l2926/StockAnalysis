@@ -10,19 +10,24 @@ import lombok.Data;
 
 @Data
 public class Top100Resp {
+    private Integer idx;
     private String tsCode;
     private String name;
     private String area;
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
-    private Double pct_chg;
+    private Double pctChg;
     private Double close;
-    private Double pe;
+    private Double peTtm;
     private Double pb;
-    private Double ps;
+    private Double psTtm;
+    private Double roe;
+    private Double profitRate;
     private Double turnoverRate;
     private Double amount;
+    private Integer up10Count5;
+    private Integer up10Count20;
     private String market;
     private Double totalMv;
     private Double assets;
