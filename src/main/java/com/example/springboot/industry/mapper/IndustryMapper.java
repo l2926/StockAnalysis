@@ -25,7 +25,7 @@ public interface IndustryMapper {
     List<TenDaysMarketResp> getTenDaysMarket(IndustryReq industryReq);
     List<CompanyInfoResp> getCompanyInfo(IndustryReq industryReq);
     List<FinaMain2Resp> getFinaMain2(IndustryReq industryReq);
-    List<FinaMain3Resp> getFinaMain3(IndustryReq industryReq);
+    List<FinaMain3Resp> selectFinaMain3(IndustryReq industryReq);
     List<FiveDaysLimitResp> selectFiveDaysLimit(IndustryReq industryReq);
     List<MoneyFlowResp> selectMoneyFlow(IndustryReq industryReq);
 

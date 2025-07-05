@@ -88,7 +88,7 @@
     </select>
 
 
-<!--  主营业务2  -->
+<!--  主营业务3  -->
     <select id="selectFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
         <if test="selectId == 1">
             select a.name as concept_name,a.con_name as name,a.con_code as ts_code,b.pb,b.total_mv ,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,

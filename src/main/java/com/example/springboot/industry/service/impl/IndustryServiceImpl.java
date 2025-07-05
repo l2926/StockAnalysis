@@ -308,7 +308,7 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<FinaMain3Resp> getFinaMain3(IndustryReq industryReq){
         System.out.println("----getFinaMain3 Service----");
-        List<FinaMain3Resp> finaMain3RespList = industryMapper.getFinaMain3(industryReq);
+        List<FinaMain3Resp> finaMain3RespList = industryMapper.selectFinaMain3(industryReq);
 
         AtomicInteger idx = new AtomicInteger(1);
         finaMain3RespList.stream().forEach(resp->{
