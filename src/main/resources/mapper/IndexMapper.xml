@@ -69,7 +69,7 @@
                  left join stock_list.industry_member as c
                            on b.ts_code = c.ts_code
         where a.name= #{name}
-        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+        order by industry_name_l1, total_mv desc
     </select>
 
 <!--  东方财富概念统计  -->
@@ -87,8 +87,18 @@
         where a.concept_name=#{name};
     </select>
 
+    <!--  主营业务2  -->
+    <select id="selectFinaMain2" resultType="com.example.springboot.industry.vo.resp.FinaMain2Resp">
+        select a.name as concept_name,a.con_name as name,a.con_code as ts_code,b.pb,b.total_mv ,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
+               c.province,c.city,c.introduction ,b.trade_date
+        from kpl_concept_cons.`20250109` as a
+                 left join common_daily.`20250109` as b on a.con_code = b.ts_code
+                 left join stock_list.industry_member as c on b.ts_code = c.ts_code
+        where a.name=#{name}
+        order by industry_name_l1, total_mv desc;
+    </select>
 
-<!--  主营业务3  -->
+    <!--  主营业务3  -->
     <select id="selectFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
         <if test="selectId == 1">
             select a.name as concept_name,a.con_name as name,a.con_code as ts_code,b.pb,b.total_mv ,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
@@ -97,18 +107,20 @@
             left join common_daily.`20250109` as b on a.con_code = b.ts_code
             left join stock_list.industry_member as c on b.ts_code = c.ts_code
             left join stock_list.stock_company as d on c.ts_code = d.ts_code
-            where a.ts_code='000025.KP';
+            where a.name=#{name}
+            order by industry_name_l1, total_mv desc;
         </if>
 
-        <if test="selectId == 2">
-            select a.concept_name,a.name,a.con_code as ts_code,b.pb,b.total_mv,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
-            d.province,d.city,d.main_business,d.business_scope,b.trade_date
-            from dc_member.`20250109` as a
-            left join common_daily.`20250109` as b on a.con_code = b.ts_code
-            left join stock_list.industry_member as c on b.ts_code = c.ts_code
-            left join stock_list.stock_company as d on c.ts_code = d.ts_code
-            where a.ts_code='BK1186.DC';
-        </if>
+    </select>
 
+    <!--  公司信息  -->
+    <select id="selectCompanyInfo" resultType="com.example.springboot.industry.vo.resp.CompanyInfoResp">
+        select a.name as concept_name,a.con_name as name,a.con_code as ts_code,b.pb,b.total_mv ,c.market,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,
+               c.province,c.city,c.list_date ,c.act_name ,c.act_ent_type ,c.exchange ,c.reg_capital ,c.setup_date ,c.website,c.com_name  ,b.trade_date
+        from kpl_concept_cons.`20250109` as a
+                 left join common_daily.`20250109` as b on a.con_code = b.ts_code
+                 left join stock_list.industry_member as c on b.ts_code = c.ts_code
+        where a.name=#{name}
+        order by industry_name_l1, total_mv desc;
     </select>
 </mapper>

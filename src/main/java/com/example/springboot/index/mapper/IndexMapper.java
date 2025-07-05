@@ -30,7 +30,7 @@ public interface IndexMapper {
     List<KplConceptConsResp> selectKplConceptCons(ConceptMemberReq conceptMemberReq);
     List<DcIndexResp> selectDcIndex(StatisticsReq statisticsReq);
     List<DcMemberResp> selectDcMember(ConceptMemberReq conceptMemberReq);
-    List<FinaMain2Resp> selectFinaMain2();
+    List<FinaMain2Resp> selectFinaMain2(ConceptMemberReq conceptMemberReq);
     List<FinaMain3Resp> selectFinaMain3(ConceptMemberReq conceptMemberReq);
-    List<CompanyInfoResp> selectCompanyInfo();
+    List<CompanyInfoResp> selectCompanyInfo(ConceptMemberReq conceptMemberReq);
 }

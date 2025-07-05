@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class CompanyInfoResp {
     private Integer idx;
+    private String conceptName;
     private String name;
     private String tradeDate;
     private String tsCode;

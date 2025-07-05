@@ -231,18 +231,21 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public List<FinaMain2Resp> getFinaMain2(ConceptMemberReq conceptMemberReq){
         System.out.println("----fina_main2 service----");
-        return null;
+        List<FinaMain2Resp> finaMain2RespList = indexMapper.selectFinaMain2(conceptMemberReq);
+        return finaMain2RespList;
     }
 
     @Override
     public List<FinaMain3Resp> getFinaMain3(ConceptMemberReq conceptMemberReq){
         System.out.println("----fina_main3 service----");
-        return indexMapper.selectFinaMain3(conceptMemberReq);
+        List<FinaMain3Resp> finaMain3RespList = indexMapper.selectFinaMain3(conceptMemberReq);
+        return finaMain3RespList;
     }
 
     @Override
     public List<CompanyInfoResp> getCompanyInfo(ConceptMemberReq conceptMemberReq){
         System.out.println("----company_info service----");
-        return null;
+        List<CompanyInfoResp> companyInfoRespList = indexMapper.selectCompanyInfo(conceptMemberReq);
+        return companyInfoRespList;
     }
 }
