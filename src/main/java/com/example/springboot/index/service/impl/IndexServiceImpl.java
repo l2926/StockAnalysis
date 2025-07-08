@@ -232,6 +232,18 @@ public class IndexServiceImpl implements IndexService {
     public List<FinaMain2Resp> getFinaMain2(ConceptMemberReq conceptMemberReq){
         System.out.println("----fina_main2 service----");
         List<FinaMain2Resp> finaMain2RespList = indexMapper.selectFinaMain2(conceptMemberReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        finaMain2RespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
+
+            if(resp.getTotalMv() != null && resp.getPb() != null && resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+        });
         return finaMain2RespList;
     }
 
@@ -239,6 +251,18 @@ public class IndexServiceImpl implements IndexService {
     public List<FinaMain3Resp> getFinaMain3(ConceptMemberReq conceptMemberReq){
         System.out.println("----fina_main3 service----");
         List<FinaMain3Resp> finaMain3RespList = indexMapper.selectFinaMain3(conceptMemberReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        finaMain3RespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
+
+            if(resp.getTotalMv() != null && resp.getPb() != null && resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+        });
         return finaMain3RespList;
     }
 
@@ -246,6 +270,18 @@ public class IndexServiceImpl implements IndexService {
     public List<CompanyInfoResp> getCompanyInfo(ConceptMemberReq conceptMemberReq){
         System.out.println("----company_info service----");
         List<CompanyInfoResp> companyInfoRespList = indexMapper.selectCompanyInfo(conceptMemberReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        companyInfoRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
+
+            if(resp.getTotalMv() != null && resp.getPb() != null && resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+        });
         return companyInfoRespList;
     }
 }
