@@ -1,5 +1,9 @@
 package com.example.springboot.index.controller;
 
+import com.example.springboot.analysis.vo.resp.FiveDaysLimitResp;
+import com.example.springboot.analysis.vo.resp.MoneyFlowPctResp;
+import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.service.IndexService;
@@ -84,5 +88,29 @@ public class IndexController {
     public List<CompanyInfoResp> getCompanyInfo(@RequestBody ConceptMemberReq conceptMemberReq){
         System.out.println("----company_info controller----");
         return indexService.getCompanyInfo(conceptMemberReq);
+    }
+
+    @PostMapping("five_days_limit")
+    public List<FiveDaysLimitResp> getFiveDaysLimit(@RequestBody ConceptMemberReq req){
+        System.out.println("----five_days_limit concept_member controller----");
+        return indexService.getFiveDaysLimit(req);
+    }
+
+    @PostMapping("money_flow")
+    public List<MoneyFlowResp> getMoneyFlow(@RequestBody ConceptMemberReq req){
+        System.out.println("----money_flow concept_member controller----");
+        return indexService.getMoneyFlow(req);
+    }
+
+    @PostMapping("money_flow_pct")
+    public List<MoneyFlowPctResp> getMoneyFlowPct(@RequestBody ConceptMemberReq req){
+        System.out.println("----money_flow_pct concept_member controller----");
+        return indexService.getMoneyFlowPct(req);
+    }
+
+    @PostMapping("ten_days_market")
+    public List<TenDaysMarketResp> getTenDays(@RequestBody ConceptMemberReq req){
+        System.out.println("----ten_days concept_member controller----");
+        return indexService.getTenDays(req);
     }
 }

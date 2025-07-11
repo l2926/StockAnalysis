@@ -1,6 +1,10 @@
 package com.example.springboot.index.service;
 
 
+import com.example.springboot.analysis.vo.resp.FiveDaysLimitResp;
+import com.example.springboot.analysis.vo.resp.MoneyFlowPctResp;
+import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
@@ -59,4 +63,20 @@ public interface IndexService {
      * 获取公司信息
      */
     List<CompanyInfoResp> getCompanyInfo(ConceptMemberReq conceptMemberReq);
+    /**
+     * 获取五日涨停统计
+     */
+    List<FiveDaysLimitResp> getFiveDaysLimit(ConceptMemberReq conceptMemberReq);
+    /**
+     * 资金流向
+     */
+    List<MoneyFlowResp> getMoneyFlow(ConceptMemberReq req);
+    /**
+     * 资金流向 百分比
+     */
+    List<MoneyFlowPctResp> getMoneyFlowPct(ConceptMemberReq req);
+    /**
+     * 十日行情统计
+     */
+    List<TenDaysMarketResp> getTenDays(ConceptMemberReq req);
 }

@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class MoneyFlowResp {
     private Integer idx;
+    private String conceptName;
     private String tsCode;
     private String name;
     private String area;

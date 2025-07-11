@@ -41,3 +41,23 @@ from dc_member.`20250109` as a
          left join stock_list.industry_member as c on b.ts_code = c.ts_code
          left join stock_list.stock_company as d on c.ts_code = d.ts_code
 where a.ts_code='BK1186.DC';
+
+
+-- 五日内涨停次数
+select c.name,c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,b.pct_chg,b.close,
+       b.up10_count5,b.up10_count10,b.up10_count15,b.up10_count20,b.down10_count5,b.down10_count10,b.down10_count15,b.down10_count20,
+       b.conti_up,c.market,b.total_mv,b.pb,b.trade_date
+from kpl_concept_cons.`20250109` as a
+         left join common_daily.`20250109` as b on a.con_code = b.ts_code
+         left join stock_list.industry_member as c on b.ts_code = c.ts_code ;
+
+
+-- 开盘啦 资金流向
+select a.name as concept_name,b.ts_code,c.name,c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,b.pct_chg,
+       d.buy_elg_amount,d.buy_lg_amount,d.buy_md_amount,d.buy_sm_amount,d.sell_elg_amount,d.sell_lg_amount,d.sell_md_amount,d.sell_sm_amount,d.net_mf_amount,
+       b.amount,b.turnover_rate,c.market,b.total_mv,b.pb,b.trade_date
+from kpl_concept_cons.`20250109` as a
+         left join common_daily.`20250109` as b on a.con_code = b.ts_code
+         left join stock_list.industry_member as c on b.ts_code = c.ts_code
+         left join money_flow.`20250612` as d on c.ts_code = d.ts_code
+where a.name = 'AI算力概念';

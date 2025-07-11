@@ -1,5 +1,9 @@
 package com.example.springboot.index.mapper;
 
+import com.example.springboot.analysis.vo.req.LimitReq;
+import com.example.springboot.analysis.vo.resp.FiveDaysLimitResp;
+import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
@@ -33,4 +37,7 @@ public interface IndexMapper {
     List<FinaMain2Resp> selectFinaMain2(ConceptMemberReq conceptMemberReq);
     List<FinaMain3Resp> selectFinaMain3(ConceptMemberReq conceptMemberReq);
     List<CompanyInfoResp> selectCompanyInfo(ConceptMemberReq conceptMemberReq);
+    List<FiveDaysLimitResp> selectFiveDaysLimit(ConceptMemberReq conceptMemberReq);
+    List<TenDaysMarketResp> selectTenDaysMarket(ConceptMemberReq conceptMemberReq);
+    List<MoneyFlowResp> selectMoneyFlow(ConceptMemberReq conceptMemberReq);
 }

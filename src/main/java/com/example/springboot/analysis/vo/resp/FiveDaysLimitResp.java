@@ -12,6 +12,7 @@ import lombok.Data;
 public class FiveDaysLimitResp {
     private Integer idx;
     private String tsCode;
+    private String conceptName;
     private String name;
     private String area;
     private String industryNameL1;
