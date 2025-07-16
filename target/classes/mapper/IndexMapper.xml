@@ -132,7 +132,8 @@
         from kpl_concept_cons.`20250109` as a
                  left join common_daily.`20250109` as b on a.con_code = b.ts_code
                  left join stock_list.industry_member as c on b.ts_code = c.ts_code
-        where a.name = #{name};
+        where a.name = #{name}
+        order by industry_name_l1, total_mv desc;
     </select>
 
     <!--  资金流向  -->
@@ -144,9 +145,11 @@
                  left join common_daily.`20250109` as b on a.con_code = b.ts_code
                  left join stock_list.industry_member as c on b.ts_code = c.ts_code
                  left join money_flow.`20250612` as d on c.ts_code = d.ts_code
-        where a.name = 'AI算力概念';
+        where a.name = 'AI算力概念'
+        order by industry_name_l1, total_mv desc;
     </select>
 
+    <!--  十日行情统计  -->
     <select id="selectTenDaysMarket" resultType="com.example.springboot.analysis.vo.resp.TenDaysMarketResp">
         select a.name as concept_name,b.ts_code,c.name,c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,b.pct_chg,
                b.y_pct1 ,b.y_pct2 ,b.y_pct3 ,b.y_pct4 ,b.y_pct5 ,b.y_pct6 ,b.y_pct7 ,b.y_pct8 ,b.y_pct9 ,
@@ -155,6 +158,7 @@
                  left join common_daily.`20250109` as b on a.con_code = b.ts_code
                  left join stock_list.industry_member as c on b.ts_code = c.ts_code
                  left join money_flow.`20250612` as d on c.ts_code = d.ts_code
-        where a.name = 'AI算力概念';
+        where a.name = 'AI算力概念'
+        order by industry_name_l1, total_mv desc;
     </select>
 </mapper>

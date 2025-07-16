@@ -105,21 +105,25 @@ public class IndexServiceImpl implements IndexService {
 
             if(!indexCode.isEmpty()){
 //                System.out.println("----");
-//                System.out.println(indexCodeL1);
-                if(statisticRespMap.get(indexCode).getAllCount() == null){
-                    statisticRespMap.get(indexCode).setAllCount(0);
+//                System.out.println(indexCode);
+                if(statisticRespMap.get(indexCode) != null){
+                    if(statisticRespMap.get(indexCode).getAllCount() == null){
+                        statisticRespMap.get(indexCode).setAllCount(0);
+                    }
+                    statisticRespMap.get(indexCode).setAllCount(statisticRespMap.get(indexCode).getAllCount() + 1);
                 }
-                statisticRespMap.get(indexCode).setAllCount(statisticRespMap.get(indexCode).getAllCount() + 1);
             }
 
             if(common.getPctChg() > 9){
                 if(!indexCode.isEmpty()){
 //                System.out.println("----");
 //                System.out.println(indexCodeL1);
-                    if(statisticRespMap.get(indexCode).getUpCount() == null){
-                        statisticRespMap.get(indexCode).setUpCount(0);
+                    if(statisticRespMap.get(indexCode) != null){
+                        if(statisticRespMap.get(indexCode).getUpCount() == null){
+                            statisticRespMap.get(indexCode).setUpCount(0);
+                        }
+                        statisticRespMap.get(indexCode).setUpCount(statisticRespMap.get(indexCode).getUpCount() + 1);
                     }
-                    statisticRespMap.get(indexCode).setUpCount(statisticRespMap.get(indexCode).getUpCount() + 1);
                 }
             }
 
@@ -127,10 +131,12 @@ public class IndexServiceImpl implements IndexService {
                 if(!indexCode.isEmpty()){
 //                System.out.println("----");
 //                System.out.println(indexCodeL1);
-                    if(statisticRespMap.get(indexCode).getDownCount() == null){
-                        statisticRespMap.get(indexCode).setDownCount(0);
+                    if(statisticRespMap.get(indexCode) != null){
+                        if(statisticRespMap.get(indexCode).getDownCount() == null){
+                            statisticRespMap.get(indexCode).setDownCount(0);
+                        }
+                        statisticRespMap.get(indexCode).setDownCount(statisticRespMap.get(indexCode).getDownCount() + 1);
                     }
-                    statisticRespMap.get(indexCode).setDownCount(statisticRespMap.get(indexCode).getDownCount() + 1);
                 }
             }
         });
@@ -164,16 +170,19 @@ public class IndexServiceImpl implements IndexService {
             if(!indexCode.isEmpty()){
 //                System.out.println("----");
 //                System.out.println(indexCodeL1);
-                if(statisticAllRespMap.get(indexCode).getCount() == null){
-                    statisticAllRespMap.get(indexCode).setCount(0);
-                }
+                if(statisticAllRespMap.get(indexCode) != null){
+                    if(statisticAllRespMap.get(indexCode).getCount() == null){
+                        statisticAllRespMap.get(indexCode).setCount(0);
+                    }
 
-                if(statisticAllRespMap.get(indexCode).getTotalMv2() == null){
-                    statisticAllRespMap.get(indexCode).setTotalMv2(0.0);
-                }
+                    if(statisticAllRespMap.get(indexCode).getTotalMv2() == null){
+                        statisticAllRespMap.get(indexCode).setTotalMv2(0.0);
+                    }
 
-                statisticAllRespMap.get(indexCode).setCount(statisticAllRespMap.get(indexCode).getCount() + 1);
-                statisticAllRespMap.get(indexCode).setTotalMv2(statisticAllRespMap.get(indexCode).getTotalMv2() + common.getTotalMv());
+                    statisticAllRespMap.get(indexCode).setCount(statisticAllRespMap.get(indexCode).getCount() + 1);
+                    statisticAllRespMap.get(indexCode).setTotalMv2(statisticAllRespMap.get(indexCode).getTotalMv2() + common.getTotalMv());
+
+                }
             }
 
         });
