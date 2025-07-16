@@ -212,6 +212,10 @@ public class IndustryServiceImpl implements IndustryService {
                 resp.setClose1(hfqDailyVo1.getClose());
                 Double totalMv1 = hfqDailyVo1.getTotalMv();
                 Double pb1 = hfqDailyVo1.getPb();
+                if(pb1 != null){
+                    resp.setPb1(Double.parseDouble(String.format("%.2f",pb1)));
+                }
+
                 if(totalMv1 != null){
                     resp.setTotalMv1(Double.parseDouble(String.format("%.2f",totalMv1 / 10000)));
                 }
@@ -226,6 +230,10 @@ public class IndustryServiceImpl implements IndustryService {
                 resp.setClose2(hfqDailyVo2.getClose());
                 Double totalMv2 = hfqDailyVo2.getTotalMv();
                 Double pb2 = hfqDailyVo2.getPb();
+                if(pb2 != null){
+                    resp.setPb2(Double.parseDouble(String.format("%.2f",pb2)));
+                }
+
                 if(totalMv2 != null){
                     resp.setTotalMv2(Double.parseDouble(String.format("%.2f",totalMv2 / 10000)));
                 }
@@ -249,7 +257,9 @@ public class IndustryServiceImpl implements IndustryService {
             twoDaysDifferRespList.sort(Comparator.comparing(TwoDaysDifferResp::getPctChgTwoDays).reversed());
         }
         if(industryReq.getParaId() == 2){
-            twoDaysDifferRespList.sort(Comparator.comparing(TwoDaysDifferResp::getIndustryNameL1).thenComparing(TwoDaysDifferResp::getTotalMv2).reversed());
+            twoDaysDifferRespList.sort(Comparator.comparing(TwoDaysDifferResp::getIndustryNameL1).
+                    thenComparing(TwoDaysDifferResp::getIndustryNameL2).thenComparing(TwoDaysDifferResp::getIndustryNameL3)
+                    .reversed().thenComparing(TwoDaysDifferResp::getTotalMv2).reversed());
         }
 
 

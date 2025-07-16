@@ -21,8 +21,8 @@ public class TwoDaysDifferResp {
     private Double close1;
     private Double close2;
     private String market;
-//    private Double pb1;
-//    private Double pb2;
+    private Double pb1;
+    private Double pb2;
     private Double asset1;
     private Double asset2;
     private Double totalMv1;
