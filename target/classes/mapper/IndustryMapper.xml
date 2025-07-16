@@ -295,12 +295,12 @@
 
     <!--  任意两日行情差  -->
     <select id="selectCommon1" resultType="com.example.springboot.analysis.vo.vo.HfqDailyVo">
-        select a.ts_code,a.`close`,b.total_mv,b.trade_date,b.pb from hfq_daily.`20250108` as a
+        select a.ts_code,a.`close`,b.total_mv,b.trade_date,b.pb from hfq_daily.`${startDate}` as a
         left join common_daily.`${startDate}` as b on a.ts_code = b.ts_code ;
     </select>
 
     <select id="selectCommon2" resultType="com.example.springboot.analysis.vo.vo.HfqDailyVo">
-        select a.ts_code,a.`close`,b.total_mv,b.trade_date,b.pb from hfq_daily.`20250401` as a
+        select a.ts_code,a.`close`,b.total_mv,b.trade_date,b.pb from hfq_daily.`${tradeDate}` as a
         left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code ;
     </select>
 
