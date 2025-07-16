@@ -38,6 +38,24 @@
             <if test="blockId == 5">
                 market = '北交所'
             </if>
+            <if test="mvId != 0">
+                and
+                <if test="mvId == 1">
+                    total_mv > 10000000
+                </if>
+                <if test="mvId == 2">
+                    total_mv > 1000000 and total_mv &lt; 10000000
+                </if>
+                <if test="mvId == 3">
+                    total_mv &lt; 1000000
+                </if>
+<!--                <if test="mvId == 4">-->
+<!--                    total_mv > 500000 and total_mv &lt; 1000000-->
+<!--                </if>-->
+<!--                <if test="mvId == 5">-->
+<!--                    total_mv &lt; 500000-->
+<!--                </if>-->
+            </if>
         </where>
     </select>
 

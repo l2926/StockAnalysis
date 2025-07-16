@@ -11,5 +11,6 @@ import lombok.Data;
 public class StatisticsReq {
     private String level;
     private Integer blockId;
+    private Integer mvId;
     private String tradeDate;
 }
