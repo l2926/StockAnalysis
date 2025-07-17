@@ -66,13 +66,13 @@
     </select>
 
     <select id="selectStatisticsCountUp" resultType="Integer">
-        select count(*) from common_daily.`20250109` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
-        where pct_chg > 0;
+        select count(*) from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        where pct_chg > 9;
     </select>
 
     <select id="selectStatisticsCountDown" resultType="Integer">
-        select count(*) from common_daily.`20250109` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
-        where pct_chg &lt; 0;
+        select count(*) from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        where pct_chg &lt; -9;
     </select>
 
 <!--统计所有-->
