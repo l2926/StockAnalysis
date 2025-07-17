@@ -12,5 +12,6 @@ public class StatisticsReq {
     private String level;
     private Integer blockId;
     private Integer mvId;
+    private Integer paraId;
     private String tradeDate;
 }

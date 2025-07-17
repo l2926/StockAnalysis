@@ -32,6 +32,10 @@ public interface IndexService {
      */
     List<StatisticResp> getStatistics(StatisticsReq statisticsReq);
     /**
+     * 获取大盘行情统计 上边栏
+     */
+    StatisticsCountResp getStatisticsCount(StatisticsReq statisticsReq);
+    /**
      * 获取大盘所有股票统计 控制器
      */
     List<StatisticAllResp> getStatisticsAll(StatisticsReq statisticsReq);

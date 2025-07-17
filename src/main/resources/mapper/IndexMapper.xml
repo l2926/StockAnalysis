@@ -38,24 +38,24 @@
             <if test="blockId == 5">
                 market = '北交所'
             </if>
-<!--            <if test="mvId != 1">-->
-<!--                and-->
-<!--                <if test="mvId == 2">-->
-<!--                    total_mv > 10000000-->
-<!--                </if>-->
-<!--                <if test="mvId == 3">-->
-<!--                    total_mv > 1000000 and total_mv &lt; 10000000-->
-<!--                </if>-->
+            <if test="mvId != 1">
+                and
+                <if test="mvId == 2">
+                    total_mv > 10000000
+                </if>
+                <if test="mvId == 3">
+                    total_mv > 1000000 and total_mv &lt; 10000000
+                </if>
+                <if test="mvId == 4">
+                    total_mv &lt; 1000000
+                </if>
 <!--                <if test="mvId == 4">-->
-<!--                    total_mv &lt; 1000000-->
+<!--                    total_mv > 500000 and total_mv &lt; 1000000-->
 <!--                </if>-->
-<!--&lt;!&ndash;                <if test="mvId == 4">&ndash;&gt;-->
-<!--&lt;!&ndash;                    total_mv > 500000 and total_mv &lt; 1000000&ndash;&gt;-->
-<!--&lt;!&ndash;                </if>&ndash;&gt;-->
-<!--&lt;!&ndash;                <if test="mvId == 5">&ndash;&gt;-->
-<!--&lt;!&ndash;                    total_mv &lt; 500000&ndash;&gt;-->
-<!--&lt;!&ndash;                </if>&ndash;&gt;-->
-<!--            </if>-->
+<!--                <if test="mvId == 5">-->
+<!--                    total_mv &lt; 500000-->
+<!--                </if>-->
+            </if>
         </where>
     </select>
 
@@ -63,6 +63,16 @@
         select index_code,industry_name,level,b.pct_change
         from stock_list.industry_list as a inner join shenwan_daily.`${tradeDate}` as b on a.index_code = b.ts_code
         where level = #{level};
+    </select>
+
+    <select id="selectStatisticsCountUp" resultType="Integer">
+        select count(*) from common_daily.`20250109` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        where pct_chg > 0;
+    </select>
+
+    <select id="selectStatisticsCountDown" resultType="Integer">
+        select count(*) from common_daily.`20250109` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        where pct_chg &lt; 0;
     </select>
 
 <!--统计所有-->

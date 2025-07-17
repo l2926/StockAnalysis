@@ -114,7 +114,10 @@ public class IndexServiceImpl implements IndexService {
                 }
             }
 
-            if(common.getPctChg() > 9){
+            Double upLimit = statisticsReq.getParaId().doubleValue();
+            Double downLimit = -1*statisticsReq.getParaId().doubleValue();
+
+            if(common.getPctChg() > upLimit){
                 if(!indexCode.isEmpty()){
 //                System.out.println("----");
 //                System.out.println(indexCodeL1);
@@ -127,7 +130,7 @@ public class IndexServiceImpl implements IndexService {
                 }
             }
 
-            if(common.getPctChg() < -9){
+            if(common.getPctChg() < downLimit){
                 if(!indexCode.isEmpty()){
 //                System.out.println("----");
 //                System.out.println(indexCodeL1);
@@ -142,6 +145,19 @@ public class IndexServiceImpl implements IndexService {
         });
 
         return statisticRespList;
+    }
+
+    @Override
+    public StatisticsCountResp getStatisticsCount(StatisticsReq statisticsReq){
+        System.out.println("----statistics_count service----");
+        Integer up = indexMapper.selectStatisticsCountUp(statisticsReq);
+        Integer down = indexMapper.selectStatisticsCountDown(statisticsReq);
+
+        StatisticsCountResp statisticsCountResp = new StatisticsCountResp();
+        statisticsCountResp.setUpCount(up);
+        statisticsCountResp.setDownCount(down);
+
+        return statisticsCountResp;
     }
 
     @Override

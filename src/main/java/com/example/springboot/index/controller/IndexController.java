@@ -39,7 +39,14 @@ public class IndexController {
 
     @PostMapping("/statistics")
     public List<StatisticResp> getStatistics(@RequestBody StatisticsReq statisticsReq){
+        System.out.println("----statistics controller----");
         return indexService.getStatistics(statisticsReq);
+    }
+
+    @PostMapping("/statistics_count")
+    public StatisticsCountResp getStatisticsCount(@RequestBody StatisticsReq statisticsReq){
+        System.out.println("----statistics_count controller----");
+        return indexService.getStatisticsCount(statisticsReq);
     }
 
     @PostMapping("/statistics_all")
