@@ -175,12 +175,12 @@ public class IndexServiceImpl implements IndexService {
                         statisticAllRespMap.get(indexCode).setCount(0);
                     }
 
-                    if(statisticAllRespMap.get(indexCode).getTotalMv2() == null){
-                        statisticAllRespMap.get(indexCode).setTotalMv2(0.0);
+                    if(statisticAllRespMap.get(indexCode).getTotalMv() == null){
+                        statisticAllRespMap.get(indexCode).setTotalMv(0.0);
                     }
 
                     statisticAllRespMap.get(indexCode).setCount(statisticAllRespMap.get(indexCode).getCount() + 1);
-                    statisticAllRespMap.get(indexCode).setTotalMv2(statisticAllRespMap.get(indexCode).getTotalMv2() + common.getTotalMv());
+                    statisticAllRespMap.get(indexCode).setTotalMv(statisticAllRespMap.get(indexCode).getTotalMv() + common.getTotalMv());
 
                 }
             }
@@ -188,9 +188,10 @@ public class IndexServiceImpl implements IndexService {
         });
 
         statisticAllRespList.stream().forEach(resp->{
-            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
-//            resp.setTotalMv2(Double.parseDouble(String.format("%.2f",resp.getTotalMv2() / 10000)));
-            resp.setTotalMv2(0.0);
+//            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            if(resp.getTotalMv() != null){
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            }
         });
 
         return statisticAllRespList;

@@ -246,7 +246,7 @@
         select a.ts_code,a.pct_chg,a.close,a.up10_count5,a.up10_count10,a.up10_count15,a.up10_count20,
                a.down10_count5,a.down10_count10,a.down10_count15,a.down10_count20,a.conti_up,a.pb,
                b.market,a.total_mv,a.trade_date,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3
-        from common_daily.`20250612` as a
+        from common_daily.`${tradeDate}` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
         <where>

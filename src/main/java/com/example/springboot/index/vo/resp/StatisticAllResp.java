@@ -24,11 +24,11 @@ public class StatisticAllResp {
     /**
      * 股票在该行业总市值
      */
-    private Double totalMv;
+//    private Double totalMv;
     /**
      * 自己计算的行业总市值
      */
-    private Double totalMv2;
+    private Double totalMv;
     /**
      * 市净率PB
      */
