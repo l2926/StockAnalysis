@@ -13,5 +13,5 @@ public class StatisticCommon {
     private String indexCodeL1;
     private String indexCodeL2;
     private String indexCodeL3;
-    private Integer totalMv;
+    private Double totalMv;
 }

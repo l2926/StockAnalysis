@@ -164,6 +164,87 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
+    public List<StatisticResp> getStatisticsMv(StatisticsReq statisticsReq){
+        System.out.println("----statistics_mv service----");
+
+        List<StatisticCommon> statisticCommonList = indexMapper.selectAllCommon(statisticsReq);
+        List<StatisticResp> statisticRespList = indexMapper.selectSwAllIndustry(statisticsReq);
+
+        Map<String,StatisticResp> statisticRespMap = statisticRespList.stream()
+                .collect(Collectors.toMap(StatisticResp::getIndexCode,resp->resp));
+
+        //组合每日行业统计信息
+        statisticCommonList.stream().forEach(common->{
+            String indexCode = "";
+            if(statisticsReq.getLevel().equals("L1")){
+                indexCode = common.getIndexCodeL1();
+            }
+
+            if(statisticsReq.getLevel().equals("L2")){
+                indexCode = common.getIndexCodeL2();
+            }
+
+            if(statisticsReq.getLevel().equals("L3")){
+                indexCode = common.getIndexCodeL3();
+            }
+
+            if(!indexCode.isEmpty()){
+//                System.out.println("----");
+//                System.out.println(indexCode);
+                if(statisticRespMap.get(indexCode) != null){
+                    if(statisticRespMap.get(indexCode).getAllMv() == null){
+                        statisticRespMap.get(indexCode).setAllMv(0.0);
+                    }
+                    statisticRespMap.get(indexCode).setAllMv(statisticRespMap.get(indexCode).getAllMv() + common.getTotalMv());
+                }
+            }
+
+            Double upLimit = statisticsReq.getParaId().doubleValue();
+            Double downLimit = -1*statisticsReq.getParaId().doubleValue();
+
+            if(common.getPctChg() > upLimit){
+                if(!indexCode.isEmpty()){
+//                System.out.println("----");
+//                System.out.println(indexCodeL1);
+                    if(statisticRespMap.get(indexCode) != null){
+                        if(statisticRespMap.get(indexCode).getUpMv() == null){
+                            statisticRespMap.get(indexCode).setUpMv(0.0);
+                        }
+                        statisticRespMap.get(indexCode).setUpMv(statisticRespMap.get(indexCode).getUpMv() + common.getTotalMv());
+                    }
+                }
+            }
+
+            if(common.getPctChg() < downLimit){
+                if(!indexCode.isEmpty()){
+//                System.out.println("----");
+//                System.out.println(indexCodeL1);
+                    if(statisticRespMap.get(indexCode) != null){
+                        if(statisticRespMap.get(indexCode).getDownMv() == null){
+                            statisticRespMap.get(indexCode).setDownMv(0.0);
+                        }
+                        statisticRespMap.get(indexCode).setDownMv(statisticRespMap.get(indexCode).getDownMv() + common.getTotalMv());
+                    }
+                }
+            }
+        });
+
+        statisticRespList.stream().forEach(resp->{
+            if(resp.getAllMv() != null){
+                resp.setAllMv(Double.parseDouble(String.format("%.2f",resp.getAllMv()/10000)));
+            }
+            if(resp.getUpMv() != null){
+                resp.setUpMv(Double.parseDouble(String.format("%.2f",resp.getUpMv()/10000)));
+            }
+            if(resp.getDownMv() != null){
+                resp.setDownMv(Double.parseDouble(String.format("%.2f",resp.getDownMv()/10000)));
+            }
+        });
+
+        return statisticRespList;
+    }
+
+    @Override
     public List<StatisticAllResp> getStatisticsAll(StatisticsReq statisticsReq){
         System.out.println("----statistics_all service----");
         List<StatisticCommon> statisticCommonList = indexMapper.selectAllCommon(statisticsReq);

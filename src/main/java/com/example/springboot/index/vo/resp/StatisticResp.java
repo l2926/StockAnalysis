@@ -31,6 +31,18 @@ public class StatisticResp {
      */
     private Integer downCount;
     /**
+     * 上涨市值
+     */
+    private Double upMv;
+    /**
+     * 下跌市值
+     */
+    private Double downMv;
+    /**
+     * 总市值
+     */
+    private Double allMv;
+    /**
      * 该行业所有统计数
      */
     private Integer allCount;
