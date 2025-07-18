@@ -35,6 +35,10 @@ public interface IndexMapper {
     List<StatisticResp> selectSwAllIndustry(StatisticsReq statisticsReq);
     Integer selectStatisticsCountUp(StatisticsReq statisticsReq);   //统计行情 上面的上涨统计
     Integer selectStatisticsCountDown(StatisticsReq statisticsReq); //统计行情 上面的下跌统计
+    Double selectShPct(StatisticsReq statisticsReq);   //上证指数涨跌幅
+    Double selectSzPct(StatisticsReq statisticsReq);   //深证指数涨跌幅
+    Double selectSmallPct(StatisticsReq statisticsReq);    //中小板指数涨跌幅
+    Double selectStartUpPct(StatisticsReq statisticsReq);  //创业板指数涨跌幅
 
     //获取统计所有数据
     List<StatisticAllResp> selectSwAllIndustry2(StatisticsReq statisticsReq);

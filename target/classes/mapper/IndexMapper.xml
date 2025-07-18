@@ -96,6 +96,7 @@
         </where>
 </select>
 
+    <!--  每日上涨、下跌股票统计  -->
     <select id="selectStatisticsCountDown" resultType="Integer">
         select count(*) from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
         <where>
@@ -125,6 +126,23 @@
             </if>
             and pct_chg &lt; #{downLimit}
         </where>
+    </select>
+
+    <!--  上证、深证、中小板、创业板指数  -->
+    <select id="selectShPct" resultType="Double">
+        select pct_chg from daily_index.`000001` where trade_date = '20250109';
+    </select>
+
+    <select id="selectSzPct" resultType="Double">
+        select pct_chg from daily_index.`399001` where trade_date = '20250109';
+    </select>
+
+    <select id="selectSmallPct" resultType="Double">
+        select pct_chg from daily_index.`399005` where trade_date = '20250109';
+    </select>
+
+    <select id="selectStartUpPct" resultType="Double">
+        select pct_chg from daily_index.`399006` where trade_date = '20250109';
     </select>
 
 <!--统计所有-->

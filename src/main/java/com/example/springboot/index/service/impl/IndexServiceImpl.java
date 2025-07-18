@@ -156,9 +156,20 @@ public class IndexServiceImpl implements IndexService {
         Integer up = indexMapper.selectStatisticsCountUp(statisticsReq);
         Integer down = indexMapper.selectStatisticsCountDown(statisticsReq);
 
+        Double shPct = indexMapper.selectShPct(statisticsReq);
+        Double szPct = indexMapper.selectSzPct(statisticsReq);
+        Double smallPct = indexMapper.selectSmallPct(statisticsReq);
+        Double startUpPct = indexMapper.selectStartUpPct(statisticsReq);
+
+        //构造返回出参
         StatisticsCountResp statisticsCountResp = new StatisticsCountResp();
         statisticsCountResp.setUpCount(up);
         statisticsCountResp.setDownCount(down);
+
+        statisticsCountResp.setShPct(shPct);
+        statisticsCountResp.setSzPct(szPct);
+        statisticsCountResp.setSmallPct(smallPct);
+        statisticsCountResp.setStartupPct(startUpPct);
 
         return statisticsCountResp;
     }

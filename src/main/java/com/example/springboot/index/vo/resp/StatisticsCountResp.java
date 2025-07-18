@@ -12,4 +12,10 @@ import lombok.Data;
 public class StatisticsCountResp {
     private Integer upCount;
     private Integer downCount;
+    private Double shPct;
+    private Double szPct;
+    private Double smallPct;
+    private Double startupPct;
+    private Double bjPct;
+    private Double kcbPct;
 }
