@@ -67,12 +67,64 @@
 
     <select id="selectStatisticsCountUp" resultType="Integer">
         select count(*) from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
-        where pct_chg > 9;
-    </select>
+        <where>
+            <if test="blockId == 2">
+                market = '主板'
+            </if>
+            <if test="blockId == 3">
+                market = '创业板'
+            </if>
+            <if test="blockId == 4">
+                market = '科创板'
+            </if>
+            <if test="blockId == 5">
+                market = '北交所'
+            </if>
+            <if test="mvId != 1">
+                and
+                <if test="mvId == 2">
+                    total_mv > 10000000
+                </if>
+                <if test="mvId == 3">
+                    total_mv > 1000000 and total_mv &lt; 10000000
+                </if>
+                <if test="mvId == 4">
+                    total_mv &lt; 1000000
+                </if>
+            </if>
+            and pct_chg > #{upLimit}
+        </where>
+</select>
 
     <select id="selectStatisticsCountDown" resultType="Integer">
         select count(*) from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code = b.ts_code
-        where pct_chg &lt; -9;
+        <where>
+            <if test="blockId == 2">
+                market = '主板'
+            </if>
+            <if test="blockId == 3">
+                market = '创业板'
+            </if>
+            <if test="blockId == 4">
+                market = '科创板'
+            </if>
+            <if test="blockId == 5">
+                market = '北交所'
+            </if>
+            <if test="mvId != 1">
+                and
+                <if test="mvId == 2">
+                    total_mv > 10000000
+                </if>
+                <if test="mvId == 3">
+                    total_mv > 1000000 and total_mv &lt; 10000000
+                </if>
+                <if test="mvId == 4">
+                    total_mv &lt; 1000000
+                </if>
+            </if>
+            and pct_chg &lt; #{downLimit}
+        </where>
     </select>
 
 <!--统计所有-->

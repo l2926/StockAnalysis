@@ -13,5 +13,7 @@ public class StatisticsReq {
     private Integer blockId;
     private Integer mvId;
     private Integer paraId;
+    private Integer upLimit;
+    private Integer downLimit;
     private String tradeDate;
 }

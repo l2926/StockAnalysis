@@ -150,6 +150,9 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public StatisticsCountResp getStatisticsCount(StatisticsReq statisticsReq){
         System.out.println("----statistics_count service----");
+        statisticsReq.setUpLimit(statisticsReq.getParaId());
+        statisticsReq.setDownLimit(-1*statisticsReq.getParaId());
+
         Integer up = indexMapper.selectStatisticsCountUp(statisticsReq);
         Integer down = indexMapper.selectStatisticsCountDown(statisticsReq);
 
