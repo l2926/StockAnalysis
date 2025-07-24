@@ -98,7 +98,7 @@
                b.act_name,
                b.act_ent_type,
                c.exchange,
-               C.reg_capital,
+               c.reg_capital,
                c.setup_date,
                c.province,
                c.city,
