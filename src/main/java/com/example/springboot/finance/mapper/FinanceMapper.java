@@ -1,5 +1,6 @@
 package com.example.springboot.finance.mapper;
 
+import com.example.springboot.finance.vo.req.FinanceReq;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,5 +15,5 @@ import java.util.List;
 @Mapper
 public interface FinanceMapper {
     Integer selectCount();
-    List<FinanceOverviewResp> getFinanceOverview();
+    List<FinanceOverviewResp> getFinanceOverview(FinanceReq financeReq);
 }

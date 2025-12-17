@@ -2,6 +2,7 @@ package com.example.springboot.finance.service.impl;
 
 import com.example.springboot.finance.mapper.FinanceMapper;
 import com.example.springboot.finance.service.FinanceService;
+import com.example.springboot.finance.vo.req.FinanceReq;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class FinanceServiceImpl implements FinanceService {
     FinanceMapper financeMapper;
 
     @Override
-    public List<FinanceOverviewResp> getFinanceOverview(){
+    public List<FinanceOverviewResp> getFinanceOverview(FinanceReq financeReq){
         System.out.println("----finance_overview Service----");
-        List<FinanceOverviewResp> financeOverviewRespList = financeMapper.getFinanceOverview();
+        List<FinanceOverviewResp> financeOverviewRespList = financeMapper.getFinanceOverview(financeReq);
         AtomicInteger index = new AtomicInteger(1);
         financeOverviewRespList.stream().forEach(resp->{
             resp.setIdx(index.getAndIncrement());
@@ -31,7 +32,7 @@ public class FinanceServiceImpl implements FinanceService {
                 resp.setNetAssets(Double.parseDouble(String.format("%.2f",resp.getTotalAssets() - resp.getTotalLiab())));
             }
             if(resp.getTotalAssets() != null && resp.getNetAssets() != null){
-                resp.setLevelRate(Double.parseDouble(String.format("%.2f",resp.getTotalAssets() / resp.getNetAssets())));
+                resp.setLevelRate(Double.parseDouble(String.format("%.2f",resp.getTotalLiab() / resp.getNetAssets())));
             }
             if(resp.getTotalRevenue() != null){
                 resp.setTotalRevenue(Double.parseDouble(String.format("%.2f",resp.getTotalRevenue()/100000000)));

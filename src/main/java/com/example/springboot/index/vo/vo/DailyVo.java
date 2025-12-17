@@ -26,6 +26,7 @@ public class DailyVo {
     private Double turnOverRate;
     private Double turnOverRateF;
     private Double pctChg;
+    private Double pctChange;
     private Double pb;
     private Double pe;
     private Double totalMv;
