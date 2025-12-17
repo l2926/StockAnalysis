@@ -1,12 +1,13 @@
-package com.example.springboot.analysis.vo.resp;
+package com.example.springboot.industry.vo.resp;
 
 import lombok.Data;
+
 /**
  * 涨停出参
  */
 
 @Data
-public class TenDaysMarketResp {
+public class MarketOverviewResp {
     private Integer idx;
     private String name;
     private String tsCode;
@@ -24,11 +25,6 @@ public class TenDaysMarketResp {
     private Double yPct7;
     private Double yPct8;
     private Double yPct9;
-    private Double yPct10;
-    private Double yPct11;
-    private Double yPct12;
-    private Double yPct13;
-    private Double yPct14;
     private String market;
     private Double pb;
     private Double asset;

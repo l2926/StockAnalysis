@@ -31,6 +31,8 @@ public class LimitResp {
     private Double amount;
     private Integer contiUp;
     private String market;
+    private Double profit;
+    private Double revenue;
     private Double asset;
     private Double totalMv;
     private String tradeDate;

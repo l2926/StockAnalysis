@@ -30,6 +30,8 @@ public class FundmentalResp {
     private Double turnoverRate;
     private Double amount;
     private String market;
+    private Double revenue;
+    private Double profit;
     private Double asset;
     private Double totalMv;
     private String tradeDate;

@@ -65,6 +65,17 @@ public class AnalysisServiceImpl implements AnalysisService {
                 }else{
                     limitResp.setAsset(0.0);
                 }
+
+                //计算销售额
+                if(limitResp.getPsTtm() != 0){
+                    limitResp.setRevenue(Double.parseDouble(String.format("%.2f",limitResp.getTotalMv() / limitResp.getPsTtm())));
+                }
+
+                //计算盈利
+                if(limitResp.getPeTtm() != 0){
+                    limitResp.setProfit(Double.parseDouble(String.format("%.2f",limitResp.getTotalMv() / limitResp.getPeTtm())));
+                }
+
                 //计算振幅
                 limitResp.setAmp(Double.parseDouble(String.format("%.2f",100*(limitResp.getHigh() - limitResp.getLow()) / limitResp.getPreClose())));
                 //计算ROE和利润率
@@ -146,6 +157,11 @@ public class AnalysisServiceImpl implements AnalysisService {
                 resp.setYPct7(Double.parseDouble(String.format("%.2f",resp.getYPct7())));
                 resp.setYPct8(Double.parseDouble(String.format("%.2f",resp.getYPct8())));
                 resp.setYPct9(Double.parseDouble(String.format("%.2f",resp.getYPct9())));
+                resp.setYPct10(Double.parseDouble(String.format("%.2f",resp.getYPct10())));
+                resp.setYPct11(Double.parseDouble(String.format("%.2f",resp.getYPct11())));
+                resp.setYPct12(Double.parseDouble(String.format("%.2f",resp.getYPct12())));
+                resp.setYPct13(Double.parseDouble(String.format("%.2f",resp.getYPct13())));
+                resp.setYPct14(Double.parseDouble(String.format("%.2f",resp.getYPct14())));
 
                 //计算市值
                 resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));

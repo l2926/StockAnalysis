@@ -56,6 +56,7 @@ public class IndustryServiceImpl implements IndustryService {
                 }else{
                     fundmentalResp.setPsTtm(0.0);
                 }
+
                 fundmentalResp.setTurnoverRate(Double.parseDouble(String.format("%.2f",fundmentalResp.getTurnoverRate())));
                 fundmentalResp.setAmount(Double.parseDouble(String.format("%.2f",fundmentalResp.getAmount() / 100000)));
                 fundmentalResp.setTotalMv(Double.parseDouble(String.format("%.2f",fundmentalResp.getTotalMv() / 10000)));
@@ -63,6 +64,17 @@ public class IndustryServiceImpl implements IndustryService {
                 if(fundmentalResp.getPb() != 0){
                     fundmentalResp.setAsset(Double.parseDouble(String.format("%.2f",fundmentalResp.getTotalMv() / fundmentalResp.getPb())));
                 }
+
+                //计算销售额
+                if(fundmentalResp.getPsTtm() != 0){
+                    fundmentalResp.setRevenue(Double.parseDouble(String.format("%.2f",fundmentalResp.getTotalMv() / fundmentalResp.getPsTtm())));
+                }
+
+                //计算盈利
+                if(fundmentalResp.getPeTtm() != 0){
+                    fundmentalResp.setProfit(Double.parseDouble(String.format("%.2f",fundmentalResp.getTotalMv() / fundmentalResp.getPeTtm())));
+                }
+
                 //计算振幅
                 fundmentalResp.setAmp(Double.parseDouble(String.format("%.2f",100*(fundmentalResp.getHigh() - fundmentalResp.getLow()) / fundmentalResp.getPreClose())));
                 //计算ROE和利润率
@@ -175,6 +187,27 @@ public class IndustryServiceImpl implements IndustryService {
             if(resp.getYPct9() != null){
                 resp.setYPct9(Double.parseDouble(String.format("%.2f",resp.getYPct9())));
             }
+
+            if(resp.getYPct10() != null){
+                resp.setYPct10(Double.parseDouble(String.format("%.2f",resp.getYPct10())));
+            }
+
+            if(resp.getYPct11() != null){
+                resp.setYPct11(Double.parseDouble(String.format("%.2f",resp.getYPct11())));
+            }
+
+            if(resp.getYPct12() != null){
+                resp.setYPct12(Double.parseDouble(String.format("%.2f",resp.getYPct12())));
+            }
+
+            if(resp.getYPct13() != null){
+                resp.setYPct13(Double.parseDouble(String.format("%.2f",resp.getYPct13())));
+            }
+
+            if(resp.getYPct14() != null){
+                resp.setYPct14(Double.parseDouble(String.format("%.2f",resp.getYPct14())));
+            }
+
 
             //计算市值
             resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
@@ -468,5 +501,11 @@ public class IndustryServiceImpl implements IndustryService {
         }).collect(Collectors.toList());
 
         return moneyFlowPctRespList;
+    }
+
+    @Override
+    public List<MarketOverviewResp> getMarketOverview(IndustryReq industryReq){
+        System.out.println("----market_overview inidustry Service----");
+        return null;
     }
 }

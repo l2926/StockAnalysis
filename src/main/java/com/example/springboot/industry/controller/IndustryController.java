@@ -88,4 +88,11 @@ public class IndustryController {
         System.out.println("----money_flow_pct industry Controller----");
         return industryService.getMoneyFlowPct(industryReq);
     }
+
+    @PostMapping("market_overview")
+    public List<MarketOverviewResp> getMarketOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----market_overview inidustry Controller----");
+        industryService.getMarketOverview(industryReq);
+        return null;
+    }
 }

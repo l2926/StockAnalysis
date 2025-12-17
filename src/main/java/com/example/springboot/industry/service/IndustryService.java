@@ -60,4 +60,8 @@ public interface IndustryService {
      * 获取资金流向 百分比
      */
     List<MoneyFlowPctResp> getMoneyFlowPct(IndustryReq industryReq);
+    /**
+     * 获取周、月、年行情纵览
+     */
+    List<MarketOverviewResp> getMarketOverview(IndustryReq industryReq);
 }
