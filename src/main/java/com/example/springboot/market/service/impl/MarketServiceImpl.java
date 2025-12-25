@@ -1,8 +1,6 @@
 package com.example.springboot.market.service.impl;
 
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.industry.vo.resp.*;
 import com.example.springboot.market.mapper.MarketMapper;
 import com.example.springboot.market.service.MarketService;
 import com.example.springboot.market.vo.req.MarketReq;
@@ -302,6 +300,46 @@ public class MarketServiceImpl implements MarketService {
         finaMain3RespList.get(0).setPb(0.0);
 
         return finaMain3RespList;
+    }
+
+    @Override
+    public List<FinaMainResp> getFinaMain(MarketReq marketReq){
+        System.out.println("----fina_mian markeet service----");
+        List<FinaMainResp> finaMainRespList = marketMapper.selectFinaMain(marketReq);
+
+        finaMainRespList.get(0).setIdx(1);
+        finaMainRespList.get(0).setTotalMv(Double.parseDouble(String.format("%.2f",finaMainRespList.get(0).getTotalMv() / 10000)));
+        try{
+            //计算净资产
+            if(finaMainRespList.get(0).getPb() != 0){
+                finaMainRespList.get(0).setAsset(Double.parseDouble(String.format("%.2f",finaMainRespList.get(0).getTotalMv() / finaMainRespList.get(0).getPb())));
+            }
+        }catch (Exception e){
+            System.out.println("pb为0:" + e.getMessage());
+        }
+        finaMainRespList.get(0).setPb(0.0);
+
+        return finaMainRespList;
+    }
+
+    @Override
+    public List<TopHoldResp> getTopHold(MarketReq marketReq){
+        System.out.println("----top_hold market service----");
+        List<TopHoldResp> topHoldRespList = marketMapper.selectTopHold(marketReq);
+
+        topHoldRespList.get(0).setIdx(1);
+        topHoldRespList.get(0).setTotalMv(Double.parseDouble(String.format("%.2f",topHoldRespList.get(0).getTotalMv() / 10000)));
+        try{
+            //计算净资产
+            if(topHoldRespList.get(0).getPb() != 0){
+                topHoldRespList.get(0).setAsset(Double.parseDouble(String.format("%.2f",topHoldRespList.get(0).getTotalMv() / topHoldRespList.get(0).getPb())));
+            }
+        }catch (Exception e){
+            System.out.println("pb为0:" + e.getMessage());
+        }
+        topHoldRespList.get(0).setPb(0.0);
+
+        return topHoldRespList;
     }
 
     @Override

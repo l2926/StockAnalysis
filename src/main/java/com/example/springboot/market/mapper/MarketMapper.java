@@ -1,8 +1,6 @@
 package com.example.springboot.market.mapper;
 
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.industry.vo.resp.*;
 import com.example.springboot.market.vo.req.MarketReq;
 import com.example.springboot.market.vo.resp.SubordinateResp;
 import com.example.springboot.market.vo.vo.AssetCenterVo;
@@ -54,6 +52,10 @@ public interface MarketMapper {
      * @return
      */
     MoneyFlowVo selectMoneyFlow(MarketReq marketReq);
+    /**
+     * 主营业务1
+     */
+    List<FinaMainResp> selectFinaMain(MarketReq marketReq);
 
     /**
      * 主营业务2
@@ -67,6 +69,10 @@ public interface MarketMapper {
      * @return
      */
     List<FinaMain3Resp> selectFinaMain3(MarketReq marketReq);
+    /**
+     * 十大股东
+     */
+    List<TopHoldResp> selectTopHold(MarketReq marketReq);
     /**
      * 公司信心
      * @param marketReq

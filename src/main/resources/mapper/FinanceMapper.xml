@@ -14,7 +14,7 @@
         from finance.`2024` as a
                  inner join stock_list.industry_member as b
                             on a.ts_code = b.ts_code
-                 inner join common_daily.`20250108` as c
+                 inner join common_daily.`20251216` as c
                             on a.ts_code = c.ts_code
         where index_code_l1 = #{industryCode}
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;

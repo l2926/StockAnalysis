@@ -29,7 +29,7 @@
     <select id="getFinaMain" resultType="com.example.springboot.industry.vo.resp.FinaMainResp">
         select a.ts_code,b.name,b.area,a.pct_chg,b.industry_name_l1 ,b.industry_name_l2
         ,b.industry_name_l3,c.main_business,b.market,a.total_mv,a.pb,a.trade_date
-        from common_daily.`${tradeDate}` as a
+        from common_daily.`20251216` as a
         left join stock_list.industry_member as b
         on a.ts_code=b.ts_code
         left join finance.fina_main as c
@@ -64,7 +64,7 @@
              , a.total_mv
              , a.pb
              , a.trade_date
-        from common_daily.`20241121` as a
+        from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join finance.top_hold as c
@@ -106,7 +106,7 @@
                industry_name_l1,
                industry_name_l2,
                industry_name_l3
-        from common_daily.`${tradeDate}` as a
+        from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
@@ -141,7 +141,7 @@
                industry_name_l1,
                industry_name_l2,
                industry_name_l3
-        from common_daily.`${tradeDate}` as a
+        from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
@@ -177,7 +177,7 @@
                industry_name_l1,
                industry_name_l2,
                industry_name_l3
-        from common_daily.`${tradeDate}` as a
+        from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
