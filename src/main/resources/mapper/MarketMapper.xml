@@ -13,7 +13,7 @@
 
     <!--  股票所属  -->
     <select id="selectSubordinate" resultType="com.example.springboot.market.vo.resp.SubordinateResp">
-        select ts_code, name, area, industry_name_l1, industry_name_l2, industry_name_l3
+        select ts_code, name, area, industry_name_l1, industry_name_l2, industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3
         from stock_list.industry_member
         where ts_code = '${tsCode}'
     </select>

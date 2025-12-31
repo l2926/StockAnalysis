@@ -16,6 +16,9 @@ public class LimitResp {
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
+    private String indexCodeL1;
+    private String indexCodeL2;
+    private String indexCodeL3;
     private Double pctChg;
     private Double close;
     private Double high;
