@@ -504,8 +504,27 @@ public class IndustryServiceImpl implements IndustryService {
     }
 
     @Override
-    public List<MarketOverviewResp> getMarketOverview(IndustryReq industryReq){
-        System.out.println("----market_overview inidustry Service----");
-        return null;
+    public List<WeekOverviewResp> getWeekOverview(IndustryReq industryReq){
+        System.out.println("----week_overview inidustry Service----");
+        List<WeekOverviewResp> weekOverviewRespList = industryMapper.selectWeekOverview(industryReq);
+        return weekOverviewRespList;
+    }
+    @Override
+    public List<MonthOverviewResp> getMonthOverview(IndustryReq industryReq){
+        System.out.println("----month_overview inidustry Service----");
+        List<MonthOverviewResp> monthOverviewRespList = industryMapper.selectMonthOverview(industryReq);
+        return monthOverviewRespList;
+    }
+    @Override
+    public List<SeasonOverviewResp> getSeasonOverview(IndustryReq industryReq){
+        System.out.println("----season_overview inidustry Service----");
+        List<SeasonOverviewResp> seasonOverviewRespList = industryMapper.selectSeasonOverview(industryReq);
+        return seasonOverviewRespList;
+    }
+    @Override
+    public List<YearOverviewResp> getYearOverview(IndustryReq industryReq){
+        System.out.println("----year_overview inidustry Service----");
+        List<YearOverviewResp> yearOverviewRespList = industryMapper.selectYearOverview(industryReq);
+        return yearOverviewRespList;
     }
 }

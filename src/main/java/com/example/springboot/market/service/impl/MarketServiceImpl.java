@@ -219,6 +219,8 @@ public class MarketServiceImpl implements MarketService {
 
             BeanUtils.copyProperties(dailyVo,logDailyVo);
 
+
+
             logDailyVo.setLogOpen(Double.parseDouble(String.format("%.4f",Math.log10(10*dailyVo.getOpen()/openFirstDay))));
             logDailyVo.setLogClose(Double.parseDouble(String.format("%.4f",Math.log10(10*dailyVo.getClose()/openFirstDay))));
             logDailyVo.setLogHigh(Double.parseDouble(String.format("%.4f",Math.log10(10*dailyVo.getHigh()/openFirstDay))));

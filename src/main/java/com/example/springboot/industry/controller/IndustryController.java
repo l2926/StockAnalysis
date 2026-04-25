@@ -7,11 +7,10 @@ import com.example.springboot.analysis.vo.resp.TwoDaysDifferResp;
 import com.example.springboot.industry.service.IndustryService;
 import com.example.springboot.industry.vo.req.IndustryReq;
 import com.example.springboot.industry.vo.resp.*;
-import com.fasterxml.jackson.databind.deser.std.StdKeyDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.time.Year;
 import java.util.List;
 
 /**
@@ -89,10 +88,24 @@ public class IndustryController {
         return industryService.getMoneyFlowPct(industryReq);
     }
 
-    @PostMapping("market_overview")
-    public List<MarketOverviewResp> getMarketOverview(@RequestBody IndustryReq industryReq){
-        System.out.println("----market_overview inidustry Controller----");
-        industryService.getMarketOverview(industryReq);
-        return null;
+    @PostMapping("week_overview")
+    public List<WeekOverviewResp> getWeekOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----week_overview inidustry Controller----");
+        return industryService.getWeekOverview(industryReq);
+    }
+    @PostMapping("month_overview")
+    public List<MonthOverviewResp> getMonthOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----month_overview inidustry Controller----");
+        return industryService.getMonthOverview(industryReq);
+    }
+    @PostMapping("season_overview")
+    public List<SeasonOverviewResp> getSeasonOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----season_overview inidustry Controller----");
+        return industryService.getSeasonOverview(industryReq);
+    }
+    @PostMapping("year_overview")
+    public List<YearOverviewResp> getYearOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----year_overview inidustry Controller----");
+        return industryService.getYearOverview(industryReq);
     }
 }

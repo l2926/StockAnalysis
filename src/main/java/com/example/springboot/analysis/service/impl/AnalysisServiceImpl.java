@@ -4,10 +4,11 @@ import com.example.springboot.analysis.mapper.AnalysisMapper;
 import com.example.springboot.analysis.service.AnalysisService;
 import com.example.springboot.analysis.vo.req.LimitReq;
 import com.example.springboot.analysis.vo.resp.*;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
+import com.example.springboot.analysis.vo.resp.TopHoldResp;
 import com.example.springboot.analysis.vo.vo.HfqDailyVo;
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.industry.vo.req.IndustryReq;
+import com.example.springboot.industry.vo.resp.*;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -519,5 +520,30 @@ public class AnalysisServiceImpl implements AnalysisService {
             resp.setPb(0.0);
         });
         return limitBoardRespList;
+    }
+
+    @Override
+    public List<WeekOverviewResp> getWeekOverview(LimitReq limitReq){
+        System.out.println("----week_overview analysis Service----");
+        List<WeekOverviewResp> weekOverviewRespList = analysisMapper.selectWeekOverview(limitReq);
+        return weekOverviewRespList;
+    }
+    @Override
+    public List<MonthOverviewResp> getMonthOverview(LimitReq limitReq){
+        System.out.println("----month_overview analysis Service----");
+        List<MonthOverviewResp> monthOverviewRespList = analysisMapper.selectMonthOverview(limitReq);
+        return monthOverviewRespList;
+    }
+    @Override
+    public List<SeasonOverviewResp> getSeasonOverview(LimitReq limitReq){
+        System.out.println("----season_overview analysis Service----");
+        List<SeasonOverviewResp> seasonOverviewRespList = analysisMapper.selectSeasonOverview(limitReq);
+        return seasonOverviewRespList;
+    }
+    @Override
+    public List<YearOverviewResp> getYearOverview(LimitReq limitReq){
+        System.out.println("----year_overview analysis Service----");
+        List<YearOverviewResp> yearOverviewRespList = analysisMapper.selectYearOverview(limitReq);
+        return yearOverviewRespList;
     }
 }

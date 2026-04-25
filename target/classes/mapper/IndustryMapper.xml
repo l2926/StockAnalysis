@@ -328,4 +328,18 @@
             =#{industryCode}
         </where>
     </select>
+
+<!--  股票周、月、季、年历史行情纵览  -->
+    <select id="selectWeekOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select * from hfq_daily.`20260423` t ;
+    </select>
+    <select id="selectMonthOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
+        select * from hfq_daily.`20260423` t ;
+    </select>
+    <select id="selectSeasonOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
+        select * from hfq_daily.`20260423` t ;
+    </select>
+    <select id="selectYearOverview" resultType="com.example.springboot.industry.vo.resp.YearOverviewResp">
+        select * from hfq_daily.`20260423` t ;
+    </select>
 </mapper>

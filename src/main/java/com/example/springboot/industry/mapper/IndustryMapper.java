@@ -8,7 +8,7 @@ import com.example.springboot.industry.vo.req.IndustryReq;
 import com.example.springboot.industry.vo.resp.*;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.time.chrono.MinguoDate;
+import java.time.Month;
 import java.util.List;
 
 /**
@@ -33,4 +33,8 @@ public interface IndustryMapper {
     List<HfqDailyVo> selectCommon1(IndustryReq industryReq);
     List<HfqDailyVo> selectCommon2(IndustryReq industryReq);
     List<TwoDaysDifferResp> selectIndustryMember(IndustryReq industryReq);
+    List<WeekOverviewResp> selectWeekOverview(IndustryReq industryReq);
+    List<MonthOverviewResp> selectMonthOverview(IndustryReq industryReq);
+    List<SeasonOverviewResp> selectSeasonOverview(IndustryReq industryReq);
+    List<YearOverviewResp> selectYearOverview(IndustryReq industryReq);
 }

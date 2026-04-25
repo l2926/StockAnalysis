@@ -2,9 +2,10 @@ package com.example.springboot.analysis.service;
 
 import com.example.springboot.analysis.vo.req.LimitReq;
 import com.example.springboot.analysis.vo.resp.*;
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
+import com.example.springboot.analysis.vo.resp.TopHoldResp;
+import com.example.springboot.industry.vo.req.IndustryReq;
+import com.example.springboot.industry.vo.resp.*;
 
 import java.util.List;
 
@@ -66,4 +67,20 @@ public interface AnalysisService {
      * 获取涨停板股票
      */
     List<LimitBoardResp> getLimitBoard(LimitReq limitReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<WeekOverviewResp> getWeekOverview(LimitReq limitReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<MonthOverviewResp> getMonthOverview(LimitReq limitReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<SeasonOverviewResp> getSeasonOverview(LimitReq limitReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<YearOverviewResp> getYearOverview(LimitReq limitReq);
 }

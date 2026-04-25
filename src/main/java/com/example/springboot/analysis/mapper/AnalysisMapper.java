@@ -2,10 +2,11 @@ package com.example.springboot.analysis.mapper;
 
 import com.example.springboot.analysis.vo.req.LimitReq;
 import com.example.springboot.analysis.vo.resp.*;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
+import com.example.springboot.analysis.vo.resp.TopHoldResp;
 import com.example.springboot.analysis.vo.vo.HfqDailyVo;
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.industry.vo.req.IndustryReq;
+import com.example.springboot.industry.vo.resp.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -44,4 +45,9 @@ public interface AnalysisMapper {
     List<HfqDailyVo> selectCommon2(LimitReq limitReq);
     List<TwoDaysDifferResp> selectIndustryMember(LimitReq limitReq);
     List<LimitBoardResp> selectLimitBoard(LimitReq limitReq);
+
+    List<WeekOverviewResp> selectWeekOverview(LimitReq limitReq);
+    List<MonthOverviewResp> selectMonthOverview(LimitReq limitReq);
+    List<SeasonOverviewResp> selectSeasonOverview(LimitReq limitReq);
+    List<YearOverviewResp> selectYearOverview(LimitReq limitReq);
 }

@@ -6,8 +6,8 @@ import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TwoDaysDifferResp;
 import com.example.springboot.industry.vo.req.IndustryReq;
 import com.example.springboot.industry.vo.resp.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.Year;
 import java.util.List;
 
 /**
@@ -61,7 +61,19 @@ public interface IndustryService {
      */
     List<MoneyFlowPctResp> getMoneyFlowPct(IndustryReq industryReq);
     /**
-     * 获取周、月、年行情纵览
+     * 获取周行情纵览
      */
-    List<MarketOverviewResp> getMarketOverview(IndustryReq industryReq);
+    List<WeekOverviewResp> getWeekOverview(IndustryReq industryReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<MonthOverviewResp> getMonthOverview(IndustryReq industryReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<SeasonOverviewResp> getSeasonOverview(IndustryReq industryReq);
+    /**
+     * 获取周行情纵览
+     */
+    List<YearOverviewResp> getYearOverview(IndustryReq industryReq);
 }

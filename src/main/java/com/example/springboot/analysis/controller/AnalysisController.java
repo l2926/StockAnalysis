@@ -3,9 +3,10 @@ package com.example.springboot.analysis.controller;
 import com.example.springboot.analysis.service.AnalysisService;
 import com.example.springboot.analysis.vo.req.LimitReq;
 import com.example.springboot.analysis.vo.resp.*;
-import com.example.springboot.industry.vo.resp.CompanyInfoResp;
-import com.example.springboot.industry.vo.resp.FinaMain2Resp;
-import com.example.springboot.industry.vo.resp.FinaMain3Resp;
+import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
+import com.example.springboot.analysis.vo.resp.TopHoldResp;
+import com.example.springboot.industry.vo.req.IndustryReq;
+import com.example.springboot.industry.vo.resp.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,5 +100,25 @@ public class AnalysisController {
     public List<LimitBoardResp> getLimitBoard(@RequestBody LimitReq limitReq){
         System.out.println("----limit_board controller----");
         return analysisService.getLimitBoard(limitReq);
+    }
+    @PostMapping("week_overview")
+    public List<WeekOverviewResp> getWeekOverview(@RequestBody LimitReq limitReq){
+        System.out.println("----week_overview analysis Controller----");
+        return analysisService.getWeekOverview(limitReq);
+    }
+    @PostMapping("month_overview")
+    public List<MonthOverviewResp> getMonthOverview(@RequestBody LimitReq limitReq){
+        System.out.println("----month_overview analysis Controller----");
+        return analysisService.getMonthOverview(limitReq);
+    }
+    @PostMapping("season_overview")
+    public List<SeasonOverviewResp> getSeasonOverview(@RequestBody LimitReq limitReq){
+        System.out.println("----season_overview analysis Controller----");
+        return analysisService.getSeasonOverview(limitReq);
+    }
+    @PostMapping("year_overview")
+    public List<YearOverviewResp> getYearOverview(@RequestBody LimitReq limitReq){
+        System.out.println("----year_overview analysis Controller----");
+        return analysisService.getYearOverview(limitReq);
     }
 }
