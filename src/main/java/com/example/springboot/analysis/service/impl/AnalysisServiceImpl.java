@@ -526,24 +526,335 @@ public class AnalysisServiceImpl implements AnalysisService {
     public List<WeekOverviewResp> getWeekOverview(LimitReq limitReq){
         System.out.println("----week_overview analysis Service----");
         List<WeekOverviewResp> weekOverviewRespList = analysisMapper.selectWeekOverview(limitReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        weekOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+            }
+
+            if(resp.getWeekPct1() != null){
+                resp.setWeekPct1(Double.parseDouble(String.format("%.2f",resp.getWeekPct1())));
+            }
+
+            if(resp.getWeekPct2() != null){
+                resp.setWeekPct2(Double.parseDouble(String.format("%.2f",resp.getWeekPct2())));
+            }
+
+            if(resp.getWeekPct3() != null){
+                resp.setWeekPct3(Double.parseDouble(String.format("%.2f",resp.getWeekPct3())));
+            }
+
+            if(resp.getWeekPct4() != null){
+                resp.setWeekPct4(Double.parseDouble(String.format("%.2f",resp.getWeekPct4())));
+            }
+
+            if(resp.getWeekPct5() != null){
+                resp.setWeekPct5(Double.parseDouble(String.format("%.2f",resp.getWeekPct5())));
+            }
+
+            if(resp.getWeekPct6() != null){
+                resp.setWeekPct6(Double.parseDouble(String.format("%.2f",resp.getWeekPct6())));
+            }
+
+            if(resp.getWeekPct7() != null){
+                resp.setWeekPct7(Double.parseDouble(String.format("%.2f",resp.getWeekPct7())));
+            }
+
+            if(resp.getWeekPct8() != null){
+                resp.setWeekPct8(Double.parseDouble(String.format("%.2f",resp.getWeekPct8())));
+            }
+
+            if(resp.getWeekPct9() != null){
+                resp.setWeekPct9(Double.parseDouble(String.format("%.2f",resp.getWeekPct9())));
+            }
+
+            if(resp.getWeekPct10() != null){
+                resp.setWeekPct10(Double.parseDouble(String.format("%.2f",resp.getWeekPct10())));
+            }
+
+            if(resp.getWeekPct11() != null){
+                resp.setWeekPct11(Double.parseDouble(String.format("%.2f",resp.getWeekPct11())));
+            }
+
+            if(resp.getWeekPct12() != null){
+                resp.setWeekPct12(Double.parseDouble(String.format("%.2f",resp.getWeekPct12())));
+            }
+
+            if(resp.getWeekPct13() != null){
+                resp.setWeekPct13(Double.parseDouble(String.format("%.2f",resp.getWeekPct13())));
+            }
+
+            if(resp.getWeekPct14() != null){
+                resp.setWeekPct14(Double.parseDouble(String.format("%.2f",resp.getWeekPct14())));
+            }
+
+            if(resp.getWeekPct15() != null){
+                resp.setWeekPct15(Double.parseDouble(String.format("%.2f",resp.getWeekPct15())));
+            }
+
+            //计算市值
+            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            //计算净资产
+            if(resp.getPb() != null && resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+        });
+
         return weekOverviewRespList;
     }
     @Override
     public List<MonthOverviewResp> getMonthOverview(LimitReq limitReq){
         System.out.println("----month_overview analysis Service----");
         List<MonthOverviewResp> monthOverviewRespList = analysisMapper.selectMonthOverview(limitReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        monthOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                if(resp.getPctChg() != null){
+                    resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+                }
+
+                if(resp.getMonthPct1() != null){
+                    resp.setMonthPct1(Double.parseDouble(String.format("%.2f",resp.getMonthPct1())));
+                }
+
+                if(resp.getMonthPct2() != null){
+                    resp.setMonthPct2(Double.parseDouble(String.format("%.2f",resp.getMonthPct2())));
+                }
+
+                if(resp.getMonthPct3() != null){
+                    resp.setMonthPct3(Double.parseDouble(String.format("%.2f",resp.getMonthPct3())));
+                }
+
+                if(resp.getMonthPct4() != null){
+                    resp.setMonthPct4(Double.parseDouble(String.format("%.2f",resp.getMonthPct4())));
+                }
+
+                if(resp.getMonthPct5() != null){
+                    resp.setMonthPct5(Double.parseDouble(String.format("%.2f",resp.getMonthPct5())));
+                }
+
+                if(resp.getMonthPct6() != null){
+                    resp.setMonthPct6(Double.parseDouble(String.format("%.2f",resp.getMonthPct6())));
+                }
+
+                if(resp.getMonthPct7() != null){
+                    resp.setMonthPct7(Double.parseDouble(String.format("%.2f",resp.getMonthPct7())));
+                }
+
+                if(resp.getMonthPct8() != null){
+                    resp.setMonthPct8(Double.parseDouble(String.format("%.2f",resp.getMonthPct8())));
+                }
+
+                if(resp.getMonthPct9() != null){
+                    resp.setMonthPct9(Double.parseDouble(String.format("%.2f",resp.getMonthPct9())));
+                }
+
+                if(resp.getMonthPct10() != null){
+                    resp.setMonthPct10(Double.parseDouble(String.format("%.2f",resp.getMonthPct10())));
+                }
+
+                if(resp.getMonthPct11() != null){
+                    resp.setMonthPct11(Double.parseDouble(String.format("%.2f",resp.getMonthPct11())));
+                }
+
+                if(resp.getMonthPct12() != null){
+                    resp.setMonthPct12(Double.parseDouble(String.format("%.2f",resp.getMonthPct12())));
+                }
+
+                if(resp.getMonthPct13() != null){
+                    resp.setMonthPct13(Double.parseDouble(String.format("%.2f",resp.getMonthPct13())));
+                }
+
+                if(resp.getMonthPct14() != null){
+                    resp.setMonthPct14(Double.parseDouble(String.format("%.2f",resp.getMonthPct14())));
+                }
+
+                if(resp.getMonthPct15() != null){
+                    resp.setMonthPct15(Double.parseDouble(String.format("%.2f",resp.getMonthPct15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+        });
+
         return monthOverviewRespList;
     }
     @Override
     public List<SeasonOverviewResp> getSeasonOverview(LimitReq limitReq){
         System.out.println("----season_overview analysis Service----");
         List<SeasonOverviewResp> seasonOverviewRespList = analysisMapper.selectSeasonOverview(limitReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        seasonOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                if(resp.getPctChg() != null){
+                    resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+                }
+
+                if(resp.getSeasonPct1() != null){
+                    resp.setSeasonPct1(Double.parseDouble(String.format("%.2f",resp.getSeasonPct1())));
+                }
+
+                if(resp.getSeasonPct2() != null){
+                    resp.setSeasonPct2(Double.parseDouble(String.format("%.2f",resp.getSeasonPct2())));
+                }
+
+                if(resp.getSeasonPct3() != null){
+                    resp.setSeasonPct3(Double.parseDouble(String.format("%.2f",resp.getSeasonPct3())));
+                }
+
+                if(resp.getSeasonPct4() != null){
+                    resp.setSeasonPct4(Double.parseDouble(String.format("%.2f",resp.getSeasonPct4())));
+                }
+
+                if(resp.getSeasonPct5() != null){
+                    resp.setSeasonPct5(Double.parseDouble(String.format("%.2f",resp.getSeasonPct5())));
+                }
+
+                if(resp.getSeasonPct6() != null){
+                    resp.setSeasonPct6(Double.parseDouble(String.format("%.2f",resp.getSeasonPct6())));
+                }
+
+                if(resp.getSeasonPct7() != null){
+                    resp.setSeasonPct7(Double.parseDouble(String.format("%.2f",resp.getSeasonPct7())));
+                }
+
+                if(resp.getSeasonPct8() != null){
+                    resp.setSeasonPct8(Double.parseDouble(String.format("%.2f",resp.getSeasonPct8())));
+                }
+
+                if(resp.getSeasonPct9() != null){
+                    resp.setSeasonPct9(Double.parseDouble(String.format("%.2f",resp.getSeasonPct9())));
+                }
+                if(resp.getSeasonPct10() != null){
+                    resp.setSeasonPct10(Double.parseDouble(String.format("%.2f",resp.getSeasonPct10())));
+                }
+
+                if(resp.getSeasonPct11() != null){
+                    resp.setSeasonPct11(Double.parseDouble(String.format("%.2f",resp.getSeasonPct11())));
+                }
+
+                if(resp.getSeasonPct12() != null){
+                    resp.setSeasonPct12(Double.parseDouble(String.format("%.2f",resp.getSeasonPct12())));
+                }
+
+                if(resp.getSeasonPct13() != null){
+                    resp.setSeasonPct13(Double.parseDouble(String.format("%.2f",resp.getSeasonPct13())));
+                }
+
+                if(resp.getSeasonPct14() != null){
+                    resp.setSeasonPct14(Double.parseDouble(String.format("%.2f",resp.getSeasonPct14())));
+                }
+
+                if(resp.getSeasonPct15() != null){
+                    resp.setSeasonPct15(Double.parseDouble(String.format("%.2f",resp.getSeasonPct15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+
         return seasonOverviewRespList;
     }
     @Override
     public List<YearOverviewResp> getYearOverview(LimitReq limitReq){
         System.out.println("----year_overview analysis Service----");
         List<YearOverviewResp> yearOverviewRespList = analysisMapper.selectYearOverview(limitReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        yearOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                if(resp.getPctChg() != null){
+                    resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+                }
+
+                if(resp.getYearPct1() != null){
+                    resp.setYearPct1(Double.parseDouble(String.format("%.2f",resp.getYearPct1())));
+                }
+
+                if(resp.getYearPct2() != null){
+                    resp.setYearPct2(Double.parseDouble(String.format("%.2f",resp.getYearPct12())));
+                }
+
+                if(resp.getYearPct3() != null){
+                    resp.setYearPct13(Double.parseDouble(String.format("%.2f",resp.getYearPct13())));
+                }
+
+                if(resp.getYearPct4() != null){
+                    resp.setYearPct4(Double.parseDouble(String.format("%.2f",resp.getYearPct4())));
+                }
+
+                if(resp.getYearPct5() != null){
+                    resp.setYearPct5(Double.parseDouble(String.format("%.2f",resp.getYearPct5())));
+                }
+
+                if(resp.getYearPct6() != null){
+                    resp.setYearPct6(Double.parseDouble(String.format("%.2f",resp.getYearPct6())));
+                }
+
+                if(resp.getYearPct7() != null){
+                    resp.setYearPct7(Double.parseDouble(String.format("%.2f",resp.getYearPct7())));
+                }
+
+                if(resp.getYearPct8() != null){
+                    resp.setYearPct8(Double.parseDouble(String.format("%.2f",resp.getYearPct8())));
+                }
+
+                if(resp.getYearPct9() != null){
+                    resp.setYearPct9(Double.parseDouble(String.format("%.2f",resp.getYearPct9())));
+                }
+
+                if(resp.getYearPct10() != null){
+                    resp.setYearPct10(Double.parseDouble(String.format("%.2f",resp.getYearPct10())));
+                }
+
+                if(resp.getYearPct11() != null){
+                    resp.setYearPct11(Double.parseDouble(String.format("%.2f",resp.getYearPct11())));
+                }
+
+                if(resp.getYearPct12() != null){
+                    resp.setYearPct12(Double.parseDouble(String.format("%.2f",resp.getYearPct12())));
+                }
+
+                if(resp.getYearPct13() != null){
+                    resp.setYearPct13(Double.parseDouble(String.format("%.2f",resp.getYearPct13())));
+                }
+
+                if(resp.getYearPct14() != null){
+                    resp.setYearPct14(Double.parseDouble(String.format("%.2f",resp.getYearPct14())));
+                }
+
+                if(resp.getYearPct15() != null){
+                    resp.setYearPct15(Double.parseDouble(String.format("%.2f",resp.getYearPct15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+
         return yearOverviewRespList;
     }
 }

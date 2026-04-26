@@ -70,3 +70,15 @@ from common_daily.`20241121` t
          left join stock_list.industry_member sl on t.ts_code = sl.ts_code
 where index_code_l1 = '801040.SI'
 order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+
+-- 周线纵览
+select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+       b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+       c.week_pct1,c.week_pct2,c.week_pct3,c.week_pct4,c.week_pct5,
+       c.week_pct6,c.week_pct7,c.week_pct8,c.week_pct9,c.week_pct10,
+       c.week_pct11,c.week_pct12,c.week_pct13,c.week_pct14,c.week_pct15
+from common_daily.`20251216` as a
+         left join stock_list.industry_member as b on a.ts_code = b.ts_code
+         left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
+where index_code_l1 = '801040.SI'
+order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;

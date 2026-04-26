@@ -11,8 +11,9 @@ public class YearOverviewResp {
     private Integer idx;
     private String name;
     private String tsCode;
-    private String province;
-    private String city;
+//    private String province;
+//    private String city;
+    private String area;
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
