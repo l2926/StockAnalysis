@@ -126,4 +126,10 @@ public class IndexController {
         System.out.println("----ten_days concept_member controller----");
         return indexService.getTenDays(req);
     }
+
+    @PostMapping("statistics_all_excel")
+    public List<StatisticsAllExcelResp> getStatisticsAllExcel(@RequestBody IndexReq indexReq){
+        System.out.println("----statistics_all_excel controller----");
+        return indexService.getStatisticsAllExcel(indexReq);
+    }
 }

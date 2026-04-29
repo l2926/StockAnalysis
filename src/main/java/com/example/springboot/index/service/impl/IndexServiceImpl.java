@@ -575,4 +575,34 @@ public class IndexServiceImpl implements IndexService {
 
         return tenDaysMarketRespList;
     }
+
+    @Override
+    public List<StatisticsAllExcelResp> getStatisticsAllExcel(IndexReq indexReq){
+        System.out.println("----statistics_all_excel service----");
+        indexMapper.setSqlMode();
+        List<StatisticsAllExcelResp> statisticsAllExcelRespList = indexMapper.selectStatisticsAllExcel(indexReq);
+
+        AtomicInteger index = new AtomicInteger(1);
+        statisticsAllExcelRespList.stream().filter(resp-> resp.getTradeDate() != null).forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            try{
+                resp.setAmt(Double.parseDouble(String.format("%.2f",resp.getAmt() / 100000)));
+                resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getAsset() / 10000)));
+                resp.setIncome(Double.parseDouble(String.format("%.2f",resp.getIncome() / 10000)));
+                resp.setProfit(Double.parseDouble(String.format("%.2f",resp.getProfit() / 10000)));
+
+                resp.setPe(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getProfit())));
+                resp.setPb(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAsset())));
+                resp.setPs(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getIncome())));
+
+                resp.setRoe(Double.parseDouble(String.format("%.2f",resp.getProfit() / resp.getAsset())));
+                resp.setProfitRate(Double.parseDouble(String.format("%.2f",resp.getProfit() / resp.getIncome())));
+                resp.setTurnover(Double.parseDouble(String.format("%.2f",resp.getTurnover())));
+            }catch (Exception e){
+                System.out.println("捕获异常:" + e.getMessage());
+            }
+        });
+        return statisticsAllExcelRespList;
+    }
 }

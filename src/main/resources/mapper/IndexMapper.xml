@@ -259,4 +259,34 @@
         where a.name = 'AI算力概念'
         order by industry_name_l1, total_mv desc;
     </select>
+
+    <update id="setSqlMode">
+        SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
+    </update>
+
+    <select id="selectStatisticsAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
+        select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
+        sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
+        from stock_list.industry_member as a
+        left join common_daily.`20251201` as b on a.ts_code = b.ts_code
+
+        <if test="selectId == 1">
+            <if test="level=='market'">
+                group by industry_name_l1 order by mv desc;
+            </if>
+            <if test="level=='L1'">
+                where index_code_l1 = #{indexCode}
+                group by industry_name_l3 order by industry_name_l2,mv desc
+            </if>
+        </if>
+        <if test="selectId == 2">
+            <if test="level=='market'">
+                order by mv desc;
+            </if>
+            <if test="level=='L1'">
+                where index_code_l1 = #{indexCode}
+                group by industry_name_l2 order by mv desc
+            </if>
+        </if>
+    </select>
 </mapper>

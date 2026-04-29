@@ -62,4 +62,8 @@ public interface IndexMapper {
 
     //资金流向
     List<MoneyFlowResp> selectMoneyFlow(ConceptMemberReq conceptMemberReq);
+    //获取行业纵览统计——表格
+    List<StatisticsAllExcelResp> selectStatisticsAllExcel(IndexReq indexReq);
+    //设置查询mod
+    void setSqlMode();
 }
