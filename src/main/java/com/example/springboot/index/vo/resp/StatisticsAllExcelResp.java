@@ -12,8 +12,12 @@ public class StatisticsAllExcelResp {
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
+    private String indexCodeL1;
+    private String indexCodeL2;
+    private String indexCodeL3;
     private Integer ct;
     private Double mv;
+    private Double avgMv;
     private Double asset;
     private Double income;
     private Double profit;

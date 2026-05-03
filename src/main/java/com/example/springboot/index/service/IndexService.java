@@ -88,7 +88,11 @@ public interface IndexService {
      */
     List<TenDaysMarketResp> getTenDays(ConceptMemberReq req);
     /**
-     * 获取行业行情纵览——表格
+     * 获取行业基本面纵览——表格
      */
     List<StatisticsAllExcelResp> getStatisticsAllExcel(IndexReq indexReq);
+    /**
+     * 获取行业行情行情纵览——表格
+     */
+    List<StatisticsExcelResp> getStatisticsExcel(IndexReq indexReq);
 }

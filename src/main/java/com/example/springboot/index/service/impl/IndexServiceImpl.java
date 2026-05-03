@@ -12,6 +12,7 @@ import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
 import com.example.springboot.index.vo.vo.DailyVo;
 import com.example.springboot.index.vo.vo.StatisticCommon;
+import com.example.springboot.index.vo.vo.StatisticsExcelVo;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
 import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.industry.vo.resp.FinaMain3Resp;
@@ -591,6 +592,7 @@ public class IndexServiceImpl implements IndexService {
                 resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getAsset() / 10000)));
                 resp.setIncome(Double.parseDouble(String.format("%.2f",resp.getIncome() / 10000)));
                 resp.setProfit(Double.parseDouble(String.format("%.2f",resp.getProfit() / 10000)));
+                resp.setAvgMv(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getCt())));
 
                 resp.setPe(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getProfit())));
                 resp.setPb(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAsset())));
@@ -604,5 +606,31 @@ public class IndexServiceImpl implements IndexService {
             }
         });
         return statisticsAllExcelRespList;
+    }
+
+    @Override
+    public List<StatisticsExcelResp> getStatisticsExcel(IndexReq indexReq){
+        System.out.println("----statistics_excel service----");
+        indexMapper.setSqlMode();
+        List<StatisticsExcelResp> statisticsExcelRespList = indexMapper.selectStatisticsExcel(indexReq);
+        List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectStatisticsExcel2(indexReq);
+
+        Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+
+        AtomicInteger index = new AtomicInteger(1);
+        statisticsExcelRespList.stream().forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+
+            try{
+                resp.setAllCt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt());
+                resp.setAllMv(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv());
+                resp.setAllAmt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt());
+            }catch (Exception e){
+                System.out.println("捕获异常:" + e.getMessage());
+            }
+        });
+
+        return statisticsExcelRespList;
     }
 }

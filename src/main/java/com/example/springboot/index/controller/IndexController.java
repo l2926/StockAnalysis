@@ -132,4 +132,10 @@ public class IndexController {
         System.out.println("----statistics_all_excel controller----");
         return indexService.getStatisticsAllExcel(indexReq);
     }
+
+    @PostMapping("statistics_excel")
+    public List<StatisticsExcelResp> getStatisticsExcel(@RequestBody IndexReq indexReq){
+        System.out.println("----statistics_excel controller----");
+        return indexService.getStatisticsExcel(indexReq);
+    }
 }

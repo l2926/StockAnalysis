@@ -10,6 +10,7 @@ import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
 import com.example.springboot.index.vo.vo.DailyVo;
 import com.example.springboot.index.vo.vo.StatisticCommon;
+import com.example.springboot.index.vo.vo.StatisticsExcelVo;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
 import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.industry.vo.resp.FinaMain3Resp;
@@ -62,8 +63,12 @@ public interface IndexMapper {
 
     //资金流向
     List<MoneyFlowResp> selectMoneyFlow(ConceptMemberReq conceptMemberReq);
-    //获取行业纵览统计——表格
+    //获取行业基本面纵览统计——表格
     List<StatisticsAllExcelResp> selectStatisticsAllExcel(IndexReq indexReq);
     //设置查询mod
     void setSqlMode();
+    //获取行业行情纵览——表格
+    List<StatisticsExcelResp> selectStatisticsExcel(IndexReq indexReq);
+    //统计该行业所有的数据
+    List<StatisticsExcelVo> selectStatisticsExcel2(IndexReq indexReq);
 }
