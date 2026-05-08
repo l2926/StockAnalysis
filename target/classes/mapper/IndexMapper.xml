@@ -264,6 +264,7 @@
         SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
     </update>
 
+<!--  获取行业基本面纵览  -->
     <select id="selectStatisticsAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
         sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
@@ -298,6 +299,8 @@
         </if>
     </select>
 
+
+<!--  获取行情纵览  -->
     <select id="selectStatisticsExcel" resultType="com.example.springboot.index.vo.resp.StatisticsExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
         from stock_list.industry_member as a
@@ -312,6 +315,7 @@
         group by industry_name_l1 order by all_mv ;
     </select>
 
+<!--  获取地域基本面纵览  -->
     <select id="selectStatisticsAreaExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAreaExcelResp">
         select c.province,
             case

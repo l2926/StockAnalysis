@@ -176,7 +176,8 @@
                c.business_scope ,
                industry_name_l1,
                industry_name_l2,
-               industry_name_l3
+               industry_name_l3,
+               a.total_mv/a.pb as asset
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
@@ -195,7 +196,16 @@
             <if test="level == 'area'">
                 area
             </if>
-            = #{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            = #{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
         </where>
     </select>
 
