@@ -269,7 +269,7 @@
         sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
         from stock_list.industry_member as a
         left join common_daily.`20251201` as b on a.ts_code = b.ts_code
-
+        left join stock_list.stock_company as c on b.ts_code = c.ts_code
         <if test="selectId == 1">
             <if test="level=='market'">
                 group by industry_name_l1 order by mv desc;
@@ -277,6 +277,10 @@
             <if test="level=='L1'">
                 where index_code_l1 = #{indexCode}
                 group by industry_name_l3 order by industry_name_l2,mv desc
+            </if>
+            <if test="level=='area'">
+                where c.province = #{indexCode}
+                group by industry_name_l1,industry_name_l2 order by industry_name_l1,mv desc
             </if>
         </if>
         <if test="selectId == 2">
@@ -286,6 +290,10 @@
             <if test="level=='L1'">
                 where index_code_l1 = #{indexCode}
                 group by industry_name_l2 order by mv desc
+            </if>
+            <if test="level=='area'">
+                where c.province = #{indexCode}
+                group by industry_name_l1 order by mv desc
             </if>
         </if>
     </select>
@@ -302,5 +310,39 @@
         from stock_list.industry_member as a
         left join common_daily.`20251201` as b on a.ts_code = b.ts_code
         group by industry_name_l1 order by all_mv ;
+    </select>
+
+    <select id="selectStatisticsAreaExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAreaExcelResp">
+        select c.province,
+            case
+                when count(distinct a.industry_name_l1) = 1
+                    then max(a.industry_name_l1)
+                else ''
+            end as industry_name_l1 ,
+            case
+                when count(distinct a.industry_name_l2) = 1
+                    then max(a.industry_name_l2)
+                else ''
+            end as industry_name_l2 ,
+            case
+                when count(distinct a.industry_name_l3) = 1
+                    then max(a.industry_name_l3)
+                else ''
+            end as industry_name_l3 ,
+            index_code_l1 ,index_code_l2 ,index_code_l3 ,
+            count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/pe_ttm) as income,sum(total_mv/ps_ttm) as profit,sum(amount) as amt,trade_date,amount/total_mv as turnover
+        from stock_list.industry_member as a
+        left join common_daily.`20251201` as b on a.ts_code = b.ts_code
+        left join stock_list.stock_company as c on b.ts_code = c.ts_code
+        <if test="level=='L1'">
+            where index_code_l1=#{indexCode}
+        </if>
+        <if test="level=='L2'">
+            where index_code_l2=#{indexCode}
+        </if>
+        <if test="level=='L3'">
+            where index_code_l3=#{indexCode}
+        </if>
+        group by c.province order by mv desc;
     </select>
 </mapper>

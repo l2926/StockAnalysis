@@ -95,4 +95,8 @@ public interface IndexService {
      * 获取行业行情行情纵览——表格
      */
     List<StatisticsExcelResp> getStatisticsExcel(IndexReq indexReq);
+    /**
+     * 获取地域统计纵览——表格
+     */
+    List<StatisticsAreaExcelResp> getStatisticsAreaExcel(IndexReq indexReq);
 }

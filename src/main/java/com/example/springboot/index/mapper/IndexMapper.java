@@ -71,4 +71,6 @@ public interface IndexMapper {
     List<StatisticsExcelResp> selectStatisticsExcel(IndexReq indexReq);
     //统计该行业所有的数据
     List<StatisticsExcelVo> selectStatisticsExcel2(IndexReq indexReq);
+    //统计该地域所有的数据
+    List<StatisticsAreaExcelResp> selectStatisticsAreaExcel(IndexReq indexReq);
 }

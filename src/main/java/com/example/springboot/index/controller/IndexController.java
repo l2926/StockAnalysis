@@ -138,4 +138,10 @@ public class IndexController {
         System.out.println("----statistics_excel controller----");
         return indexService.getStatisticsExcel(indexReq);
     }
+
+    @PostMapping("statistics_area_excel")
+    public List<StatisticsAreaExcelResp> getStatisticsAreaExcel(@RequestBody IndexReq indexReq){
+        System.out.println("----statistics_area_excel controller----");
+        return indexService.getStatisticsAreaExcel(indexReq);
+    }
 }
