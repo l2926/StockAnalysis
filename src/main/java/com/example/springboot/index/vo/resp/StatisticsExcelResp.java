@@ -12,6 +12,9 @@ public class StatisticsExcelResp {
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
+    private String indexCodeL1;
+    private String indexCodeL2;
+    private String indexCodeL3;
     private Integer ct;
     private Integer allCt;
     private Double ctPct;
@@ -22,5 +25,7 @@ public class StatisticsExcelResp {
     private Double amt;
     private Double allAmt;
     private Double amtPct;
+    private Double turnover;
+    private Double allTurnover;
     private String tradeDate;
 }

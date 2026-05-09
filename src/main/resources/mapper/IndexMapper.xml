@@ -271,6 +271,7 @@
         from stock_list.industry_member as a
         left join common_daily.`20251201` as b on a.ts_code = b.ts_code
         left join stock_list.stock_company as c on b.ts_code = c.ts_code
+
         <if test="selectId == 1">
             <if test="level=='market'">
                 group by industry_name_l1 order by mv desc;
@@ -302,17 +303,70 @@
 
 <!--  获取行情纵览  -->
     <select id="selectStatisticsExcel" resultType="com.example.springboot.index.vo.resp.StatisticsExcelResp">
-        select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
+        select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3,
+               count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
         from stock_list.industry_member as a
-                 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where b.pct_chg > 10
-        group by industry_name_l1 order by industry_name_l1 ,industry_name_l2 ,industry_name_l3 ;
+                 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where b.pct_chg > 9
+--         group by industry_name_l1 order by mv desc;
+        <if test="selectId == 1">
+            <if test="level=='market'">
+                group by industry_name_l1 order by mv desc;
+            </if>
+            <if test="level=='L1'">
+                and index_code_l1 = #{indexCode}
+                group by industry_name_l3 order by industry_name_l2,mv desc
+            </if>
+            <if test="level=='area'">
+                and c.province = #{indexCode}
+                group by industry_name_l1,industry_name_l2 order by industry_name_l1,mv desc
+            </if>
+        </if>
+        <if test="selectId == 2">
+            <if test="level=='market'">
+                order by mv desc;
+            </if>
+            <if test="level=='L1'">
+                and index_code_l1 = #{indexCode}
+                group by industry_name_l2 order by mv desc
+            </if>
+            <if test="level=='area'">
+                and c.province = #{indexCode}
+                group by industry_name_l1 order by mv desc
+            </if>
+        </if>
     </select>
 
     <select id="selectStatisticsExcel2" resultType="com.example.springboot.index.vo.vo.StatisticsExcelVo">
         select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as all_ct,sum(total_mv) as all_mv,sum(amount) as all_amt
         from stock_list.industry_member as a
         left join common_daily.`20251201` as b on a.ts_code = b.ts_code
-        group by industry_name_l1 order by all_mv ;
+--         group by industry_name_l1 order by all_mv ;
+        <if test="selectId == 1">
+            <if test="level=='market'">
+                group by industry_name_l1 order by all_mv desc;
+            </if>
+            <if test="level=='L1'">
+                and index_code_l1 = #{indexCode}
+                group by industry_name_l3 order by industry_name_l2,all_mv desc
+            </if>
+            <if test="level=='area'">
+                and c.province = #{indexCode}
+                group by industry_name_l1,industry_name_l2 order by industry_name_l1,all_mv desc
+            </if>
+        </if>
+        <if test="selectId == 2">
+            <if test="level=='market'">
+                order by all_mv desc;
+            </if>
+            <if test="level=='L1'">
+                and index_code_l1 = #{indexCode}
+                group by industry_name_l2 order by all_mv desc
+            </if>
+            <if test="level=='area'">
+                and c.province = #{indexCode}
+                group by industry_name_l1 order by all_mv desc
+            </if>
+        </if>
     </select>
 
 <!--  获取地域基本面纵览  -->

@@ -61,3 +61,9 @@ from kpl_concept_cons.`20250109` as a
          left join stock_list.industry_member as c on b.ts_code = c.ts_code
          left join money_flow.`20250612` as d on c.ts_code = d.ts_code
 where a.name = 'AI算力概念';
+
+-- 统计行情表格
+select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
+from stock_list.industry_member as a
+left join common_daily.`20251201` as b on a.ts_code = b.ts_code where b.pct_chg > 10
+group by industry_name_l1 order by industry_name_l1 ,industry_name_l2 ,industry_name_l3 ;

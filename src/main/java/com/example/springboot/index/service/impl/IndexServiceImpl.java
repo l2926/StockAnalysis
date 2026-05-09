@@ -626,6 +626,20 @@ public class IndexServiceImpl implements IndexService {
                 resp.setAllCt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt());
                 resp.setAllMv(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv());
                 resp.setAllAmt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt());
+
+                resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
+                resp.setAllMv(Double.parseDouble(String.format("%.2f",resp.getAllMv() / 10000)));
+                resp.setAmt(Double.parseDouble(String.format("%.2f",resp.getAmt() / 100000)));
+                resp.setAllAmt(Double.parseDouble(String.format("%.2f",resp.getAllAmt() / 100000)));
+
+                resp.setCtPct(Double.parseDouble(String.format("%.2f",resp.getCt().doubleValue() / resp.getAllCt().doubleValue())));
+                resp.setMvPct(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAllMv())));
+                resp.setAmtPct(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getAllAmt())));
+
+                //换手率
+                resp.setTurnover(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getMv())));
+                resp.setAllTurnover(Double.parseDouble(String.format("%.2f",resp.getAllAmt() / resp.getAllMv())));
+
             }catch (Exception e){
                 System.out.println("捕获异常:" + e.getMessage());
             }
