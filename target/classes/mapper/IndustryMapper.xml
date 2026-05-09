@@ -349,7 +349,22 @@
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+--         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
 </select>
     <select id="selectMonthOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
@@ -361,7 +376,22 @@
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+--         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
 </select>
     <select id="selectSeasonOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
@@ -373,7 +403,22 @@
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+--         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
 
     </select>
@@ -386,7 +431,22 @@
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+--         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
 
     </select>
