@@ -264,6 +264,45 @@
         SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
     </update>
 
+    <sql id="block_where">
+        <if test="blockId==1">
+            1
+        </if>
+        <if test="blockId == 2">
+            market='主板'
+        </if>
+        <if test="blockId == 3">
+            market='创业板'
+        </if>
+        <if test="blockId == 4">
+            market='科创板'
+        </if>
+        <if test="blockId == 5">
+            market='北交所'
+        </if>
+    </sql>
+
+    <sql id="pct_where">
+        <if test="paraId == 1">
+            b.pct_chg > 9
+        </if>
+        <if test="paraId == 2">
+            b.pct_chg > 5
+        </if>
+        <if test="paraId == 3">
+            b.pct_chg > 0
+        </if>
+        <if test="paraId == 4">
+            b.pct_chg &lt; 0
+        </if>
+        <if test="paraId == 5">
+            b.pct_chg &lt; -5
+        </if>
+        <if test="paraId == 6">
+            b.pct_chg &lt; -9
+        </if>
+    </sql>
+
 <!--  获取行业基本面纵览  -->
     <select id="selectStatisticsAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
@@ -274,27 +313,33 @@
 
         <if test="selectId == 1">
             <if test="level=='market'">
+                where <include refid="block_where"></include>
                 group by industry_name_l1 order by mv desc;
             </if>
             <if test="level=='L1'">
                 where index_code_l1 = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l3 order by industry_name_l2,mv desc
             </if>
             <if test="level=='area'">
                 where c.province = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l1,industry_name_l2 order by industry_name_l1,mv desc
             </if>
         </if>
         <if test="selectId == 2">
             <if test="level=='market'">
+                where <include refid="block_where"></include>
                 order by mv desc;
             </if>
             <if test="level=='L1'">
                 where index_code_l1 = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l2 order by mv desc
             </if>
             <if test="level=='area'">
                 where c.province = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l1 order by mv desc
             </if>
         </if>
@@ -306,31 +351,37 @@
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3,
                count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
         from stock_list.industry_member as a
-                 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where b.pct_chg > 9
---         group by industry_name_l1 order by mv desc;
+                 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where
+        <include refid="pct_where"></include>
         <if test="selectId == 1">
             <if test="level=='market'">
+                and <include refid="block_where"></include>
                 group by industry_name_l1 order by mv desc;
             </if>
             <if test="level=='L1'">
                 and index_code_l1 = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l3 order by industry_name_l2,mv desc
             </if>
             <if test="level=='area'">
                 and c.province = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l1,industry_name_l2 order by industry_name_l1,mv desc
             </if>
         </if>
         <if test="selectId == 2">
             <if test="level=='market'">
+                and <include refid="block_where"></include>
                 order by mv desc;
             </if>
             <if test="level=='L1'">
                 and index_code_l1 = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l2 order by mv desc
             </if>
             <if test="level=='area'">
                 and c.province = #{indexCode}
+                and <include refid="block_where"></include>
                 group by industry_name_l1 order by mv desc
             </if>
         </if>
@@ -340,29 +391,34 @@
         select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as all_ct,sum(total_mv) as all_mv,sum(amount) as all_amt
         from stock_list.industry_member as a
         left join common_daily.`20251201` as b on a.ts_code = b.ts_code
---         group by industry_name_l1 order by all_mv ;
         <if test="selectId == 1">
             <if test="level=='market'">
+                where <include refid="block_where"></include>
                 group by industry_name_l1 order by all_mv desc;
             </if>
             <if test="level=='L1'">
+                where <include refid="block_where"></include>
                 and index_code_l1 = #{indexCode}
                 group by industry_name_l3 order by industry_name_l2,all_mv desc
             </if>
             <if test="level=='area'">
+                where <include refid="block_where"></include>
                 and c.province = #{indexCode}
                 group by industry_name_l1,industry_name_l2 order by industry_name_l1,all_mv desc
             </if>
         </if>
         <if test="selectId == 2">
             <if test="level=='market'">
+                where <include refid="block_where"></include>
                 order by all_mv desc;
             </if>
             <if test="level=='L1'">
+                where <include refid="block_where"></include>
                 and index_code_l1 = #{indexCode}
                 group by industry_name_l2 order by all_mv desc
             </if>
             <if test="level=='area'">
+                where <include refid="block_where"></include>
                 and c.province = #{indexCode}
                 group by industry_name_l1 order by all_mv desc
             </if>
