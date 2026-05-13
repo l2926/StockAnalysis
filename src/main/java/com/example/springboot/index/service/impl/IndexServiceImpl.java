@@ -615,17 +615,85 @@ public class IndexServiceImpl implements IndexService {
         List<StatisticsExcelResp> statisticsExcelRespList = indexMapper.selectStatisticsExcel(indexReq);
         List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectStatisticsExcel2(indexReq);
 
-        Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
-                .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+        Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = null;
+        if(indexReq.getSelectId() == 1){
+            if(indexReq.getLevel().equals("market")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+            }
+            if(indexReq.getLevel().equals("L1")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL3,vo->vo));
+            }
+            if(indexReq.getLevel().equals("area")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL2,vo->vo));
+            }
+        }
+        if(indexReq.getSelectId() == 2){
+            if(indexReq.getLevel().equals("market")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+            }
+            if(indexReq.getLevel().equals("L1")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL2,vo->vo));
+            }
+            if(indexReq.getLevel().equals("area")){
+                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+            }
 
-        AtomicInteger index = new AtomicInteger(1);
-        statisticsExcelRespList.stream().forEach(resp->{
-            resp.setIdx(index.getAndIncrement());
+        }
 
+//        Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+//                .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+
+        int i = 1;
+        for (StatisticsExcelResp resp : statisticsExcelRespList){
             try{
-                resp.setAllCt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt());
-                resp.setAllMv(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv());
-                resp.setAllAmt(stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt());
+                resp.setIdx(i++);
+                Integer allCt = 0;
+                Double allMv = 0.0;
+                Double allAmt = 0.0;
+
+                if(indexReq.getSelectId() == 1){
+                    if(indexReq.getLevel().equals("market")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                    }
+                    if(indexReq.getLevel().equals("L1")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllAmt();
+                    }
+                    if(indexReq.getLevel().equals("area")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllAmt();
+                    }
+                }
+                if(indexReq.getSelectId() == 2){
+                    if(indexReq.getLevel().equals("market")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                    }
+                    if(indexReq.getLevel().equals("L1")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllAmt();
+                    }
+                    if(indexReq.getLevel().equals("area")){
+                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
+                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
+                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                    }
+                }
+                resp.setAllCt(allCt);
+                resp.setAllMv(allMv);
+                resp.setAllAmt(allAmt);
 
                 resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
                 resp.setAllMv(Double.parseDouble(String.format("%.2f",resp.getAllMv() / 10000)));
@@ -643,7 +711,7 @@ public class IndexServiceImpl implements IndexService {
             }catch (Exception e){
                 System.out.println("捕获异常:" + e.getMessage());
             }
-        });
+        }
 
         return statisticsExcelRespList;
     }

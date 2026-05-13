@@ -367,9 +367,9 @@
                c.week_pct6,c.week_pct7,c.week_pct8,c.week_pct9,c.week_pct10,
                c.week_pct11,c.week_pct12,c.week_pct13,c.week_pct14,c.week_pct15
         from common_daily.`20251216` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
     <select id="selectMonthOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
@@ -379,9 +379,9 @@
                c.month_pct6,c.month_pct7,c.month_pct8,c.month_pct9,c.month_pct10,
                c.month_pct11,c.month_pct12,c.month_pct13,c.month_pct14,c.month_pct15
         from common_daily.`20251216` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
     <select id="selectSeasonOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
@@ -391,9 +391,9 @@
                c.season_pct6,c.season_pct7,c.season_pct8,c.season_pct9,c.season_pct10,
                c.season_pct11,c.season_pct12,c.season_pct13,c.season_pct14,c.season_pct15
         from common_daily.`20251216` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
     <select id="selectYearOverview" resultType="com.example.springboot.industry.vo.resp.YearOverviewResp">
@@ -403,9 +403,9 @@
                c.year_pct6,c.year_pct7,c.year_pct8,c.year_pct9,c.year_pct10,
                c.year_pct11,c.year_pct12,c.year_pct13,c.year_pct14,c.year_pct15
         from common_daily.`20251216` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 left join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
-        where index_code_l1 = '801040.SI'
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`20260423` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 </mapper>
