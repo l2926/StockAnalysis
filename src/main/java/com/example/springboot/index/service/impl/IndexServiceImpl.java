@@ -632,8 +632,7 @@ public class IndexServiceImpl implements IndexService {
         }
         if(indexReq.getSelectId() == 2){
             if(indexReq.getLevel().equals("market")){
-                stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
-                        .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+
             }
             if(indexReq.getLevel().equals("L1")){
                 stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
@@ -676,9 +675,9 @@ public class IndexServiceImpl implements IndexService {
                 }
                 if(indexReq.getSelectId() == 2){
                     if(indexReq.getLevel().equals("market")){
-                        allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
-                        allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
-                        allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                        allCt = statisticsExcelVoList.get(0).getAllCt();
+                        allMv = statisticsExcelVoList.get(0).getAllMv();
+                        allAmt = statisticsExcelVoList.get(0).getAllAmt();
                     }
                     if(indexReq.getLevel().equals("L1")){
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
