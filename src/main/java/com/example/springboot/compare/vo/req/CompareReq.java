@@ -18,4 +18,6 @@ public class CompareReq {
     private String name2;
     private String tradeDate;
     private String startDate;
+    private Integer selectId1;
+    private Integer selectId2;
 }

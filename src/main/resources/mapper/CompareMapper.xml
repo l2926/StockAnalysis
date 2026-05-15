@@ -11,11 +11,26 @@
         select * from daily_index.`000001` where trade_date > #{startDate} and trade_date &lt; #{tradeDate} order by trade_date asc;
     </select>
 
+
     <select id="selectUpDaily" resultType="com.example.springboot.compare.vo.vo.DailyVo">
-        select * from daily_common.`${symbol1}` where trade_date > #{startDate} and trade_date &lt; #{tradeDate} order by trade_date asc;
+        select * from
+        <if test="selectId1 == 1">
+            daily_index.`${symbol1}`
+        </if>
+        <if test="selectId1 == 2">
+            daily_common.`${symbol1}`
+        </if>
+        where trade_date > #{startDate} and trade_date &lt; #{tradeDate} order by trade_date asc;
     </select>
 
     <select id="selectDownDaily" resultType="com.example.springboot.compare.vo.vo.DailyVo">
-        select * from daily_common.`${symbol2}` where trade_date > #{startDate} and trade_date &lt; #{tradeDate} order by trade_date asc;
+        select * from
+        <if test="selectId2 == 1">
+            daily_index.`${symbol2}`
+        </if>
+        <if test="selectId2 == 2">
+            daily_common.`${symbol2}`
+        </if>
+        where trade_date > #{startDate} and trade_date &lt; #{tradeDate} order by trade_date asc;
     </select>
 </mapper>
