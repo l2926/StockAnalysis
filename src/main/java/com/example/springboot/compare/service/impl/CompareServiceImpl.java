@@ -21,6 +21,11 @@ public class CompareServiceImpl implements CompareService {
     @Override
     public DailyCompareResp getDaily(CompareReq compareReq){
         System.out.println("----Compare Service----");
+
+        //System.out.println(tmp[0]);
+        compareReq.setSymbol1(compareReq.getTsCode1().split("\\.")[0]);
+        compareReq.setSymbol2(compareReq.getTsCode2().split("\\.")[0]);
+
         List<DailyCompareVo> dailyCompareVoList = compareMapper.selectBenchmark(compareReq);
         List<DailyVo> dailyVoList1 = compareMapper.selectUpDaily(compareReq);
         List<DailyVo> dailyVoList2 = compareMapper.selectDownDaily(compareReq);
