@@ -78,7 +78,7 @@ public class CompareServiceImpl implements CompareService {
         DailyCompareResp dailyCompareResp = new DailyCompareResp();
         dailyCompareResp.setTsFirstName("平安银行");
         dailyCompareResp.setTsFirstCode("000001.SZ");
-        dailyCompareResp.setTsSecondName("万科");
+        dailyCompareResp.setTsSecondName("万科233");
         dailyCompareResp.setTsSecondCode("000002.SZ");
         dailyCompareResp.setDailyCompareVoList(dailyCompareVoList);
         return dailyCompareResp;
