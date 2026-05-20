@@ -35,4 +35,5 @@ public class FundmentalResp {
     private Double asset;
     private Double totalMv;
     private String tradeDate;
+    private Double ratio;
 }
