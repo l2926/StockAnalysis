@@ -76,10 +76,10 @@ public class CompareServiceImpl implements CompareService {
 
         //组装为对比行情出参
         DailyCompareResp dailyCompareResp = new DailyCompareResp();
-        dailyCompareResp.setTsFirstName("平安银行");
-        dailyCompareResp.setTsFirstCode("000001.SZ");
-        dailyCompareResp.setTsSecondName("万科233");
-        dailyCompareResp.setTsSecondCode("000002.SZ");
+        dailyCompareResp.setTsFirstName(compareReq.getName1());
+        dailyCompareResp.setTsFirstCode(compareReq.getTsCode1());
+        dailyCompareResp.setTsSecondName(compareReq.getName2());
+        dailyCompareResp.setTsSecondCode(compareReq.getTsCode2());
         dailyCompareResp.setDailyCompareVoList(dailyCompareVoList);
         return dailyCompareResp;
     }

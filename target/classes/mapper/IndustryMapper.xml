@@ -7,8 +7,9 @@
             parameterType="com.example.springboot.industry.vo.req.IndustryReq">
         select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3 ,
         b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,
-        a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date
+        a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date,c.ratio
         from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code=b.ts_code
+        left join hsgt.`20260331` as c on b.ts_code = c.ts_code
         <where>
             <if test="level == 'L1'">
                 index_code_l1
