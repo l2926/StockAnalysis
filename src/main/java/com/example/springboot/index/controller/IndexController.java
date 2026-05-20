@@ -144,4 +144,10 @@ public class IndexController {
         System.out.println("----statistics_area_excel controller----");
         return indexService.getStatisticsAreaExcel(indexReq);
     }
+
+    @PostMapping("hsgt_daily")
+    public HsgtDailyResp getHsgtDaily(@RequestBody IndexReq indexReq){
+        System.out.println("----hsgt_daily controller----");
+        return indexService.getHsgtOverview(indexReq);
+    }
 }

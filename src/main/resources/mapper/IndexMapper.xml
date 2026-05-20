@@ -303,6 +303,15 @@
         </if>
     </sql>
 
+    <sql id="mv_where">
+        <if test="mvId == 1">
+            1
+        </if>
+        <if test="mvId == 2">
+            b.total_mv > 10000000
+        </if>
+    </sql>
+
 <!--  获取行业基本面纵览  -->
     <select id="selectStatisticsAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
@@ -314,6 +323,7 @@
         <if test="selectId == 1">
             <if test="level=='market'">
                 where <include refid="block_where"></include>
+                and <include refid="mv_where"></include>
                 group by industry_name_l1 order by mv desc;
             </if>
             <if test="level=='L1'">
@@ -330,6 +340,7 @@
         <if test="selectId == 2">
             <if test="level=='market'">
                 where <include refid="block_where"></include>
+                and <include refid="mv_where"></include>
                 order by mv desc;
             </if>
             <if test="level=='L1'">
@@ -458,5 +469,11 @@
             where index_code_l3=#{indexCode}
         </if>
         group by c.province order by mv desc;
+    </select>
+    
+    <select id="selectHsgtDaily" resultType="com.example.springboot.index.vo.vo.HsgtDailyVo">
+        select a.trade_date ,a.close,a.open,a.high,a.low,a.pct_chg,a.amount,a.turnover_rate,a.pe_ttm,a.pb,b.north_money from daily_index.`000001` as a
+        inner join hsgt.hsgt_overview as b on a.trade_date = b.trade_date
+        order by a.trade_date asc;
     </select>
 </mapper>

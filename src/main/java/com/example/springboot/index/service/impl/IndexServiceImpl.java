@@ -11,18 +11,16 @@ import com.example.springboot.index.service.IndexService;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
 import com.example.springboot.index.vo.vo.DailyVo;
+import com.example.springboot.index.vo.vo.HsgtDailyVo;
 import com.example.springboot.index.vo.vo.StatisticCommon;
 import com.example.springboot.index.vo.vo.StatisticsExcelVo;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
 import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.industry.vo.resp.FinaMain3Resp;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.server.Ssl;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -744,5 +742,17 @@ public class IndexServiceImpl implements IndexService {
             }
         });
         return statisticsAreaExcelRespList;
+    }
+
+    @Override
+    public HsgtDailyResp getHsgtOverview(IndexReq indexReq){
+        System.out.println("----hsgt_daily service----");
+        List<HsgtDailyVo> hsgtDailyVoList = indexMapper.selectHsgtDaily(indexReq);
+
+        HsgtDailyResp hsgtOverviewResp = new HsgtDailyResp();
+        hsgtOverviewResp.setIndexName("北上资金");
+        hsgtOverviewResp.setIndexCode("000001.SH");
+        hsgtOverviewResp.setHsgtDailyVoList(hsgtDailyVoList);
+        return hsgtOverviewResp;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.springboot.index.mapper;
 
-import com.example.springboot.analysis.vo.req.LimitReq;
 import com.example.springboot.analysis.vo.resp.FiveDaysLimitResp;
 import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
@@ -9,6 +8,7 @@ import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
 import com.example.springboot.index.vo.vo.DailyVo;
+import com.example.springboot.index.vo.vo.HsgtDailyVo;
 import com.example.springboot.index.vo.vo.StatisticCommon;
 import com.example.springboot.index.vo.vo.StatisticsExcelVo;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
@@ -73,4 +73,5 @@ public interface IndexMapper {
     List<StatisticsExcelVo> selectStatisticsExcel2(IndexReq indexReq);
     //统计该地域所有的数据
     List<StatisticsAreaExcelResp> selectStatisticsAreaExcel(IndexReq indexReq);
+    List<HsgtDailyVo> selectHsgtDaily(IndexReq indexReq);
 }

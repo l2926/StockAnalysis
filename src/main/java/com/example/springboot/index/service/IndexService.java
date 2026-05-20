@@ -99,4 +99,11 @@ public interface IndexService {
      * 获取地域统计纵览——表格
      */
     List<StatisticsAreaExcelResp> getStatisticsAreaExcel(IndexReq indexReq);
+
+    /**
+     * 北向资金概览
+     * @param indexReq
+     * @return
+     */
+    HsgtDailyResp getHsgtOverview(IndexReq indexReq);
 }

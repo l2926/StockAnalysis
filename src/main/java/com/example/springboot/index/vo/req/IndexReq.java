@@ -14,6 +14,7 @@ public class IndexReq {
     private String level;
     private Integer paraId;
     private Integer blockId;
+    private Integer mvId;
     private String tradeDate;
     private String indexCode;
     private String symbol;
