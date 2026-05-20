@@ -74,4 +74,8 @@ public interface IndexMapper {
     //统计该地域所有的数据
     List<StatisticsAreaExcelResp> selectStatisticsAreaExcel(IndexReq indexReq);
     List<HsgtDailyVo> selectHsgtDaily(IndexReq indexReq);
+    //东方财富-概念列表
+    List<DcIndex2Resp> selectDcIndex2(IndexReq indexReq);
+    //东方财富-成员列表
+    List<DcMember2Resp> selectDcMember2(IndexReq indexReq);
 }

@@ -476,4 +476,16 @@
         inner join hsgt.hsgt_overview as b on a.trade_date = b.trade_date
         order by a.trade_date asc;
     </select>
+
+    <select id="selectDcIndex2" resultType="com.example.springboot.index.vo.resp.DcIndex2Resp">
+        select theme_code,trade_date,name,pct_change,z_t_num,main_change,lead_stock,lead_stock_code,lead_stock_pct_change from dc_index.`20260519`;
+    </select>
+
+    <select id="selectDcMember2" resultType="com.example.springboot.index.vo.resp.DcMember2Resp">
+        select a.ts_code,a.trade_date,a.name,a.theme_code,a.reason, b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,c.pct_chg,b.market,c.total_mv
+        from dc_member.`20260519` as a
+                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 left join common_daily.`20251201` as c on b.ts_code = c.ts_code
+        where theme_code = '000015.DC';
+    </select>
 </mapper>

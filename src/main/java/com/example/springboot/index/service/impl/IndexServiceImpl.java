@@ -755,4 +755,18 @@ public class IndexServiceImpl implements IndexService {
         hsgtOverviewResp.setHsgtDailyVoList(hsgtDailyVoList);
         return hsgtOverviewResp;
     }
+
+    @Override
+    public List<DcIndex2Resp> getDcIndex2(IndexReq indexReq){
+        System.out.println("----dc_index2 service----");
+        List<DcIndex2Resp> dcIndex2RespList = indexMapper.selectDcIndex2(indexReq);
+        return dcIndex2RespList;
+    }
+
+    @Override
+    public List<DcMember2Resp> getDcMember2(IndexReq indexReq){
+        System.out.println("----dc_member service----");
+        List<DcMember2Resp> dcMember2RespList = indexMapper.selectDcMember2(indexReq);
+        return dcMember2RespList;
+    }
 }

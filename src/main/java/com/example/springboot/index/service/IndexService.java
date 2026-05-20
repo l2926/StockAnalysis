@@ -106,4 +106,12 @@ public interface IndexService {
      * @return
      */
     HsgtDailyResp getHsgtOverview(IndexReq indexReq);
+    /**
+     * 东方财富-概念列表
+     */
+    List<DcIndex2Resp> getDcIndex2(IndexReq indexReq);
+    /**
+     * 东方财富-成员列表
+     */
+    List<DcMember2Resp> getDcMember2(IndexReq indexReq);
 }

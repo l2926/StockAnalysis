@@ -150,4 +150,16 @@ public class IndexController {
         System.out.println("----hsgt_daily controller----");
         return indexService.getHsgtOverview(indexReq);
     }
+
+    @PostMapping("dc_index2")
+    public List<DcIndex2Resp> getDcIndex2(@RequestBody IndexReq indexReq){
+        System.out.println("----dc_index2 controller----");
+        return indexService.getDcIndex2(indexReq);
+    }
+
+    @PostMapping("dc_member2")
+    public List<DcMember2Resp> getDcMember2(@RequestBody IndexReq indexReq){
+        System.out.println("----dc_member2 controller----");
+        return indexService.getDcMember2(indexReq);
+    }
 }
