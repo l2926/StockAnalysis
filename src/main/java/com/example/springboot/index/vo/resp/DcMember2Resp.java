@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class DcMember2Resp {
+    private Integer idx;
     private String tsCode;
     private String tradeDate;
     private String name;
@@ -21,4 +22,5 @@ public class DcMember2Resp {
     private String market;
     private Double asset;
     private Double totalMv;
+    private Double pb;
 }

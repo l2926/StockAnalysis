@@ -761,6 +761,12 @@ public class IndexServiceImpl implements IndexService {
     public List<DcIndex2Resp> getDcIndex2(IndexReq indexReq){
         System.out.println("----dc_index2 service----");
         List<DcIndex2Resp> dcIndex2RespList = indexMapper.selectDcIndex2(indexReq);
+
+        AtomicInteger index = new AtomicInteger(1);
+        dcIndex2RespList.stream().forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            resp.setMainChange(Double.parseDouble(String.format("%.2f",resp.getMainChange() / 100000000)));
+        });
         return dcIndex2RespList;
     }
 
@@ -768,6 +774,22 @@ public class IndexServiceImpl implements IndexService {
     public List<DcMember2Resp> getDcMember2(DcMemberReq dcMemberReq){
         System.out.println("----dc_member service----");
         List<DcMember2Resp> dcMember2RespList = indexMapper.selectDcMember2(dcMemberReq);
+
+        AtomicInteger index = new AtomicInteger(1);
+        dcMember2RespList.stream().forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            try{
+                resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }catch (Exception e){
+                System.out.println("捕获异常:" + e.getMessage());
+            }
+
+        });
         return dcMember2RespList;
     }
 }

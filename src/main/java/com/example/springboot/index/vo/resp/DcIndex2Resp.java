@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class DcIndex2Resp {
+    private Integer idx;
     private String themeCode;
     private String tradeDate;
     private String name;
