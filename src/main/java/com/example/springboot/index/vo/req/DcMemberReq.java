@@ -10,4 +10,5 @@ import lombok.Data;
 public class DcMemberReq {
     private String themeCode;
     private String name;
+    private Double sortId;
 }
