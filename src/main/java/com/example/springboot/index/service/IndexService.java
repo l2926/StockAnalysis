@@ -6,6 +6,7 @@ import com.example.springboot.analysis.vo.resp.MoneyFlowPctResp;
 import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
+import com.example.springboot.index.vo.req.DcMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
@@ -113,5 +114,5 @@ public interface IndexService {
     /**
      * 东方财富-成员列表
      */
-    List<DcMember2Resp> getDcMember2(IndexReq indexReq);
+    List<DcMember2Resp> getDcMember2(DcMemberReq dcMemberReq);
 }

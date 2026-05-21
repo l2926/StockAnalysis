@@ -5,6 +5,7 @@ import com.example.springboot.analysis.vo.resp.MoneyFlowPctResp;
 import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
+import com.example.springboot.index.vo.req.DcMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.service.IndexService;
 import com.example.springboot.index.vo.req.IndexReq;
@@ -158,8 +159,8 @@ public class IndexController {
     }
 
     @PostMapping("dc_member2")
-    public List<DcMember2Resp> getDcMember2(@RequestBody IndexReq indexReq){
+    public List<DcMember2Resp> getDcMember2(@RequestBody DcMemberReq dcMemberReq){
         System.out.println("----dc_member2 controller----");
-        return indexService.getDcMember2(indexReq);
+        return indexService.getDcMember2(dcMemberReq);
     }
 }

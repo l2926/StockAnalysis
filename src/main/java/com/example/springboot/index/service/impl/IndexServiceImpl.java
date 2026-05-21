@@ -5,6 +5,7 @@ import com.example.springboot.analysis.vo.resp.MoneyFlowPctResp;
 import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
+import com.example.springboot.index.vo.req.DcMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.mapper.IndexMapper;
 import com.example.springboot.index.service.IndexService;
@@ -764,9 +765,9 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public List<DcMember2Resp> getDcMember2(IndexReq indexReq){
+    public List<DcMember2Resp> getDcMember2(DcMemberReq dcMemberReq){
         System.out.println("----dc_member service----");
-        List<DcMember2Resp> dcMember2RespList = indexMapper.selectDcMember2(indexReq);
+        List<DcMember2Resp> dcMember2RespList = indexMapper.selectDcMember2(dcMemberReq);
         return dcMember2RespList;
     }
 }

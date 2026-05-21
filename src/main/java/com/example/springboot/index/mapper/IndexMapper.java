@@ -4,6 +4,7 @@ import com.example.springboot.analysis.vo.resp.FiveDaysLimitResp;
 import com.example.springboot.analysis.vo.resp.MoneyFlowResp;
 import com.example.springboot.analysis.vo.resp.TenDaysMarketResp;
 import com.example.springboot.index.vo.req.ConceptMemberReq;
+import com.example.springboot.index.vo.req.DcMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
@@ -77,5 +78,5 @@ public interface IndexMapper {
     //东方财富-概念列表
     List<DcIndex2Resp> selectDcIndex2(IndexReq indexReq);
     //东方财富-成员列表
-    List<DcMember2Resp> selectDcMember2(IndexReq indexReq);
+    List<DcMember2Resp> selectDcMember2(DcMemberReq dcMemberReq);
 }
