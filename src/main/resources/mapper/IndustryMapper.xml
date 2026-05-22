@@ -7,7 +7,7 @@
             parameterType="com.example.springboot.industry.vo.req.IndustryReq">
         select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3 ,
         b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,
-        a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date,c.ratio
+        a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date,c.ratio,a.total_mv/a.pb as asset
         from common_daily.`${tradeDate}` as a left join stock_list.industry_member as b on a.ts_code=b.ts_code
         left join hsgt.`20260331` as c on b.ts_code = c.ts_code
         <where>
@@ -23,13 +23,28 @@
             <if test="level == 'area'">
                 area
             </if>
-            =#{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+            <if test="sortId == 4">
+                order by pct_chg desc;
+            </if>
+            <if test="sortId == 5">
+                order by ratio desc;
+            </if>
         </where>
     </select>
 
     <select id="getFinaMain" resultType="com.example.springboot.industry.vo.resp.FinaMainResp">
         select a.ts_code,b.name,b.area,a.pct_chg,b.industry_name_l1 ,b.industry_name_l2
-        ,b.industry_name_l3,c.main_business,b.market,a.total_mv,a.pb,a.trade_date
+        ,b.industry_name_l3,c.main_business,b.market,a.total_mv,a.pb,a.trade_date,a.total_mv/a.pb as asset
         from common_daily.`20251216` as a
         left join stock_list.industry_member as b
         on a.ts_code=b.ts_code
@@ -48,7 +63,19 @@
             <if test="level == 'area'">
                 area
             </if>
-            =#{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+            <if test="sortId == 4">
+                order by pct_chg desc;
+            </if>
         </where>
     </select>
 
@@ -83,7 +110,7 @@
             <if test="level == 'area'">
                 area
             </if>
-            =#{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+            =#{industryCode} order by total_mv desc
         </where>
     </select>
     
@@ -125,7 +152,7 @@
             <if test="level == 'area'">
                 area
             </if>
-            = #{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            = #{industryCode} order by total_mv desc;
         </where>
     </select>
 
@@ -141,7 +168,8 @@
                c.introduction,
                industry_name_l1,
                industry_name_l2,
-               industry_name_l3
+               industry_name_l3,
+               a.total_mv/a.pb as asset
         from common_daily.`20251216` as a
                  left join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
@@ -160,7 +188,16 @@
             <if test="level == 'area'">
                 area
             </if>
-            = #{industryCode} order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            = #{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
         </where>
     </select>
 
