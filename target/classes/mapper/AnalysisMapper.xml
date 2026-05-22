@@ -279,17 +279,19 @@
     <!--  前100市值  -->
     <select id="getTop100" resultType="com.example.springboot.analysis.vo.resp.Top100Resp">
         select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,a.pct_chg,a.close,a.pe_ttm,a.pb,a.ps_ttm,a.turnover_rate,a.amount,
-               b.market,a.total_mv,a.trade_date,a.up10_count5,a.up10_count20
+               b.market,a.total_mv,a.trade_date,a.up10_count5,a.up10_count20,a.total_mv/a.pb as asset
         from common_daily.`20250109` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
-        order by
-        <if test="selectId == 1">
-            total_mv
+        <if test="sortId == 1">
+            order by total_mv desc
         </if>
-        <if test="selectId == 2">
-            amount
+        <if test="sortId == 2">
+            order by amount desc
         </if>
-        desc limit 100;
+        <if test="sortId == 3">
+            order by asset desc
+        </if>
+        limit 100;
     </select>
 
     <!--  五日行情统计  -->
