@@ -11,4 +11,5 @@ public class DcMemberReq {
     private String themeCode;
     private String name;
     private Double sortId;
+    private String tradeDate;
 }
