@@ -2,6 +2,7 @@ package com.example.springboot.finance.controller;
 
 import com.example.springboot.finance.service.FinanceService;
 import com.example.springboot.finance.vo.req.FinanceReq;
+import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,13 @@ public class FinanceController {
     @PostMapping("/finance_overview")
     public List<FinanceOverviewResp> getFinanceOverView(@RequestBody FinanceReq financeReq){
         System.out.println("----finance_overview Controller");
-        System.out.println(financeReq.getIndustryCode());
+//        System.out.println(financeReq.getIndustryCode());
         return financeService.getFinanceOverview(financeReq);
+    }
+
+    @PostMapping("/finance_history")
+    public List<FinanceHistoryResp> getFinanceHistory(@RequestBody FinanceReq financeReq){
+        System.out.println(("----finance history Controller----"));
+        return financeService.getFinanceHistory(financeReq);
     }
 }

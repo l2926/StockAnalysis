@@ -3,6 +3,7 @@ package com.example.springboot.finance.service.impl;
 import com.example.springboot.finance.mapper.FinanceMapper;
 import com.example.springboot.finance.service.FinanceService;
 import com.example.springboot.finance.vo.req.FinanceReq;
+import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,4 +89,124 @@ public class FinanceServiceImpl implements FinanceService {
             resp.setPb(0.0);
         });
         return financeOverviewRespList;
-    }}
+    }
+
+    @Override
+    public List<FinanceHistoryResp> getFinanceHistory(FinanceReq financeReq){
+        System.out.println("----finance history service----");
+        System.out.println(financeReq.getSelectId());
+
+        List<FinanceHistoryResp> financeHistoryRespList = null;
+        if(financeReq.getSelectId() == 1){
+            financeHistoryRespList = financeMapper.selectTotalAssetsHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 2){
+            financeHistoryRespList = financeMapper.selectTotalLiabHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 3){
+            financeHistoryRespList = financeMapper.selectTotalRevenueHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 4){
+            financeHistoryRespList = financeMapper.selectProfitHistory(financeReq);
+        }
+
+        AtomicInteger index = new AtomicInteger(1);
+        financeHistoryRespList.stream().forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            //计算净资产
+            if(resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+
+            Integer selectID = financeReq.getSelectId();
+            if (selectID == 1 || selectID == 2 || selectID == 3 || selectID == 4 || selectID == 5){
+                try{
+                    resp.setNum2010(Double.parseDouble(String.format("%.2f",resp.getNum2010() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2011(Double.parseDouble(String.format("%.2f",resp.getNum2011() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2012(Double.parseDouble(String.format("%.2f",resp.getNum2012() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2013(Double.parseDouble(String.format("%.2f",resp.getNum2013() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2014(Double.parseDouble(String.format("%.2f",resp.getNum2014() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2015(Double.parseDouble(String.format("%.2f",resp.getNum2015() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2016(Double.parseDouble(String.format("%.2f",resp.getNum2016() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2017(Double.parseDouble(String.format("%.2f",resp.getNum2017() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2018(Double.parseDouble(String.format("%.2f",resp.getNum2018() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2019(Double.parseDouble(String.format("%.2f",resp.getNum2019() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2020(Double.parseDouble(String.format("%.2f",resp.getNum2020() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2021(Double.parseDouble(String.format("%.2f",resp.getNum2021() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2022(Double.parseDouble(String.format("%.2f",resp.getNum2022() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2023(Double.parseDouble(String.format("%.2f",resp.getNum2023() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2024(Double.parseDouble(String.format("%.2f",resp.getNum2024() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2025(Double.parseDouble(String.format("%.2f",resp.getNum2025() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+            }
+        });
+
+        return financeHistoryRespList;
+    }
+}

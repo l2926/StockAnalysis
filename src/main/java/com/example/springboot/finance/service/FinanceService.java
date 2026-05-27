@@ -1,6 +1,7 @@
 package com.example.springboot.finance.service;
 
 import com.example.springboot.finance.vo.req.FinanceReq;
+import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface FinanceService {
      * 获取财务概览数据
      */
     List<FinanceOverviewResp> getFinanceOverview(FinanceReq financeReq);
+    /**
+     * 获取历史财务数据
+     */
+    List<FinanceHistoryResp> getFinanceHistory(FinanceReq financeReq);
 }
