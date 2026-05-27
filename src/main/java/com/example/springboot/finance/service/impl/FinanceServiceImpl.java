@@ -113,6 +113,10 @@ public class FinanceServiceImpl implements FinanceService {
             financeHistoryRespList = financeMapper.selectProfitHistory(financeReq);
         }
 
+        if(financeReq.getSelectId() == 5){
+            financeHistoryRespList = financeMapper.selectNetAssetsHistory(financeReq);
+        }
+
         AtomicInteger index = new AtomicInteger(1);
         financeHistoryRespList.stream().forEach(resp->{
             resp.setIdx(index.getAndIncrement());

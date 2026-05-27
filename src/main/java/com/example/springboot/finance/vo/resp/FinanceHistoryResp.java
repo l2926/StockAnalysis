@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class FinanceHistoryResp {
     private Integer idx;
+    private String tsCode;
     private String name;
     private String area;
     private String industryNameL1;
