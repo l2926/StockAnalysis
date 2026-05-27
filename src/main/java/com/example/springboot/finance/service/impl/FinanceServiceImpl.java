@@ -117,6 +117,22 @@ public class FinanceServiceImpl implements FinanceService {
             financeHistoryRespList = financeMapper.selectNetAssetsHistory(financeReq);
         }
 
+        if(financeReq.getSelectId() == 6){
+            financeHistoryRespList = financeMapper.selectLeverHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 7){
+            financeHistoryRespList = financeMapper.selectProfitRateHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 8){
+            financeHistoryRespList = financeMapper.selectROEHistory(financeReq);
+        }
+
+        if(financeReq.getSelectId() == 9){
+            financeHistoryRespList = financeMapper.selectROAHistory(financeReq);
+        }
+
         AtomicInteger index = new AtomicInteger(1);
         financeHistoryRespList.stream().forEach(resp->{
             resp.setIdx(index.getAndIncrement());
@@ -205,6 +221,87 @@ public class FinanceServiceImpl implements FinanceService {
                 }
                 try{
                     resp.setNum2025(Double.parseDouble(String.format("%.2f",resp.getNum2025() / 100000000)));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+            }else{
+                try{
+                    resp.setNum2010(Double.parseDouble(String.format("%.2f",resp.getNum2010())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2011(Double.parseDouble(String.format("%.2f",resp.getNum2011())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2012(Double.parseDouble(String.format("%.2f",resp.getNum2012())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2013(Double.parseDouble(String.format("%.2f",resp.getNum2013())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2014(Double.parseDouble(String.format("%.2f",resp.getNum2014())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2015(Double.parseDouble(String.format("%.2f",resp.getNum2015())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2016(Double.parseDouble(String.format("%.2f",resp.getNum2016())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2017(Double.parseDouble(String.format("%.2f",resp.getNum2017())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2018(Double.parseDouble(String.format("%.2f",resp.getNum2018())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2019(Double.parseDouble(String.format("%.2f",resp.getNum2019())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2020(Double.parseDouble(String.format("%.2f",resp.getNum2020())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2021(Double.parseDouble(String.format("%.2f",resp.getNum2021())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2022(Double.parseDouble(String.format("%.2f",resp.getNum2022())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2023(Double.parseDouble(String.format("%.2f",resp.getNum2023())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2024(Double.parseDouble(String.format("%.2f",resp.getNum2024())));
+                }catch (Exception e){
+                    System.out.println("年数据异常"+e);
+                }
+                try{
+                    resp.setNum2025(Double.parseDouble(String.format("%.2f",resp.getNum2025())));
                 }catch (Exception e){
                     System.out.println("年数据异常"+e);
                 }
