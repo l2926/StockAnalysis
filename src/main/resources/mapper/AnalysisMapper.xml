@@ -11,7 +11,7 @@
     <select id="getLimit" resultType="com.example.springboot.analysis.vo.resp.LimitResp"
             parameterType="com.example.springboot.analysis.vo.req.LimitReq">
         select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.index_code_l1,b.index_code_l2,b.index_code_l3,
-               b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.open,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,
+               b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.open,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,a.total_mv/a.pb as asset,
                a.turnover_rate,a.amount,a.conti_up,b.market,a.total_mv,a.trade_date
         from common_daily.`${tradeDate}` as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
@@ -31,8 +31,25 @@
             <if test="paraId == 5">
                 conti_up > 4
             </if>
+
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+            <if test="sortId == 4">
+                order by conti_up desc,industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 5">
+                order by amount desc;
+            </if>
+
         </where>
-        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
+--         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
     </select>
 
 
