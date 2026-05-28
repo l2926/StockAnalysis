@@ -102,7 +102,7 @@ public class IndustryServiceImpl implements IndustryService {
     public List<FundmentalResp> getMarket(IndustryReq industryReq){
         System.out.println("----industry market service----");
         List<FundmentalResp> fundmentalRespList = industryMapper.getFundmental(industryReq);
-        AtomicInteger idx = new AtomicInteger();
+        AtomicInteger idx = new AtomicInteger(1);
         fundmentalRespList.stream().forEach(resp->{
             resp.setIdx(idx.getAndIncrement());
             resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));

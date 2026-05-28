@@ -29,7 +29,14 @@ public class AnalysisController {
 
     @PostMapping("/limit")
     public List<LimitResp> getLimit(@RequestBody LimitReq limitReq){
+        System.out.println("----limit controlelr----");
         return  analysisService.getLimit(limitReq);
+    }
+
+    @PostMapping("/limit_market")
+    public List<LimitResp> getLimitMarket(@RequestBody LimitReq limitReq){
+        System.out.println("----limit_market controlelr----");
+        return analysisService.getLimitMarket(limitReq);
     }
 
     @PostMapping("/fina_main")

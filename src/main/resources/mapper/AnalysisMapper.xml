@@ -10,30 +10,9 @@
 
     <select id="getLimit" resultType="com.example.springboot.analysis.vo.resp.LimitResp"
             parameterType="com.example.springboot.analysis.vo.req.LimitReq">
-        select a.ts_code,
-               b.name,
-               b.industry_name_l1,
-               b.industry_name_l2,
-               b.industry_name_l3,
-               b.index_code_l1,
-               b.index_code_l2,
-               b.index_code_l3,
-               b.area,
-               a.pct_chg,
-               a.close,
-               a.pre_close,
-               a.high,
-               a.low,
-               a.pe_ttm,
-               a.pb,
-               a.ps_ttm,
-               a.volume_ratio,
-               a.turnover_rate,
-               a.amount,
-               a.conti_up,
-               b.market,
-               a.total_mv,
-               a.trade_date
+        select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.index_code_l1,b.index_code_l2,b.index_code_l3,
+               b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.open,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,
+               a.turnover_rate,a.amount,a.conti_up,b.market,a.total_mv,a.trade_date
         from common_daily.`${tradeDate}` as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
         <where>
@@ -45,6 +24,9 @@
             </if>
             <if test="paraId == 3">
                 conti_up > 2
+            </if>
+            <if test="paraId == 4">
+                conti_up > 3
             </if>
             <if test="paraId == 5">
                 conti_up > 4

@@ -16,9 +16,13 @@ import java.util.List;
  */
 public interface AnalysisService {
     /**
-     * 获取涨停股票
+     * 获取涨停股票基本面
      */
     List<LimitResp> getLimit(LimitReq limitReq);
+    /**
+     * 获取涨停股票行情
+     */
+    List<LimitResp> getLimitMarket(LimitReq limitReq);
     /**
      * 获取涨停股票的主营业务信息
      */

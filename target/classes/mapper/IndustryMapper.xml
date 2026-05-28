@@ -5,7 +5,7 @@
 
     <select id="getFundmental" resultType="com.example.springboot.industry.vo.resp.FundmentalResp"
             parameterType="com.example.springboot.industry.vo.req.IndustryReq">
-        select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3 ,
+        select a.ts_code,b.name,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3 ,a.open,
         b.area,a.pct_chg,a.close,a.pre_close,a.high,a.low,a.pe_ttm,a.pb,a.ps_ttm,a.volume_ratio,
         a.turnover_rate,a.amount,b.market,a.total_mv,a.trade_date,c.ratio,a.total_mv/a.pb as asset,
         a.total_mv/a.ps_ttm as sales,a.total_mv/a.pe_ttm as profit
