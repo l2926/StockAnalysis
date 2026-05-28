@@ -97,6 +97,58 @@ public class IndustryServiceImpl implements IndustryService {
         }
         return fundmentalRespList;
     }
+
+    @Override
+    public List<FundmentalResp> getMarket(IndustryReq industryReq){
+        System.out.println("----industry market service----");
+        List<FundmentalResp> fundmentalRespList = industryMapper.getFundmental(industryReq);
+        AtomicInteger idx = new AtomicInteger();
+        fundmentalRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+            resp.setOepnChg(Double.parseDouble(String.format("%.2f",100*(resp.getOpen()-resp.getPreClose()) / resp.getPreClose())));
+            resp.setHighChg(Double.parseDouble(String.format("%.2f",100*(resp.getHigh()-resp.getPreClose()) / resp.getPreClose())));
+            resp.setLowChg(Double.parseDouble(String.format("%.2f",100*(resp.getLow()-resp.getPreClose()) / resp.getPreClose())));
+
+            resp.setClose(Double.parseDouble(String.format("%.2f",resp.getClose())));
+            if(resp.getPeTtm() != null){
+                resp.setPeTtm(Double.parseDouble(String.format("%.2f",resp.getPeTtm())));
+            }else{
+                resp.setPeTtm(0.0);
+            }
+            if(resp.getPb() != null){
+                resp.setPb(Double.parseDouble(String.format("%.2f",resp.getPb())));
+            }else{
+                resp.setPb(0.0);
+            }
+            if(resp.getPsTtm() != null){
+                resp.setPsTtm(Double.parseDouble(String.format("%.2f",resp.getPsTtm())));
+            }else{
+                resp.setPsTtm(0.0);
+            }
+
+            resp.setTurnoverRate(Double.parseDouble(String.format("%.2f",resp.getTurnoverRate())));
+            resp.setAmount(Double.parseDouble(String.format("%.2f",resp.getAmount() / 100000)));
+            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            //计算净资产
+            if(resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+
+            //计算振幅
+            resp.setAmp(Double.parseDouble(String.format("%.2f",100*(resp.getHigh() - resp.getLow()) / resp.getPreClose())));
+            //计算ROE和利润率
+            if(resp.getPeTtm() != 0 && resp.getPeTtm() != null){
+                resp.setRoe(Double.parseDouble(String.format("%.2f",resp.getPb()/resp.getPeTtm())));
+                resp.setProfitRate(Double.parseDouble(String.format("%.2f",resp.getPsTtm()/resp.getPeTtm())));
+            }else{
+                resp.setRoe(0.0);
+                resp.setProfitRate(0.0);
+            }
+        });
+        return fundmentalRespList;
+    }
+
     @Override
     public List<FinaMainResp> getFinaMain(IndustryReq industryReq){
         System.out.println("----getFinaMain----");

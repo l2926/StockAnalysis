@@ -21,6 +21,10 @@ public interface IndustryService {
      */
     List<FundmentalResp> getFundmental(IndustryReq industryReq);
     /**
+     * 获取行业行情数据
+     */
+    List<FundmentalResp> getMarket(IndustryReq industryReq);
+    /**
      * 获取行业主营业务数据
      */
     List<FinaMainResp> getFinaMain(IndustryReq industryReq);

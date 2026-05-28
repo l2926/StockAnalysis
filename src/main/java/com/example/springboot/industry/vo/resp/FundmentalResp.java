@@ -19,6 +19,10 @@ public class FundmentalResp {
     private Double close;
     private Double high;
     private Double low;
+    private Double open;
+    private Double highChg;
+    private Double lowChg;
+    private Double oepnChg;
     private Double preClose;
     private Double amp;
     private Double peTtm;

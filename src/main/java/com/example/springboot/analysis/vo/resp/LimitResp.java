@@ -23,6 +23,10 @@ public class LimitResp {
     private Double close;
     private Double high;
     private Double low;
+    private Double open;
+    private Double openChg;
+    private Double highChg;
+    private Double lowChg;
     private Double preClose;
     private Double amp;
     private Double peTtm;

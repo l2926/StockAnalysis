@@ -27,7 +27,14 @@ public class IndustryController {
 
     @PostMapping("/fundmental")
     public List<FundmentalResp> getFundmental(@RequestBody IndustryReq industryReq){
+        System.out.println("----industry fundmental conroller====");
         return industryService.getFundmental(industryReq);
+    }
+
+    @PostMapping("market")
+    public List<FundmentalResp> getMarket(@RequestBody IndustryReq industryReq){
+        System.out.println("----industry market controller----");
+        return industryService.getMarket(industryReq);
     }
 
     @PostMapping("/fina_main")
