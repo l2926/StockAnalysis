@@ -10,7 +10,7 @@
     
     <select id="getFinanceOverview" resultType="com.example.springboot.finance.vo.resp.FinanceOverviewResp">
         select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,total_assets,total_liab,total_revenue,total_cogs,oper_cost,n_income_attr_p,
-               b.market,c.total_mv,c.pb,c.trade_date
+               b.market,c.total_mv,c.pb,c.trade_date,c.total_mv/c.pb as asset
         from finance.`2024` as a
                  inner join stock_list.industry_member as b
                             on a.ts_code = b.ts_code
@@ -27,7 +27,15 @@
                 index_code_l3
             </if>
             =#{industryCode}
-            order by total_mv desc;
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
         </where>
     </select>
 
@@ -35,40 +43,124 @@
         select a.`20101231` as num2010,a.`20111231` as num2011,a.`20121231` as num2012,a.`20131231` as num2013,a.`20141231` as num2014,a.`20151231` as num2015,
                a.`20161231` as num2016,a.`20171231` as num2017,a.`20181231` as num2018,a.`20191231` as num2019,a.`20201231` as num2020,
                a.`20211231` as num2021,a.`20221231` as num2022,a.`20231231` as num2023,a.`20241231` as num2024,a.`20251231` as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code,c.total_mv/c.pb as asset
         from finance.total_assets as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code ;
+                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectTotalLiabHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
         select a.`20101231` as num2010,a.`20111231` as num2011,a.`20121231` as num2012,a.`20131231` as num2013,a.`20141231` as num2014,a.`20151231` as num2015,
                a.`20161231` as num2016,a.`20171231` as num2017,a.`20181231` as num2018,a.`20191231` as num2019,a.`20201231` as num2020,
                a.`20211231` as num2021,a.`20221231` as num2022,a.`20231231` as num2023,a.`20241231` as num2024,a.`20251231` as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code,c.total_mv/c.pb as asset
         from finance.total_liab as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code ;
+                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectTotalRevenueHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
         select a.`20101231` as num2010,a.`20111231` as num2011,a.`20121231` as num2012,a.`20131231` as num2013,a.`20141231` as num2014,a.`20151231` as num2015,
                a.`20161231` as num2016,a.`20171231` as num2017,a.`20181231` as num2018,a.`20191231` as num2019,a.`20201231` as num2020,
                a.`20211231` as num2021,a.`20221231` as num2022,a.`20231231` as num2023,a.`20241231` as num2024,a.`20251231` as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code,c.total_mv/c.pb as asset
         from finance.total_revenue as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code ;
+                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectProfitHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
         select a.`20101231` as num2010,a.`20111231` as num2011,a.`20121231` as num2012,a.`20131231` as num2013,a.`20141231` as num2014,a.`20151231` as num2015,
                a.`20161231` as num2016,a.`20171231` as num2017,a.`20181231` as num2018,a.`20191231` as num2019,a.`20201231` as num2020,
                a.`20211231` as num2021,a.`20221231` as num2022,a.`20231231` as num2023,a.`20241231` as num2024,a.`20251231` as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code,c.total_mv/c.pb as asset
         from finance.n_income as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code ;
+                 inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectNetAssetsHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
@@ -78,11 +170,32 @@
                (a.`20181231` - d.`20181231`) as num2018,(a.`20191231` - d.`20191231`) as num2019,(a.`20201231` - d.`20201231`) as num2020,
                (a.`20211231` - d.`20211231`) as num2021,(a.`20221231` - d.`20221231`) as num2022,(a.`20231231` - d.`20231231`) as num2023,
                (a.`20241231` - d.`20241231`) as num2024,(a.`20251231` - d.`20251231`) as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,a.ts_code,c.total_mv/c.pb as asset
         from finance.total_assets as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
-                 inner join finance.total_liab as d on a.ts_code = d.ts_code ;
+                 inner join finance.total_liab as d on a.ts_code = d.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectLeverHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
@@ -92,11 +205,32 @@
                d.`20191231` / (a.`20191231` - d.`20191231`) as num2019,d.`20201231` / (a.`20201231` - d.`20201231`) as num2020,d.`20211231` / (a.`20211231` - d.`20211231`) as num2021,
                d.`20221231` / (a.`20221231` - d.`20221231`) as num2022,d.`20231231` / (a.`20231231` - d.`20231231`) as num2023,d.`20241231` / (a.`20241231` - d.`20241231`) as num20124,
                d.`20251231` / (a.`20251231` - d.`20251231`) as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,c.total_mv/c.pb as asset
         from finance.total_assets as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
-                 inner join finance.total_liab as d on a.ts_code = d.ts_code ;
+                 inner join finance.total_liab as d on a.ts_code = d.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
     <select id="selectProfitRateHistory" resultType="com.example.springboot.finance.vo.resp.FinanceHistoryResp">
@@ -104,11 +238,32 @@
                d.`20141231`/ a.`20141231`  as num2014,d.`20151231`/ a.`20151231`  as num2015,d.`20161231`/ a.`20161231`  as num2016,d.`20171231`/ a.`20171231`  as num2017,
                d.`20181231`/ a.`20181231`  as num2018,d.`20191231`/ a.`20191231`  as num2019,d.`20201231`/ a.`20201231`  as num2020,d.`20211231`/ a.`20211231`  as num2021,
                d.`20221231`/ a.`20221231`  as num2022,d.`20231231`/ a.`20231231`  as num2023,d.`20241231`/ a.`20241231`  as num2024,d.`20251231`/ a.`20251231`  as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,c.total_mv/c.pb as asset
         from finance.total_revenue as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
-                 inner join finance.n_income as d on a.ts_code = d.ts_code ;
+                 inner join finance.n_income as d on a.ts_code = d.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
 
@@ -119,12 +274,33 @@
                d.`20191231`/ (a.`20191231`-e.`20191231` ) as num2019,d.`20201231`/ (a.`20201231`-e.`20201231` ) as num2020,d.`20211231`/ (a.`20211231`-e.`20211231` ) as num2021,
                d.`20221231`/ (a.`20221231`-e.`20221231` ) as num2022,d.`20231231`/ (a.`20231231`-e.`20231231` ) as num2023,d.`20241231`/ (a.`20241231`-e.`20241231` ) as num2024,
                d.`20251231`/ (a.`20251231`-e.`20251231` ) as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,c.total_mv/c.pb as asset
         from finance.total_assets as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
                  inner join finance.n_income as d on a.ts_code = d.ts_code
-                 inner join finance.total_liab as e on d.ts_code = e.ts_code ;
+                 inner join finance.total_liab as e on d.ts_code = e.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
 
@@ -133,11 +309,32 @@
                d.`20141231`/ a.`20141231`  as num2014,d.`20151231`/ a.`20151231`  as num2015,d.`20161231`/ a.`20161231`  as num2016,d.`20171231`/ a.`20171231`  as num2017,
                d.`20181231`/ a.`20181231`  as num2018,d.`20191231`/ a.`20191231`  as num2019,d.`20201231`/ a.`20201231`  as num2020,d.`20211231`/ a.`20211231`  as num2021,
                d.`20221231`/ a.`20221231`  as num2022,d.`20231231`/ a.`20231231`  as num2023,d.`20241231`/ a.`20241231`  as num2024,d.`20251231`/ a.`20251231`  as num2025,
-               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date
+               b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,b.market,c.total_mv,c.pb,c.trade_date,c.total_mv/c.pb as asset
         from finance.total_assets as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join common_daily.`20251216` as c on b.ts_code = c.ts_code
-                 inner join finance.n_income as d on a.ts_code = d.ts_code ;
+                 inner join finance.n_income as d on a.ts_code = d.ts_code
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            =#{industryCode}
+            <if test="sortId == 1">
+                order by total_mv desc;
+            </if>
+            <if test="sortId == 2">
+                order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+            </if>
+            <if test="sortId == 3">
+                order by asset desc;
+            </if>
+        </where>
     </select>
 
 </mapper>

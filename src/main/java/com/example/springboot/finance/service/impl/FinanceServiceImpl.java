@@ -138,7 +138,7 @@ public class FinanceServiceImpl implements FinanceService {
             resp.setIdx(index.getAndIncrement());
             resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
             //计算净资产
-            if(resp.getPb() != 0){
+            if(resp.getPb() != null && resp.getPb() != 0){
                 resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
             }
 
