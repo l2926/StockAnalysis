@@ -317,7 +317,7 @@
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
         sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
         from stock_list.industry_member as a
-        left join common_daily.`20251201` as b on a.ts_code = b.ts_code
+        left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
         left join stock_list.stock_company as c on b.ts_code = c.ts_code
 
         <if test="selectId == 1">
@@ -360,9 +360,11 @@
 <!--  获取行情纵览  -->
     <select id="selectStatisticsExcel" resultType="com.example.springboot.index.vo.resp.StatisticsExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3,
-               count(*) as ct,sum(total_mv) as mv,sum(amount) as amt,b.trade_date
+               count(*) as ct,sum(b.total_mv) as mv,sum(b.amount) as amt,b.trade_date
         from stock_list.industry_member as a
-                 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where
+                 left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
+                 left join shenwan_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where
         <include refid="pct_where"></include>
         <if test="selectId == 1">
             <if test="level=='market'">
@@ -401,7 +403,7 @@
     <select id="selectStatisticsExcel2" resultType="com.example.springboot.index.vo.vo.StatisticsExcelVo">
         select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as all_ct,sum(total_mv) as all_mv,sum(amount) as all_amt
         from stock_list.industry_member as a
-        left join common_daily.`20251201` as b on a.ts_code = b.ts_code
+        left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
         <if test="selectId == 1">
             <if test="level=='market'">
                 where <include refid="block_where"></include>
@@ -433,6 +435,23 @@
                 and c.province = #{indexCode}
                 group by industry_name_l1 order by all_mv desc
             </if>
+        </if>
+    </select>
+
+    <select id="selectShenWanDaily" resultType="com.example.springboot.index.vo.vo.ShenWanDailyVo">
+        select a.pct_change,a.name from shenwan_daily.`20251218` as a inner join stock_list.industry_list as b
+        on a.ts_code = b.index_code
+        where
+        <if test="selectId == 1">
+            <if test="level == 'market'">
+                b.level='L1'
+            </if>
+            <if test="">
+                b.level='L3'
+            </if>
+        </if>
+        <if test="selectId == 2">
+            b.level='L2'
         </if>
     </select>
 

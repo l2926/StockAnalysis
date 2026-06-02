@@ -8,10 +8,7 @@ import com.example.springboot.index.vo.req.DcMemberReq;
 import com.example.springboot.index.vo.resp.*;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
-import com.example.springboot.index.vo.vo.DailyVo;
-import com.example.springboot.index.vo.vo.HsgtDailyVo;
-import com.example.springboot.index.vo.vo.StatisticCommon;
-import com.example.springboot.index.vo.vo.StatisticsExcelVo;
+import com.example.springboot.index.vo.vo.*;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
 import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.industry.vo.resp.FinaMain3Resp;
@@ -72,6 +69,8 @@ public interface IndexMapper {
     List<StatisticsExcelResp> selectStatisticsExcel(IndexReq indexReq);
     //统计该行业所有的数据
     List<StatisticsExcelVo> selectStatisticsExcel2(IndexReq indexReq);
+    List<ShenWanDailyVo> selectShenWanDaily(IndexReq indexReq);
+
     //统计该地域所有的数据
     List<StatisticsAreaExcelResp> selectStatisticsAreaExcel(IndexReq indexReq);
     List<HsgtDailyVo> selectHsgtDaily(IndexReq indexReq);

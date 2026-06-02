@@ -11,10 +11,7 @@ import com.example.springboot.index.mapper.IndexMapper;
 import com.example.springboot.index.service.IndexService;
 import com.example.springboot.index.vo.req.IndexReq;
 import com.example.springboot.index.vo.req.StatisticsReq;
-import com.example.springboot.index.vo.vo.DailyVo;
-import com.example.springboot.index.vo.vo.HsgtDailyVo;
-import com.example.springboot.index.vo.vo.StatisticCommon;
-import com.example.springboot.index.vo.vo.StatisticsExcelVo;
+import com.example.springboot.index.vo.vo.*;
 import com.example.springboot.industry.vo.resp.CompanyInfoResp;
 import com.example.springboot.industry.vo.resp.FinaMain2Resp;
 import com.example.springboot.industry.vo.resp.FinaMain3Resp;
@@ -613,6 +610,9 @@ public class IndexServiceImpl implements IndexService {
         indexMapper.setSqlMode();
         List<StatisticsExcelResp> statisticsExcelRespList = indexMapper.selectStatisticsExcel(indexReq);
         List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectStatisticsExcel2(indexReq);
+//        List<ShenWanDailyVo> shenWanDailyVoList = indexMapper.selectShenWanDaily(indexReq);
+//        Map<String,ShenWanDailyVo> stringShenWanDailyVoMap = shenWanDailyVoList.stream()
+//                .collect(Collectors.toMap(ShenWanDailyVo::getName,vo->vo));
 
         Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = null;
         if(indexReq.getSelectId() == 1){
