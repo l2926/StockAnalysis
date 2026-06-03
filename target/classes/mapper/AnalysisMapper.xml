@@ -67,7 +67,7 @@
                a.pb,
                a.trade_date
         from common_daily.`${tradeDate}` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join finance.fina_main as c on b.ts_code = c.ts_code
         where pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
@@ -95,7 +95,7 @@
                industry_name_l2,
                industry_name_l3
         from common_daily.`${tradeDate}` as a
-                 left join stock_list.industry_member as b
+                 inner join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
@@ -116,7 +116,7 @@
                 a.up10_count20 > 3
             </if>
         </where>
-        order by industry_name_l1, total_mv desc;
+        order by industry_name_l1,industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 
     <select id="getFinaMain2" resultType="com.example.springboot.industry.vo.resp.FinaMain2Resp">
@@ -133,7 +133,7 @@
                industry_name_l2,
                industry_name_l3
         from common_daily.`${tradeDate}` as a
-                 left join stock_list.industry_member as b
+                 inner join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
@@ -154,7 +154,7 @@
                 a.up10_count20 > 3
             </if>
         </where>
-        order by industry_name_l1, total_mv desc;
+        order by industry_name_l1,industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 
     <select id="getFinaMain3" resultType="com.example.springboot.industry.vo.resp.FinaMain3Resp">
@@ -172,7 +172,7 @@
                industry_name_l2,
                industry_name_l3
         from common_daily.`${tradeDate}` as a
-                 left join stock_list.industry_member as b
+                 inner join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
@@ -193,7 +193,7 @@
                 a.up10_count20 > 3
             </if>
         </where>
-        order by industry_name_l1, total_mv desc;
+        order by industry_name_l1,industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 
 
@@ -211,7 +211,7 @@
                a.pb,
                a.trade_date
         from common_daily.`${tradeDate}` as a
-                 left join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  left join finance.top_hold as c on b.ts_code = c.ts_code
         where pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
@@ -279,7 +279,7 @@
     <select id="getTop100" resultType="com.example.springboot.analysis.vo.resp.Top100Resp">
         select a.ts_code,b.name,b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,a.pct_chg,a.close,a.pe_ttm,a.pb,a.ps_ttm,a.turnover_rate,a.amount,
                b.market,a.total_mv,a.trade_date,a.up10_count5,a.up10_count20,a.total_mv/a.pb as asset
-        from common_daily.`20250109` as a
+        from common_daily.`${tradeDate}` as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
         <if test="sortId == 1">
             order by total_mv desc
@@ -326,7 +326,7 @@
                a.pct_chg,c.buy_elg_amount,c.buy_lg_amount,c.buy_md_amount,c.buy_sm_amount,a.trade_date,
                c.sell_elg_amount,c.sell_lg_amount,c.sell_md_amount,c.sell_sm_amount,a.amount,a.turnover_rate,b.market,a.total_mv
         from common_daily.`20250612` as a
-                 left join stock_list.industry_member as b
+                 inner join stock_list.industry_member as b
                            on a.ts_code = b.ts_code
                  left join money_flow.`20250612` as c
                            on b.ts_code = c.ts_code
@@ -354,8 +354,8 @@
     <select id="selectLimitBoard" resultType="com.example.springboot.analysis.vo.resp.LimitBoardResp">
         select a.ts_code,a.name,a.trade_date,a.lu_time,a.last_time, a.lu_desc,a.theme,a.status,b.total_mv,b.trade_date,
                c.area,c.industry_name_l1,c.industry_name_l2,c.industry_name_l3,c.market,b.pb
-        from kpl_list.`20250109` as a
-                 left join common_daily.`20250109` as b on a.ts_code = b.ts_code
+        from kpl_list.`${tradeDate}` as a
+                 left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
                  left join stock_list.industry_member as c on b.ts_code = c.ts_code
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc
     </select>
@@ -403,6 +403,18 @@
                c.year_pct1,c.year_pct2,c.year_pct3,c.year_pct4,c.year_pct5,
                c.year_pct6,c.year_pct7,c.year_pct8,c.year_pct9,c.year_pct10,
                c.year_pct11,c.year_pct12,c.year_pct13,c.year_pct14,c.year_pct15
+        from common_daily.`${tradeDate}` as a
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectDailyOverview" resultType="com.example.springboot.industry.vo.resp.DailyOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+               b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+               c.day_pct1,c.day_pct2,c.day_pct3,c.day_pct4,c.day_pct5,
+               c.day_pct6,c.day_pct7,c.day_pct8,c.day_pct9,c.day_pct10,
+               c.day_pct11,c.day_pct12,c.day_pct13,c.day_pct14,c.day_pct15
         from common_daily.`${tradeDate}` as a
                  inner join stock_list.industry_member as b on a.ts_code = b.ts_code
                  inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
