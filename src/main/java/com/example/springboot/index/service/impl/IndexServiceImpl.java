@@ -610,9 +610,9 @@ public class IndexServiceImpl implements IndexService {
         indexMapper.setSqlMode();
         List<StatisticsExcelResp> statisticsExcelRespList = indexMapper.selectStatisticsExcel(indexReq);
         List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectStatisticsExcel2(indexReq);
-//        List<ShenWanDailyVo> shenWanDailyVoList = indexMapper.selectShenWanDaily(indexReq);
-//        Map<String,ShenWanDailyVo> stringShenWanDailyVoMap = shenWanDailyVoList.stream()
-//                .collect(Collectors.toMap(ShenWanDailyVo::getName,vo->vo));
+        List<ShenWanDailyVo> shenWanDailyVoList = indexMapper.selectShenWanDaily(indexReq);
+        Map<String,ShenWanDailyVo> stringShenWanDailyVoMap = shenWanDailyVoList.stream()
+                .collect(Collectors.toMap(ShenWanDailyVo::getName,vo->vo));
 
         Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = null;
         if(indexReq.getSelectId() == 1){
@@ -655,16 +655,20 @@ public class IndexServiceImpl implements IndexService {
                 Double allMv = 0.0;
                 Double allAmt = 0.0;
 
+                Double pctChg = 0.0;
+
                 if(indexReq.getSelectId() == 1){
                     if(indexReq.getLevel().equals("market")){
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
                         allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
                         allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                        pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL1()).getPctChange();
                     }
                     if(indexReq.getLevel().equals("L1")){
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllCt();
                         allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllMv();
                         allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllAmt();
+                        pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL3()).getPctChange();
                     }
                     if(indexReq.getLevel().equals("area")){
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
@@ -682,6 +686,7 @@ public class IndexServiceImpl implements IndexService {
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
                         allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllMv();
                         allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllAmt();
+                        pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL2()).getPctChange();
                     }
                     if(indexReq.getLevel().equals("area")){
                         allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
@@ -692,6 +697,7 @@ public class IndexServiceImpl implements IndexService {
                 resp.setAllCt(allCt);
                 resp.setAllMv(allMv);
                 resp.setAllAmt(allAmt);
+                resp.setPctChg(pctChg);
 
                 resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
                 resp.setAllMv(Double.parseDouble(String.format("%.2f",resp.getAllMv() / 10000)));

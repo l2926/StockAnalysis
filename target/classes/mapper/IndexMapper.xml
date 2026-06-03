@@ -439,14 +439,14 @@
     </select>
 
     <select id="selectShenWanDaily" resultType="com.example.springboot.index.vo.vo.ShenWanDailyVo">
-        select a.pct_change,a.name from shenwan_daily.`20251218` as a inner join stock_list.industry_list as b
+        select a.pct_change,a.name from shenwan_daily.`${tradeDate}` as a inner join stock_list.industry_list as b
         on a.ts_code = b.index_code
         where
         <if test="selectId == 1">
             <if test="level == 'market'">
                 b.level='L1'
             </if>
-            <if test="">
+            <if test="level == 'L1'">
                 b.level='L3'
             </if>
         </if>
