@@ -115,4 +115,10 @@ public class IndustryController {
         System.out.println("----year_overview inidustry Controller----");
         return industryService.getYearOverview(industryReq);
     }
+
+    @PostMapping("daily_overview")
+    public List<DailyOverviewResp> getDailyOverview(@RequestBody IndustryReq industryReq){
+        System.out.println("----daily_overview Controller----");
+        return industryService.getDailyOverview(industryReq);
+    }
 }

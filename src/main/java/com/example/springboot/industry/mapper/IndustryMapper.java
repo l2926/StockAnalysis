@@ -37,4 +37,5 @@ public interface IndustryMapper {
     List<MonthOverviewResp> selectMonthOverview(IndustryReq industryReq);
     List<SeasonOverviewResp> selectSeasonOverview(IndustryReq industryReq);
     List<YearOverviewResp> selectYearOverview(IndustryReq industryReq);
+    List<DailyOverviewResp> selectDailyOverview(IndustryReq industryReq);
 }

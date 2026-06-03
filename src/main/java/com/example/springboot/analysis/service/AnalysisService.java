@@ -87,4 +87,8 @@ public interface AnalysisService {
      * 获取周行情纵览
      */
     List<YearOverviewResp> getYearOverview(LimitReq limitReq);
+    /**
+     * 获取日行情纵览
+     */
+    List<DailyOverviewResp> getDailyOverview(LimitReq limitReq);
 }

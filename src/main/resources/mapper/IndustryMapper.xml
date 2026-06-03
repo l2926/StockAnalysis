@@ -495,4 +495,32 @@
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
 
     </select>
+    <select id="selectDailyOverview" resultType="com.example.springboot.industry.vo.resp.DailyOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.day_pct1,c.day_pct2,c.day_pct3,c.day_pct4,c.day_pct5,
+        c.day_pct6,c.day_pct7,c.day_pct8,c.day_pct9,c.day_pct10,
+        c.day_pct11,c.day_pct12,c.day_pct13,c.day_pct14,c.day_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+
+    </select>
 </mapper>

@@ -144,3 +144,15 @@ select a.ts_code,a.name,a.trade_date,a.lu_time,a.last_time, a.lu_desc,a.theme,a.
 from kpl_list.`20250109` as a
          left join common_daily.`20250109` as b on a.ts_code = b.ts_code
          left join stock_list.industry_member as c on b.ts_code = c.ts_code ;
+
+
+select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+       b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+       c.year_pct1,c.year_pct2,c.year_pct3,c.year_pct4,c.year_pct5,
+       c.year_pct6,c.year_pct7,c.year_pct8,c.year_pct9,c.year_pct10,
+       c.year_pct11,c.year_pct12,c.year_pct13,c.year_pct14,c.year_pct15
+from common_daily.`${tradeDate}` as a
+         inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+         inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+where a.pct_chg > 9
+order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;

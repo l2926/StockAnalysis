@@ -80,4 +80,8 @@ public interface IndustryService {
      * 获取周行情纵览
      */
     List<YearOverviewResp> getYearOverview(IndustryReq industryReq);
+    /**
+     * 获取日度行情纵览
+     */
+    List<DailyOverviewResp> getDailyOverview(IndustryReq industryReq);
 }

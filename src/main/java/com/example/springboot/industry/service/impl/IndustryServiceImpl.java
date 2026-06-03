@@ -888,4 +888,90 @@ public class IndustryServiceImpl implements IndustryService {
 
         return yearOverviewRespList;
     }
+
+    @Override
+    public List<DailyOverviewResp> getDailyOverview(IndustryReq industryReq){
+        System.out.println("----daily_overview Service----");
+        List<DailyOverviewResp> dailyOverviewRespList = industryMapper.selectDailyOverview(industryReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        dailyOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            if(resp.getPctChg() != null){
+                if(resp.getPctChg() != null){
+                    resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+                }
+
+                if(resp.getDayPct1() != null){
+                    resp.setDayPct1(Double.parseDouble(String.format("%.2f",resp.getDayPct1())));
+                }
+
+                if(resp.getDayPct2() != null){
+                    resp.setDayPct2(Double.parseDouble(String.format("%.2f",resp.getDayPct2())));
+                }
+
+                if(resp.getDayPct3() != null){
+                    resp.setDayPct3(Double.parseDouble(String.format("%.2f",resp.getDayPct3())));
+                }
+
+                if(resp.getDayPct4() != null){
+                    resp.setDayPct4(Double.parseDouble(String.format("%.2f",resp.getDayPct4())));
+                }
+
+                if(resp.getDayPct5() != null){
+                    resp.setDayPct5(Double.parseDouble(String.format("%.2f",resp.getDayPct5())));
+                }
+
+                if(resp.getDayPct6() != null){
+                    resp.setDayPct6(Double.parseDouble(String.format("%.2f",resp.getDayPct6())));
+                }
+
+                if(resp.getDayPct7() != null){
+                    resp.setDayPct7(Double.parseDouble(String.format("%.2f",resp.getDayPct7())));
+                }
+
+                if(resp.getDayPct8() != null){
+                    resp.setDayPct8(Double.parseDouble(String.format("%.2f",resp.getDayPct8())));
+                }
+
+                if(resp.getDayPct9() != null){
+                    resp.setDayPct9(Double.parseDouble(String.format("%.2f",resp.getDayPct9())));
+                }
+
+                if(resp.getDayPct10() != null){
+                    resp.setDayPct10(Double.parseDouble(String.format("%.2f",resp.getDayPct10())));
+                }
+
+                if(resp.getDayPct11() != null){
+                    resp.setDayPct11(Double.parseDouble(String.format("%.2f",resp.getDayPct11())));
+                }
+
+                if(resp.getDayPct12() != null){
+                    resp.setDayPct12(Double.parseDouble(String.format("%.2f",resp.getDayPct12())));
+                }
+
+                if(resp.getDayPct13() != null){
+                    resp.setDayPct13(Double.parseDouble(String.format("%.2f",resp.getDayPct13())));
+                }
+
+                if(resp.getDayPct14() != null){
+                    resp.setDayPct14(Double.parseDouble(String.format("%.2f",resp.getDayPct14())));
+                }
+
+                if(resp.getDayPct15() != null){
+                    resp.setDayPct15(Double.parseDouble(String.format("%.2f",resp.getDayPct15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+
+        return dailyOverviewRespList;
+    }
 }

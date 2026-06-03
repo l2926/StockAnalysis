@@ -128,4 +128,10 @@ public class AnalysisController {
         System.out.println("----year_overview analysis Controller----");
         return analysisService.getYearOverview(limitReq);
     }
+
+    @PostMapping("daily_overview")
+    public List<DailyOverviewResp> getDailyOverview(@RequestBody LimitReq limitReq){
+        System.out.println("----daily_overview analysis Controller----");
+        return analysisService.getDailyOverview(limitReq);
+    }
 }

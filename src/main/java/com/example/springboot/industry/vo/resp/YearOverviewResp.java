@@ -3,7 +3,7 @@ package com.example.springboot.industry.vo.resp;
 import lombok.Data;
 
 /**
- * 涨停出参
+ * 年度行情纵览出参
  */
 
 @Data
