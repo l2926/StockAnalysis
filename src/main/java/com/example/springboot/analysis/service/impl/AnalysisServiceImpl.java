@@ -842,11 +842,11 @@ public class AnalysisServiceImpl implements AnalysisService {
                 }
 
                 if(resp.getYearPct2() != null){
-                    resp.setYearPct2(Double.parseDouble(String.format("%.2f",resp.getYearPct12())));
+                    resp.setYearPct2(Double.parseDouble(String.format("%.2f",resp.getYearPct2())));
                 }
 
                 if(resp.getYearPct3() != null){
-                    resp.setYearPct13(Double.parseDouble(String.format("%.2f",resp.getYearPct13())));
+                    resp.setYearPct3(Double.parseDouble(String.format("%.2f",resp.getYearPct3())));
                 }
 
                 if(resp.getYearPct4() != null){
