@@ -33,6 +33,12 @@ public interface IndustryMapper {
     List<HfqDailyVo> selectCommon1(IndustryReq industryReq);
     List<HfqDailyVo> selectCommon2(IndustryReq industryReq);
     List<TwoDaysDifferResp> selectIndustryMember(IndustryReq industryReq);
+
+    /**
+     * 历史行情
+     * @param industryReq
+     * @return
+     */
     List<WeekOverviewResp> selectWeekOverview(IndustryReq industryReq);
     List<MonthOverviewResp> selectMonthOverview(IndustryReq industryReq);
     List<SeasonOverviewResp> selectSeasonOverview(IndustryReq industryReq);
@@ -47,4 +53,10 @@ public interface IndustryMapper {
     List<MonthOverviewResp> selectMonthOriginOverview(IndustryReq industryReq);
     List<MonthOverviewResp> selectMonthPbOverview(IndustryReq industryReq);
     List<MonthOverviewResp> selectMonthGrowthOverview(IndustryReq industryReq);
+    List<SeasonOverviewResp> selectSeasonOriginOverview(IndustryReq industryReq);
+    List<SeasonOverviewResp> selectSeasonPbOverview(IndustryReq industryReq);
+    List<SeasonOverviewResp> selectSeasonGrowthOverview(IndustryReq industryReq);
+    List<YearOverviewResp> selectYearOriginOverview(IndustryReq industryReq);
+    List<YearOverviewResp> selectYearPbOverview(IndustryReq industryReq);
+    List<YearOverviewResp> selectYearGrowthOverview(IndustryReq industryReq);
 }

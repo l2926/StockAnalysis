@@ -522,14 +522,16 @@
         where theme_code = #{themeCode}
         order by
         <if test="sortId == 1">
-            industry_name_l1,industry_name_l2,industry_name_l3,total_mv
+            total_mv desc
         </if>
         <if test="sortId == 2">
-            total_mv
+            industry_name_l1,industry_name_l2,industry_name_l3,total_mv desc
         </if>
         <if test="sortId == 3">
-            asset
+            asset desc
         </if>
-        desc
+        <if test="sortId == 4">
+            pct_chg desc
+        </if>
     </select>
 </mapper>

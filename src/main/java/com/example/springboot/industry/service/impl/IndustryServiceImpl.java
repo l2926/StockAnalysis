@@ -754,7 +754,23 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<SeasonOverviewResp> getSeasonOverview(IndustryReq industryReq){
         System.out.println("----season_overview inidustry Service----");
-        List<SeasonOverviewResp> seasonOverviewRespList = industryMapper.selectSeasonOverview(industryReq);
+        List<SeasonOverviewResp> seasonOverviewRespList = null;
+
+        if(industryReq.getSelectId() == 1){
+            seasonOverviewRespList = industryMapper.selectSeasonOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 2){
+            seasonOverviewRespList = industryMapper.selectSeasonOriginOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 3){
+            seasonOverviewRespList = industryMapper.selectSeasonPbOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 4){
+            seasonOverviewRespList = industryMapper.selectSeasonGrowthOverview(industryReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         seasonOverviewRespList.stream().forEach(resp->{
@@ -838,7 +854,23 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<YearOverviewResp> getYearOverview(IndustryReq industryReq){
         System.out.println("----year_overview inidustry Service----");
-        List<YearOverviewResp> yearOverviewRespList = industryMapper.selectYearOverview(industryReq);
+        List<YearOverviewResp> yearOverviewRespList = null;
+
+        if(industryReq.getSelectId() == 1){
+            yearOverviewRespList = industryMapper.selectYearOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 2){
+            yearOverviewRespList = industryMapper.selectYearOriginOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 3){
+            yearOverviewRespList = industryMapper.selectYearPbOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 4){
+            yearOverviewRespList = industryMapper.selectYearGrowthOverview(industryReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         yearOverviewRespList.stream().forEach(resp->{

@@ -521,6 +521,412 @@
             =#{industryCode}
         </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectDailyOriginOverview" resultType="com.example.springboot.industry.vo.resp.DailyOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.day_pct_origin1 as day_pct1,c.day_pct_origin2 as day_pct2,c.day_pct_origin3 as day_pct3,c.day_pct_origin4 as day_pct4,c.day_pct_origin5 as day_pct5,
+        c.day_pct_origin6 as day_pct6,c.day_pct_origin7 as day_pct7,c.day_pct_origin8 as day_pct8,c.day_pct_origin9 as day_pct9,c.day_pct_origin10 as day_pct10,
+        c.day_pct_origin11 as day_pct11,c.day_pct_origin12 as day_pct12,c.day_pct_origin13 as day_pct13,c.day_pct_origin14 as day_pct14,c.day_pct_origin15 as day_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectDailyPbOverview" resultType="com.example.springboot.industry.vo.resp.DailyOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.day_pb1 as day_pct1,c.day_pb2 as day_pct2,c.day_pb3 as day_pct3,c.day_pb4 as day_pct4,c.day_pb5 as day_pct5,
+        c.day_pb6 as day_pct6,c.day_pb7 as day_pct7,c.day_pb8 as day_pct8,c.day_pb9 as day_pct9,c.day_pb10 as day_pct10,
+        c.day_pb11 as day_pct11,c.day_pb12 as day_pct12,c.day_pb13 as day_pct13,c.day_pb14 as day_pct14,c.day_pb15 as day_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectDailyGrowthOverview" resultType="com.example.springboot.industry.vo.resp.DailyOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.day_growth_rate1 as day_pct1,c.day_growth_rate2 as day_pct2,c.day_growth_rate3 as day_pct3,c.day_growth_rate4 as day_pct4,c.day_growth_rate5 as day_pct5,
+        c.day_growth_rate6 as day_pct6,c.day_growth_rate7 as day_pct7,c.day_growth_rate8 as day_pct8,c.day_growth_rate9 as day_pct9,c.day_growth_rate10 as day_pct10,
+        c.day_growth_rate11 as day_pct11,c.day_growth_rate12 as day_pct12,c.day_growth_rate13 as day_pct13,c.day_growth_rate14 as day_pct14,c.day_growth_rate15 as day_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectWeekOriginOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_pct_origin1 as week_pct1,c.week_pct_origin2 as week_pct2,c.week_pct_origin3 as week_pct3,c.week_pct_origin4 as week_pct4,c.week_pct_origin5 as week_pct5,
+        c.week_pct_origin6 as week_pct6,c.week_pct_origin7 as week_pct7,c.week_pct_origin8 as week_pct8,c.week_pct_origin9 as week_pct9,c.week_pct_origin10 as week_pct10,
+        c.week_pct_origin11 as week_pct11,c.week_pct_origin12 as week_pct12,c.week_pct_origin13 as week_pct13,c.week_pct_origin14 as week_pct14,c.week_pct_origin15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectWeekPbOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_pb1 as week_pct1,c.week_pb2 as week_pct2,c.week_pb3 as week_pct3,c.week_pb4 as week_pct4,c.week_pb5 as week_pct5,
+        c.week_pb6 as week_pct6,c.week_pb7 as week_pct7,c.week_pb8 as week_pct8,c.week_pb9 as week_pct9,c.week_pb10 as week_pct10,
+        c.week_pb11 as week_pct11,c.week_pb12 as week_pct12,c.week_pb13 as week_pct13,c.week_pb14 as week_pct14,c.week_pb15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectWeekGrowthOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_growth_rate1 as week_pct1,c.week_growth_rate2 as week_pct2,c.week_growth_rate3 as week_pct3,c.week_growth_rate4 as week_pct4,c.week_growth_rate5 as week_pct5,
+        c.week_growth_rate6 as week_pct6,c.week_growth_rate7 as week_pct7,c.week_growth_rate8 as week_pct8,c.week_growth_rate9 as week_pct9,c.week_growth_rate10 as week_pct10,
+        c.week_growth_rate11 as week_pct11,c.week_growth_rate12 as week_pct12,c.week_growth_rate13 as week_pct13,c.week_growth_rate14 as week_pct14,c.week_growth_rate15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectMonthOriginOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.month_pct_origin1 as month_pct1,c.month_pct_origin2 as month_pct2,c.month_pct_origin3 as month_pct3,c.month_pct_origin4 as month_pct4,c.month_pct_origin5 as month_pct5,
+        c.month_pct_origin6 as month_pct6,c.month_pct_origin7 as month_pct7,c.month_pct_origin8 as month_pct8,c.month_pct_origin9 as month_pct9,c.month_pct_origin10 as month_pct10,
+        c.month_pct_origin11 as month_pct11,c.month_pct_origin12 as month_pct12,c.month_pct_origin13 as month_pct13,c.month_pct_origin14 as month_pct14,c.month_pct_origin15 as month_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectMonthPbOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.month_pb1 as month_pct1,c.month_pb2 as month_pct2,c.month_pb3 as month_pct3,c.month_pb4 as month_pct4,c.month_pb5 as month_pct5,
+        c.month_pb6 as month_pct6,c.month_pb7 as month_pct7,c.month_pb8 as month_pct8,c.month_pb9 as month_pct9,c.month_pb10 as month_pct10,
+        c.month_pb11 as month_pct11,c.month_pb12 as month_pct12,c.month_pb13 as month_pct13,c.month_pb14 as month_pct14,c.month_pb15 as month_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectMonthGrowthOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.month_growth_rate1 as month_pct1,c.month_growth_rate2 as month_pct2,c.month_growth_rate3 as month_pct3,c.month_growth_rate4 as month_pct4,c.month_growth_rate5 as month_pct5,
+        c.month_growth_rate6 as month_pct6,c.month_growth_rate7 as month_pct7,c.month_growth_rate8 as month_pct8,c.month_growth_rate9 as month_pct9,c.month_growth_rate10 as month_pct10,
+        c.month_growth_rate11 as month_pct11,c.month_growth_rate12 as month_pct12,c.month_growth_rate13 as month_pct13,c.month_growth_rate14 as month_pct14,c.month_growth_rate15 as month_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
 
+    <select id="selectSeasonOriginOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.season_pct_origin1 as season_pct1,c.season_pct_origin2 as season_pct2,c.season_pct_origin3 as season_pct3,c.season_pct_origin4 as season_pct4,c.season_pct_origin5 as season_pct5,
+        c.season_pct_origin6 as season_pct6,c.season_pct_origin7 as season_pct7,c.season_pct_origin8 as season_pct8,c.season_pct_origin9 as season_pct9,c.season_pct_origin10 as season_pct10,
+        c.season_pct_origin11 as season_pct11,c.season_pct_origin12 as season_pct12,c.season_pct_origin13 as season_pct13,c.season_pct_origin14 as season_pct14,c.season_pct_origin15 as season_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectSeasonPbOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.season_pb1 as season_pct1,c.season_pb2 as season_pct2,c.season_pb3 as season_pct3,c.season_pb4 as season_pct4,c.season_pb5 as season_pct5,
+        c.season_pb6 as season_pct6,c.season_pb7 as season_pct7,c.season_pb8 as season_pct8,c.season_pb9 as season_pct9,c.season_pb10 as season_pct10,
+        c.season_pb11 as season_pct11,c.season_pb12 as season_pct12,c.season_pb13 as season_pct13,c.season_pb14 as season_pct14,c.season_pb15 as season_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectSeasonGrowthOverview" resultType="com.example.springboot.industry.vo.resp.SeasonOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.year_growth_rate1 as season_pct1,c.year_growth_rate2 as season_pct2,c.year_growth_rate3 as season_pct3,c.year_growth_rate4 as season_pct4,c.year_growth_rate5 as season_pct5,
+        c.year_growth_rate6 as season_pct6,c.year_growth_rate7 as season_pct7,c.year_growth_rate8 as season_pct8,c.year_growth_rate9 as season_pct9,c.year_growth_rate10 as season_pct10,
+        c.year_growth_rate11 as season_pct11,c.year_growth_rate12 as season_pct12,c.year_growth_rate13 as season_pct13,c.year_growth_rate14 as season_pct14,c.year_growth_rate15 as season_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+
+    <select id="selectYearOriginOverview" resultType="com.example.springboot.industry.vo.resp.YearOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.year_pct_origin1 as year_pct1,c.year_pct_origin2 as year_pct2,c.year_pct_origin3 as year_pct3,c.year_pct_origin4 as year_pct4,c.year_pct_origin5 as year_pct5,
+        c.year_pct_origin6 as year_pct6,c.year_pct_origin7 as year_pct7,c.year_pct_origin8 as year_pct8,c.year_pct_origin9 as year_pct9,c.year_pct_origin10 as year_pct10,
+        c.year_pct_origin11 as year_pct11,c.year_pct_origin12 as year_pct12,c.year_pct_origin13 as year_pct13,c.year_pct_origin14 as year_pct14,c.year_pct_origin15 as year_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectYearPbOverview" resultType="com.example.springboot.industry.vo.resp.YearOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.year_pb1 as year_pct1,c.year_pb2 as year_pct2,c.year_pb3 as year_pct3,c.year_pb4 as year_pct4,c.year_pb5 as year_pct5,
+        c.year_pb6 as year_pct6,c.year_pb7 as year_pct7,c.year_pb8 as year_pct8,c.year_pb9 as year_pct9,c.year_pb10 as year_pct10,
+        c.year_pb11 as year_pct11,c.year_pb12 as year_pct12,c.year_pb13 as year_pct13,c.year_pb14 as year_pct14,c.year_pb15 as year_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectYearGrowthOverview" resultType="com.example.springboot.industry.vo.resp.YearOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.season_growth_rate1 as year_pct1,c.season_growth_rate2 as year_pct2,c.season_growth_rate3 as year_pct3,c.season_growth_rate4 as year_pct4,c.season_growth_rate5 as year_pct5,
+        c.season_growth_rate6 as year_pct6,c.season_growth_rate7 as year_pct7,c.season_growth_rate8 as year_pct8,c.season_growth_rate9 as year_pct9,c.season_growth_rate10 as year_pct10,
+        c.season_growth_rate11 as year_pct11,c.season_growth_rate12 as year_pct12,c.season_growth_rate13 as year_pct13,c.season_growth_rate14 as year_pct14,c.season_growth_rate15 as year_pct15
+        from common_daily.`${tradeDate}` as a
+        left join stock_list.industry_member as b on a.ts_code = b.ts_code
+        left join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        --         where index_code_l1 = '801040.SI'
+        <where>
+            <if test="level == 'L1'">
+                index_code_l1
+            </if>
+            <if test="level == 'L2'">
+                index_code_l2
+            </if>
+            <if test="level == 'L3'">
+                index_code_l3
+            </if>
+            <if test="level == 'area'">
+                area
+            </if>
+            =#{industryCode}
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 </mapper>
