@@ -38,4 +38,13 @@ public interface IndustryMapper {
     List<SeasonOverviewResp> selectSeasonOverview(IndustryReq industryReq);
     List<YearOverviewResp> selectYearOverview(IndustryReq industryReq);
     List<DailyOverviewResp> selectDailyOverview(IndustryReq industryReq);
+    List<DailyOverviewResp> selectDailyOriginOverview(IndustryReq industryReq);
+    List<DailyOverviewResp> selectDailyPbOverview(IndustryReq industryReq);
+    List<DailyOverviewResp> selectDailyGrowthOverview(IndustryReq industryReq);
+    List<WeekOverviewResp> selectWeekOriginOverview(IndustryReq industryReq);
+    List<WeekOverviewResp> selectWeekPbOverview(IndustryReq industryReq);
+    List<WeekOverviewResp> selectWeekGrowthOverview(IndustryReq industryReq);
+    List<MonthOverviewResp> selectMonthOriginOverview(IndustryReq industryReq);
+    List<MonthOverviewResp> selectMonthPbOverview(IndustryReq industryReq);
+    List<MonthOverviewResp> selectMonthGrowthOverview(IndustryReq industryReq);
 }

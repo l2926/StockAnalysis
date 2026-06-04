@@ -558,7 +558,23 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<WeekOverviewResp> getWeekOverview(IndustryReq industryReq){
         System.out.println("----week_overview inidustry Service----");
-        List<WeekOverviewResp> weekOverviewRespList = industryMapper.selectWeekOverview(industryReq);
+        List<WeekOverviewResp> weekOverviewRespList = null;
+
+        if(industryReq.getSelectId() == 1){
+            weekOverviewRespList = industryMapper.selectWeekOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() ==  2){
+            weekOverviewRespList = industryMapper.selectWeekOriginOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 3){
+            weekOverviewRespList = industryMapper.selectWeekPbOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 4){
+            weekOverviewRespList = industryMapper.selectWeekGrowthOverview(industryReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         weekOverviewRespList.stream().forEach(resp->{
@@ -639,7 +655,23 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<MonthOverviewResp> getMonthOverview(IndustryReq industryReq){
         System.out.println("----month_overview inidustry Service----");
-        List<MonthOverviewResp> monthOverviewRespList = industryMapper.selectMonthOverview(industryReq);
+        List<MonthOverviewResp> monthOverviewRespList = null;
+
+        if(industryReq.getSelectId() == 1){
+            monthOverviewRespList = industryMapper.selectMonthOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 2){
+            monthOverviewRespList = industryMapper.selectMonthOriginOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 3){
+            monthOverviewRespList = industryMapper.selectMonthPbOverview(industryReq);
+        }
+
+        if(industryReq.getSelectId() == 4){
+            monthOverviewRespList = industryMapper.selectMonthGrowthOverview(industryReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         monthOverviewRespList.stream().forEach(resp->{
@@ -892,7 +924,20 @@ public class IndustryServiceImpl implements IndustryService {
     @Override
     public List<DailyOverviewResp> getDailyOverview(IndustryReq industryReq){
         System.out.println("----daily_overview Service----");
-        List<DailyOverviewResp> dailyOverviewRespList = industryMapper.selectDailyOverview(industryReq);
+
+        List<DailyOverviewResp> dailyOverviewRespList = null;
+        if(industryReq.getSelectId() == 1){
+            dailyOverviewRespList = industryMapper.selectDailyOverview(industryReq);
+        }
+        if(industryReq.getSelectId() == 2){
+            dailyOverviewRespList = industryMapper.selectDailyOriginOverview(industryReq);
+        }
+        if(industryReq.getSelectId() == 3){
+            dailyOverviewRespList = industryMapper.selectDailyPbOverview(industryReq);
+        }
+        if(industryReq.getSelectId() == 4){
+            dailyOverviewRespList = industryMapper.selectDailyGrowthOverview(industryReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         dailyOverviewRespList.stream().forEach(resp->{
