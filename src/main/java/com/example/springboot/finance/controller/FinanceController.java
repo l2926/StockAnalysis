@@ -4,6 +4,7 @@ import com.example.springboot.finance.service.FinanceService;
 import com.example.springboot.finance.vo.req.FinanceReq;
 import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
+import com.example.springboot.finance.vo.resp.HsgtHoldResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,5 +36,11 @@ public class FinanceController {
     public List<FinanceHistoryResp> getFinanceHistory(@RequestBody FinanceReq financeReq){
         System.out.println(("----finance history Controller----"));
         return financeService.getFinanceHistory(financeReq);
+    }
+
+    @PostMapping("hsgt_hold")
+    public List<HsgtHoldResp> getHsgtHold(@RequestBody FinanceReq financeReq){
+        System.out.println("----finance hsgt_hold Controller----");
+        return financeService.getHsgtHold(financeReq);
     }
 }

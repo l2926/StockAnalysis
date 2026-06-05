@@ -5,6 +5,7 @@ import com.example.springboot.finance.service.FinanceService;
 import com.example.springboot.finance.vo.req.FinanceReq;
 import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
+import com.example.springboot.finance.vo.resp.HsgtHoldResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -309,5 +310,10 @@ public class FinanceServiceImpl implements FinanceService {
         });
 
         return financeHistoryRespList;
+    }
+
+    public List<HsgtHoldResp> getHsgtHold(FinanceReq financeReq){
+        System.out.println("----finance hsgt_hold service----");
+        return null;
     }
 }
