@@ -337,6 +337,15 @@
         </where>
     </select>
 
-<!--    <select id=""-->
+    <select id="selectHsgtHoldHistory" resultType="com.example.springboot.finance.vo.resp.HsgtHoldResp">
+        select a.ts_code,a.name ,c.industry_name_l1 ,c.industry_name_l2 ,c.industry_name_l3,
+               a.`20170630` as num20170630,a.`20180630` as num20180630,a.`20181231` as num20181231,a.`20191231` as num20191231 ,a.`20200630`  as num20200630,
+               a.`20201231` as num20201231 ,a.`20210630` as num20210630 ,a.`20211231` as num20211231 ,a.`20220630`  as num20220630,a.`20221231` as num20221231,
+               a.`20230630`  as num20230630,a.`20241231`  as num20241231,a.`20250630`  as num20250630,a.`20251231`  as num20251231,a.`20260331` as num20260331 ,
+               b.pb,c.market,b.total_mv,b.trade_date
+        from finance.hsgt_hold as a left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+                                    left join stock_list.industry_member as c on b.ts_code = c.ts_code
+        where c.index_code_l1 = '801010.SI';
+    </select>
 
 </mapper>

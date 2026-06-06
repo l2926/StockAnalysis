@@ -19,3 +19,13 @@ select a.`20101231` as num2010,a.`20111231` as num2011,a.`20121231` as num2012,a
 from finance.total_assets as a
          inner join stock_list.industry_member as b on a.ts_code = b.ts_code
          inner join common_daily.`20251216` as c on b.ts_code = c.ts_code ;
+
+
+-- 沪深股通历史持股
+select a.ts_code,a.name ,c.industry_name_l1 ,c.industry_name_l2 ,c.industry_name_l3,
+       a.`20170630` ,a.`20180630` ,a.`20181231` ,a.`20191231` ,a.`20200630` ,
+       a.`20201231` ,a.`20210630` ,a.`20211231` ,a.`20220630` ,a.`20221231`,
+       a.`20230630` ,a.`20241231` ,a.`20250630` ,a.`20251231` ,a.`20260331` ,
+       b.pb,c.market,b.total_mv,b.trade_date
+from finance.hsgt_hold as a left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+                            left join stock_list.industry_member as c on b.ts_code = c.ts_code ;

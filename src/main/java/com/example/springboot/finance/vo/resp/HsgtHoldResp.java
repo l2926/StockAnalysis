@@ -8,6 +8,11 @@ import lombok.Data;
 
 @Data
 public class HsgtHoldResp {
+    private Integer idx;
+    private String name;
+    private String industryNameL1;
+    private String industryNameL2;
+    private String industryNameL3;
     private Double num20260331;
     private Double num20251231;
     private Double num20250630;
@@ -23,4 +28,9 @@ public class HsgtHoldResp {
     private Double num20181231;
     private Double num20180630;
     private Double num20170630;
+    private Double pb;
+    private String market;
+    private Double asset;
+    private Double totalMv;
+    private String tradeDate;
 }

@@ -3,6 +3,7 @@ package com.example.springboot.finance.mapper;
 import com.example.springboot.finance.vo.req.FinanceReq;
 import com.example.springboot.finance.vo.resp.FinanceHistoryResp;
 import com.example.springboot.finance.vo.resp.FinanceOverviewResp;
+import com.example.springboot.finance.vo.resp.HsgtHoldResp;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,5 +27,5 @@ public interface FinanceMapper {
     List<FinanceHistoryResp> selectProfitRateHistory(FinanceReq financeReq);
     List<FinanceHistoryResp> selectROEHistory(FinanceReq financeReq);
     List<FinanceHistoryResp> selectROAHistory(FinanceReq financeReq);
-
+    List<HsgtHoldResp> selectHsgtHoldHistory(FinanceReq financeReq);
 }

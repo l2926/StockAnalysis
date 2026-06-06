@@ -314,6 +314,7 @@ public class FinanceServiceImpl implements FinanceService {
 
     public List<HsgtHoldResp> getHsgtHold(FinanceReq financeReq){
         System.out.println("----finance hsgt_hold service----");
-        return null;
+        List<HsgtHoldResp> hsgtHoldRespList = financeMapper.selectHsgtHoldHistory(financeReq);
+        return hsgtHoldRespList;
     }
 }
