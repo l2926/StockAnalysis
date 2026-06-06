@@ -315,6 +315,17 @@ public class FinanceServiceImpl implements FinanceService {
     public List<HsgtHoldResp> getHsgtHold(FinanceReq financeReq){
         System.out.println("----finance hsgt_hold service----");
         List<HsgtHoldResp> hsgtHoldRespList = financeMapper.selectHsgtHoldHistory(financeReq);
+
+        AtomicInteger index = new AtomicInteger(1);
+        hsgtHoldRespList.stream().forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            //计算市值
+            resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            //计算净资产
+            if(resp.getPb() != null && resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }
+        });
         return hsgtHoldRespList;
     }
 }
