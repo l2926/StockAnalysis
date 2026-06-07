@@ -421,4 +421,8 @@
         where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
+    
+    <select id="selectHotMoneyDetail" resultType="com.example.springboot.analysis.vo.resp.HotMoneyResp">
+        select * from hot_money.`${tradeDate}`
+    </select>
 </mapper>

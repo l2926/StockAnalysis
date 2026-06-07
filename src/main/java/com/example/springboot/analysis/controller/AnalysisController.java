@@ -134,4 +134,10 @@ public class AnalysisController {
         System.out.println("----daily_overview analysis Controller----");
         return analysisService.getDailyOverview(limitReq);
     }
+
+    @PostMapping("hot_money")
+    public List<HotMoneyResp> getHotMoneyDetail(@RequestBody LimitReq limitReq){
+        System.out.println("----hot_money controller----");
+        return analysisService.getHotMoneyDetail(limitReq);
+    }
 }

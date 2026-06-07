@@ -995,4 +995,19 @@ public class AnalysisServiceImpl implements AnalysisService {
 
         return dailyOverviewRespList;
     }
+
+    @Override
+    public List<HotMoneyResp> getHotMoneyDetail(LimitReq limitReq){
+        System.out.println("----hot_money Service----");
+        List<HotMoneyResp> hotMoneyRespList = analysisMapper.selectHotMoneyDetail(limitReq);
+        AtomicInteger idx = new AtomicInteger(1);
+
+        hotMoneyRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            resp.setBuyAmount(Double.parseDouble(String.format("%.2f",resp.getBuyAmount() / 10000)));
+            resp.setSellAmount(Double.parseDouble(String.format("%.2f",resp.getSellAmount() / 10000)));
+            resp.setNetAmount(Double.parseDouble(String.format("%.2f",resp.getNetAmount() / 10000)));
+        });
+        return hotMoneyRespList;
+    }
 }

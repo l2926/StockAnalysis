@@ -91,4 +91,8 @@ public interface AnalysisService {
      * 获取日行情纵览
      */
     List<DailyOverviewResp> getDailyOverview(LimitReq limitReq);
+    /**
+     * 游资明细
+     */
+    List<HotMoneyResp> getHotMoneyDetail(LimitReq limitReq);
 }

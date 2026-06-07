@@ -51,4 +51,5 @@ public interface AnalysisMapper {
     List<SeasonOverviewResp> selectSeasonOverview(LimitReq limitReq);
     List<YearOverviewResp> selectYearOverview(LimitReq limitReq);
     List<DailyOverviewResp> selectDailyOverview(LimitReq limitReq);
+    List<HotMoneyResp> selectHotMoneyDetail(LimitReq limitReq);
 }

@@ -536,6 +536,6 @@
     </select>
     
     <select id="selectLimitCptList" resultType="com.example.springboot.index.vo.resp.LimitCptListResp">
-        select * from limit_cpt_list.`20260605` t ;
+        select * from limit_cpt_list.`${tradeDate}` t ;
     </select>
 </mapper>
