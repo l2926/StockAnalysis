@@ -1007,6 +1007,44 @@ public class AnalysisServiceImpl implements AnalysisService {
             resp.setBuyAmount(Double.parseDouble(String.format("%.2f",resp.getBuyAmount() / 10000)));
             resp.setSellAmount(Double.parseDouble(String.format("%.2f",resp.getSellAmount() / 10000)));
             resp.setNetAmount(Double.parseDouble(String.format("%.2f",resp.getNetAmount() / 10000)));
+
+            if(resp.getPctChg() != null){
+                resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+            }
+            else{
+                resp.setPctChg(0.0);
+            }
+            if(resp.getPeTtm() != null){
+                resp.setPeTtm(Double.parseDouble(String.format("%.2f",resp.getPeTtm())));
+            }else{
+                resp.setPeTtm(0.0);
+            }
+            if(resp.getPb() != null){
+                resp.setPb(Double.parseDouble(String.format("%.2f",resp.getPb())));
+            }else{
+                resp.setPb(0.0);
+            }
+            if(resp.getPsTtm() != null){
+                resp.setPsTtm(Double.parseDouble(String.format("%.2f",resp.getPsTtm())));
+            }else {
+                resp.setPsTtm(0.0);
+            }
+            if(resp.getAmount() != null){
+                resp.setAmount(Double.parseDouble(String.format("%.2f",resp.getAmount() / 100000)));
+            }else{
+                resp.setAmount(0.0);
+            }
+            if(resp.getTotalMv() != null) {
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f", resp.getTotalMv() / 10000)));
+            }else{
+                resp.setTotalMv(0.0);
+            }
+            //计算净资产
+            if(resp.getPb() != 0){
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+            }else{
+                resp.setAsset(0.0);
+            }
         });
         return hotMoneyRespList;
     }

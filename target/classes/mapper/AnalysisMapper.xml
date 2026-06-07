@@ -423,6 +423,10 @@
     </select>
     
     <select id="selectHotMoneyDetail" resultType="com.example.springboot.analysis.vo.resp.HotMoneyResp">
-        select * from hot_money.`${tradeDate}`
+        select a.ts_code ,a.ts_name,c.area,c.industry_name_l1,c.industry_name_l2 ,c.industry_name_l3,c.index_code_l1 ,c.index_code_l2 ,c.index_code_l3,b.amount,
+               b.pct_chg,b.pe_ttm ,b.pb ,b.ps_ttm,a.buy_amount ,a.sell_amount ,a.net_amount ,a.hm_name ,a.hm_orgs ,c.market ,b.total_mv ,b.trade_date,b.conti_up
+        from hot_money.`20260605` as a
+                 left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+                 left join stock_list.industry_member as c on b.ts_code = c.ts_code ;
     </select>
 </mapper>
