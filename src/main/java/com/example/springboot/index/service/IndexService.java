@@ -115,4 +115,8 @@ public interface IndexService {
      * 东方财富-成员列表
      */
     List<DcMember2Resp> getDcMember2(DcMemberReq dcMemberReq);
+    /**
+     * 获取最强板块
+     */
+    List<LimitCptListResp> getLimitCptList(IndexReq indexReq);
 }

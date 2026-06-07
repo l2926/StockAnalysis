@@ -163,4 +163,10 @@ public class IndexController {
         System.out.println("----dc_member2 controller----");
         return indexService.getDcMember2(dcMemberReq);
     }
+
+    @PostMapping("limit_cpt_list")
+    public List<LimitCptListResp> getLimitCptList(@RequestBody IndexReq indexReq){
+        System.out.println("-----limit_cpt_list Controller----");
+        return indexService.getLimitCptList(indexReq);
+    }
 }

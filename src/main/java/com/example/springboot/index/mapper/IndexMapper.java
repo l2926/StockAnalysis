@@ -78,4 +78,5 @@ public interface IndexMapper {
     List<DcIndex2Resp> selectDcIndex2(IndexReq indexReq);
     //东方财富-成员列表
     List<DcMember2Resp> selectDcMember2(DcMemberReq dcMemberReq);
+    List<LimitCptListResp> selectLimitCptList(IndexReq indexReq);
 }

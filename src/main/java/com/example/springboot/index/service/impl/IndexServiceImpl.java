@@ -798,4 +798,16 @@ public class IndexServiceImpl implements IndexService {
         });
         return dcMember2RespList;
     }
+
+    @Override
+    public List<LimitCptListResp> getLimitCptList(IndexReq indexReq){
+        System.out.println("----limit_cpt_list Service----");
+        List<LimitCptListResp> limitCptListRespList = indexMapper.selectLimitCptList(indexReq);
+        AtomicInteger idx = new AtomicInteger(1);
+        limitCptListRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+            resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
+        });
+        return limitCptListRespList;
+    }
 }
