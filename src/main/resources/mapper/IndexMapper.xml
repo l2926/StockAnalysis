@@ -518,7 +518,7 @@
                c.total_mv/c.pb as asset
         from dc_member.${tradeDate} as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
-                 left join common_daily.`20251201` as c on b.ts_code = c.ts_code
+                 left join common_daily.${tradeDate} as c on b.ts_code = c.ts_code
         where theme_code = #{themeCode}
         order by
         <if test="sortId == 1">
