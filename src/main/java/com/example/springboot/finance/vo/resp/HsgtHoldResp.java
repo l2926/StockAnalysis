@@ -9,10 +9,13 @@ import lombok.Data;
 @Data
 public class HsgtHoldResp {
     private Integer idx;
+    private String tsCode;
     private String name;
+    private String area;
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
+    private Double pctChg;
     private Double num20260331;
     private Double num20251231;
     private Double num20250630;

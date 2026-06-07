@@ -319,6 +319,7 @@ public class FinanceServiceImpl implements FinanceService {
         AtomicInteger index = new AtomicInteger(1);
         hsgtHoldRespList.stream().forEach(resp->{
             resp.setIdx(index.getAndIncrement());
+            resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
             //计算市值
             resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
             //计算净资产
