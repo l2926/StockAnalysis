@@ -119,4 +119,8 @@ public interface IndexService {
      * 获取最强板块
      */
     List<LimitCptListResp> getLimitCptList(IndexReq indexReq);
+    /**
+     * 获取行情概览(L1,L2,L3)
+     */
+    List<StatisticsExcelResp> getStatisticsLevelExcel(IndexReq indexReq);
 }

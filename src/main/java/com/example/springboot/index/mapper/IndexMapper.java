@@ -79,4 +79,10 @@ public interface IndexMapper {
     //东方财富-成员列表
     List<DcMember2Resp> selectDcMember2(DcMemberReq dcMemberReq);
     List<LimitCptListResp> selectLimitCptList(IndexReq indexReq);
+    /**
+     * 行情板块概览(L1,L2,L3)
+     */
+    List<StatisticsExcelResp> selectLevelStatisticsExcel(IndexReq indexReq);
+    List<StatisticsExcelVo> selectLevelStatisticsExcel2(IndexReq indexReq);
+    List<ShenWanDailyVo> selectLevelShenWanDaily(IndexReq indexReq);
 }

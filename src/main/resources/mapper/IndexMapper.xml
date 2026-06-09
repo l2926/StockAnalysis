@@ -261,7 +261,7 @@
     </select>
 
     <update id="setSqlMode">
-        SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
+            SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
     </update>
 
     <sql id="block_where">
@@ -514,7 +514,7 @@
 
     <select id="selectDcMember2" resultType="com.example.springboot.index.vo.resp.DcMember2Resp">
         select a.ts_code,a.trade_date,a.name,a.theme_code,a.reason, b.area,
-               b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,c.pct_chg,b.market,c.total_mv,c.pb,
+               b.indus try_name_l1,b.industry_name_l2,b.industry_name_l3,c.pct_chg,b.market,c.total_mv,c.pb,
                c.total_mv/c.pb as asset
         from dc_member.${tradeDate} as a
                  left join stock_list.industry_member as b on a.ts_code = b.ts_code
@@ -537,5 +537,27 @@
     
     <select id="selectLimitCptList" resultType="com.example.springboot.index.vo.resp.LimitCptListResp">
         select * from limit_cpt_list.`${tradeDate}` t ;
+    </select>
+
+<!--  行情板块概览(L1,L2,L3)  -->
+    <select id="selectLevelStatisticsExcel" resultType="com.example.springboot.index.vo.resp.StatisticsExcelResp">
+        select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3,
+        count(*) as ct,sum(b.total_mv) as mv,sum(b.amount) as amt,b.trade_date
+        from stock_list.industry_member as a
+        left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+        where b.pct_chg > 0
+        group by industry_name_l1 order by ct desc
+    </select>
+
+    <select id="selectLevelStatisticsExcel2" resultType="com.example.springboot.index.vo.vo.StatisticsExcelVo">
+        select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as all_ct,sum(total_mv) as all_mv,sum(amount) as all_amt
+        from stock_list.industry_member as a
+        left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+        group by industry_name_l1
+    </select>
+    
+    <select id="selectLevelShenWanDaily" resultType="com.example.springboot.index.vo.vo.ShenWanDailyVo">
+        select a.pct_change,a.name from shenwan_daily.`20260605` as a inner join stock_list.industry_list as b
+        on a.ts_code = b.index_code where level = 'L1'
     </select>
 </mapper>

@@ -810,4 +810,17 @@ public class IndexServiceImpl implements IndexService {
         });
         return limitCptListRespList;
     }
+
+    @Override
+    public List<StatisticsExcelResp> getStatisticsLevelExcel(IndexReq indexReq){
+        System.out.println("----statistics_level_excel service-----");
+
+        indexMapper.setSqlMode();
+        List<StatisticsExcelResp> statisticsExcelRespList = indexMapper.selectLevelStatisticsExcel(indexReq);
+        List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectLevelStatisticsExcel2(indexReq);
+        List<ShenWanDailyVo> shenWanDailyVoList = indexMapper.selectLevelShenWanDaily(indexReq);
+
+
+        return null;
+    }
 }

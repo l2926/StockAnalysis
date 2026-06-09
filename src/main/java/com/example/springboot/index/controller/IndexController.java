@@ -169,4 +169,10 @@ public class IndexController {
         System.out.println("-----limit_cpt_list Controller----");
         return indexService.getLimitCptList(indexReq);
     }
+
+    @PostMapping("statistics_level_excel")
+    public List<StatisticsExcelResp> getStatisticsLevelExcel(@RequestBody IndexReq indexReq){
+        System.out.println("----statistics_level_excel Controller----");
+        return indexService.getStatisticsLevelExcel(indexReq);
+    }
 }
