@@ -820,7 +820,114 @@ public class IndexServiceImpl implements IndexService {
         List<StatisticsExcelVo> statisticsExcelVoList = indexMapper.selectLevelStatisticsExcel2(indexReq);
         List<ShenWanDailyVo> shenWanDailyVoList = indexMapper.selectLevelShenWanDaily(indexReq);
 
+        Map<String,ShenWanDailyVo> stringShenWanDailyVoMap = shenWanDailyVoList.stream()
+                .collect(Collectors.toMap(ShenWanDailyVo::getName,vo->vo));
 
-        return null;
+        Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = null;
+
+        if(indexReq.getLevel().equals("L1")){
+            stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                    .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+        }
+
+        if(indexReq.getLevel().equals("L2")){
+            stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                    .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL2,vo->vo));
+        }
+
+        if(indexReq.getLevel().equals("L3")){
+            stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+                    .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL3,vo->vo));
+        }
+
+        int i = 1;
+        for(StatisticsExcelResp resp : statisticsExcelRespList){
+            try{
+                resp.setIdx(i++);
+
+                Integer allCt = 0;
+                Double allMv = 0.0;
+                Double allAmt = 0.0;
+
+                Double pctChg = 0.0;
+
+                if(indexReq.getLevel().equals("L1")){
+                    allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
+                    allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
+                    allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllAmt();
+                    pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL1()).getPctChange();
+                }
+
+                if(indexReq.getLevel().equals("L2")){
+                    allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllCt();
+                    allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllMv();
+                    allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL2()).getAllAmt();
+                    pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL2()).getPctChange();
+                }
+
+                if(indexReq.getLevel().equals("L3")){
+                    allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllCt();
+                    allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllMv();
+                    allAmt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL3()).getAllAmt();
+                    pctChg = stringShenWanDailyVoMap.get(resp.getIndustryNameL3()).getPctChange();
+                }
+
+                resp.setAllCt(allCt);
+                resp.setAllMv(allMv);
+                resp.setAllAmt(allAmt);
+                resp.setPctChg(pctChg);
+
+                resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
+                resp.setAllMv(Double.parseDouble(String.format("%.2f",resp.getAllMv() / 10000)));
+                resp.setAmt(Double.parseDouble(String.format("%.2f",resp.getAmt() / 100000)));
+                resp.setAllAmt(Double.parseDouble(String.format("%.2f",resp.getAllAmt() / 100000)));
+
+                resp.setCtPct(Double.parseDouble(String.format("%.2f",resp.getCt().doubleValue() / resp.getAllCt().doubleValue())));
+                resp.setMvPct(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAllMv())));
+                resp.setAmtPct(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getAllAmt())));
+
+                //换手率
+                resp.setTurnover(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getMv())));
+                resp.setAllTurnover(Double.parseDouble(String.format("%.2f",resp.getAllAmt() / resp.getAllMv())));
+
+            }catch (Exception e){
+                System.out.println("捕获异常:" + e.getMessage());
+            }
+
+        }
+        return statisticsExcelRespList;
+    }
+
+    @Override
+    public List<StatisticsAllExcelResp> getStatisticsLevelAllExcel(IndexReq indexReq){
+        System.out.println("----statistics_level_all_excel Servcie----");
+        indexMapper.setSqlMode();
+        List<StatisticsAllExcelResp> statisticsAllExcelRespList = indexMapper.selectStatisticsLevelAllExcel(indexReq);
+
+        AtomicInteger index = new AtomicInteger(1);
+        statisticsAllExcelRespList.stream().filter(resp-> resp.getTradeDate() != null).forEach(resp->{
+            resp.setIdx(index.getAndIncrement());
+            try{
+                resp.setAmt(Double.parseDouble(String.format("%.2f",resp.getAmt() / 100000)));
+                resp.setMv(Double.parseDouble(String.format("%.2f",resp.getMv() / 10000)));
+                resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getAsset() / 10000)));
+                resp.setIncome(Double.parseDouble(String.format("%.2f",resp.getIncome() / 10000)));
+                resp.setProfit(Double.parseDouble(String.format("%.2f",resp.getProfit() / 10000)));
+                resp.setAvgMv(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getCt())));
+
+                resp.setPe(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getProfit())));
+                resp.setPb(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAsset())));
+                resp.setPs(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getIncome())));
+
+                resp.setRoe(Double.parseDouble(String.format("%.2f",resp.getProfit() / resp.getAsset())));
+                resp.setProfitRate(Double.parseDouble(String.format("%.2f",resp.getProfit() / resp.getIncome())));
+                resp.setTurnover(Double.parseDouble(String.format("%.2f",resp.getTurnover())));
+
+
+            }catch (Exception e){
+                System.out.println("捕获异常:" + e.getMessage());
+            }
+        });
+        return statisticsAllExcelRespList;
     }
 }
