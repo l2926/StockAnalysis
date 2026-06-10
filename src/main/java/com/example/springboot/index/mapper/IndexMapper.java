@@ -87,4 +87,8 @@ public interface IndexMapper {
     List<ShenWanDailyVo> selectLevelShenWanDaily(IndexReq indexReq);
     // 基本面概览(L1,L2,L3)
     List<StatisticsAllExcelResp> selectStatisticsLevelAllExcel(IndexReq indexReq);
+    /**
+     * 历史行情概览
+     */
+    List<DailyOverviewResp> selectDailyPctOverview(IndexReq indexReq);
 }

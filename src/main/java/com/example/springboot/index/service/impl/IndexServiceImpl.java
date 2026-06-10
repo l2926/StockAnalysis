@@ -930,4 +930,40 @@ public class IndexServiceImpl implements IndexService {
         });
         return statisticsAllExcelRespList;
     }
+
+    @Override
+    public List<DailyOverviewResp> getDailyPctOverview(IndexReq indexReq){
+        System.out.println("----daily_overview service----");
+        List<DailyOverviewResp> dailyOverviewRespList = indexMapper.selectDailyPctOverview(indexReq);
+
+        AtomicInteger idx = new AtomicInteger(1);
+        dailyOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+        });
+        return dailyOverviewRespList;
+    }
+
+    @Override
+    public List<WeekOverviewResp> getWeekOverview(IndexReq indexReq){
+        System.out.println("----week_overview service----");
+        return null;
+    }
+
+    @Override
+    public List<MonthOverviewResp> getMonthOverview(IndexReq indexReq){
+        System.out.println("----month_overview service----");
+        return null;
+    }
+
+    @Override
+    public List<SeasonOverviewResp> getSeasonOverview(IndexReq indexReq){
+        System.out.println("----season_overview service----");
+        return null;
+    }
+
+    @Override
+    public List<YearOverviewResp> getYearOverview(IndexReq indexReq){
+        System.out.println("----year_overview service----");
+        return null;
+    }
 }

@@ -181,4 +181,31 @@ public class IndexController {
         System.out.println("----statistics_level_all_excel Controller----");
         return indexService.getStatisticsLevelAllExcel(indexReq);
     }
+
+    @PostMapping("daily_overview")
+    public List<DailyOverviewResp> getDailyPctOverview(@RequestBody IndexReq indexReq){
+        System.out.println("----daily_overview Controller----");
+        return indexService.getDailyPctOverview(indexReq);
+    }
+    @PostMapping("week_overview")
+    public List<WeekOverviewResp> getWeekOverview(@RequestBody IndexReq indexReq){
+        System.out.println("----week_overview Controller----");
+        return indexService.getWeekOverview(indexReq);
+    }
+    @PostMapping("month_overview")
+    public List<MonthOverviewResp> getMonthOverview(@RequestBody IndexReq indexReq){
+        System.out.println("----month_overview Controller----");
+        return indexService.getMonthOverview(indexReq);
+    }
+    @PostMapping("season_overview")
+    public List<SeasonOverviewResp> getSeasonOverview(@RequestBody IndexReq indexReq){
+        System.out.println("----season_overview Controller----");
+        return indexService.getSeasonOverview(indexReq);
+    }
+
+    @PostMapping("year_overview")
+    public List<YearOverviewResp> getYearOverview(@RequestBody IndexReq indexReq){
+        System.out.println("----year_overview Controller----");
+        return indexService.getYearOverview(indexReq);
+    }
 }

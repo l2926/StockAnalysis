@@ -124,7 +124,27 @@ public interface IndexService {
      */
     List<StatisticsExcelResp> getStatisticsLevelExcel(IndexReq indexReq);
     /**
-     *
+     * 获取基本面概览(L1,L2,L3)
      */
     List<StatisticsAllExcelResp> getStatisticsLevelAllExcel(IndexReq indexReq);
+    /**
+     * 获取日行情概览
+     */
+    List<DailyOverviewResp> getDailyPctOverview(IndexReq indexReq);
+    /**
+     * 获取周行情概览
+     */
+    List<WeekOverviewResp> getWeekOverview(IndexReq indexReq);
+    /**
+     * 获取月行情概览
+     */
+    List<MonthOverviewResp> getMonthOverview(IndexReq indexReq);
+    /**
+     * 获取季行情概览
+     */
+    List<SeasonOverviewResp> getSeasonOverview(IndexReq indexReq);
+    /**
+     * 获取年行情概览
+     */
+    List<YearOverviewResp> getYearOverview(IndexReq indexReq);
 }
