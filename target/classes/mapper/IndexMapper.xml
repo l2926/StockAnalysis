@@ -304,11 +304,21 @@
     </sql>
 
     <sql id="mv_where">
-        <if test="mvId == 1">
-            1
+        <if test="selectId == 1">
+            <if test="mvId == 1">
+                1
+            </if>
+            <if test="mvId == 2">
+                b.total_mv > 10000000
+            </if>
         </if>
-        <if test="mvId == 2">
-            b.total_mv > 10000000
+        <if test="selectId == 2">
+            <if test="mvId == 1">
+                1
+            </if>
+            <if test="mvId == 2">
+                b.total_mv / b.pb > 10000000
+            </if>
         </if>
     </sql>
 
@@ -637,7 +647,7 @@
 
     </select>
 
-<!--  获取所有行情表格(L1,L2,L3)  -->
+<!--  获取所有板块基本面表格(L1,L2,L3)  -->
     <select id="selectStatisticsLevelAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
                sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date

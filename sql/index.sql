@@ -67,3 +67,12 @@ select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as ct,sum(tot
 from stock_list.industry_member as a
 left join common_daily.`20251201` as b on a.ts_code = b.ts_code where b.pct_chg > 10
 group by industry_name_l1 order by industry_name_l1 ,industry_name_l2 ,industry_name_l3 ;
+
+-- 界面统计
+select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
+       sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
+from stock_list.industry_member as a
+         left join common_daily.`20260610` as b on a.ts_code = b.ts_code
+         left join stock_list.stock_company as c on b.ts_code = c.ts_code
+where total_mv/pb > 10000000
+group by industry_name_l1 ;
