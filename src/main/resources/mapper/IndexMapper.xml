@@ -311,6 +311,18 @@
             <if test="mvId == 2">
                 b.total_mv > 10000000
             </if>
+            <if test="mvId == 3">
+                b.total_mv > 5000000 and b.total_mv &lt; 10000000
+            </if>
+            <if test="mvId == 4">
+                b.total_mv > 1000000 and b.total_mv &lt; 5000000
+            </if>
+            <if test="mvId == 5">
+                b.total_mv > 500000 and b.total_mv &lt; 1000000
+            </if>
+            <if test="mvId == 6">
+                b.total_mv > 0 and b.total_mv &lt; 500000
+            </if>
         </if>
         <if test="selectId == 2">
             <if test="mvId == 1">
@@ -319,6 +331,19 @@
             <if test="mvId == 2">
                 b.total_mv / b.pb > 10000000
             </if>
+            <if test="mvId == 3">
+                b.total_mv / b.pb > 5000000 and b.total_mv / b.pb &lt; 10000000
+            </if>
+            <if test="mvId == 4">
+                b.total_mv / b.pb > 1000000 and b.total_mv / b.pb &lt; 5000000
+            </if>
+            <if test="mvId == 5">
+                b.total_mv / b.pb > 500000 and b.total_mv / b.pb &lt; 1000000
+            </if>
+            <if test="mvId == 6">
+                b.total_mv / b.pb > 0 and b.total_mv / b.pb &lt; 500000
+            </if>
+
         </if>
     </sql>
 
