@@ -825,6 +825,11 @@ public class IndexServiceImpl implements IndexService {
 
         Map<String,StatisticsExcelVo> stringStatisticsExcelVoMap = null;
 
+//        if(indexReq.getLevel().equals("market")){
+//            stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
+//                    .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
+//        }
+
         if(indexReq.getLevel().equals("L1")){
             stringStatisticsExcelVoMap = statisticsExcelVoList.stream()
                     .collect(Collectors.toMap(StatisticsExcelVo::getIndustryNameL1,vo->vo));
@@ -851,6 +856,11 @@ public class IndexServiceImpl implements IndexService {
 
                 Double pctChg = 0.0;
 
+                if(indexReq.getLevel().equals("market")){
+                    allCt = statisticsExcelVoList.get(0).getAllCt();
+                    allMv = statisticsExcelVoList.get(0).getAllMv();
+                    allAmt = statisticsExcelVoList.get(0).getAllAmt();
+                }
                 if(indexReq.getLevel().equals("L1")){
                     allCt = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllCt();
                     allMv = stringStatisticsExcelVoMap.get(resp.getIndustryNameL1()).getAllMv();
@@ -882,9 +892,9 @@ public class IndexServiceImpl implements IndexService {
                 resp.setAmt(Double.parseDouble(String.format("%.2f",resp.getAmt() / 100000)));
                 resp.setAllAmt(Double.parseDouble(String.format("%.2f",resp.getAllAmt() / 100000)));
 
-                resp.setCtPct(Double.parseDouble(String.format("%.2f",resp.getCt().doubleValue() / resp.getAllCt().doubleValue())));
-                resp.setMvPct(Double.parseDouble(String.format("%.2f",resp.getMv() / resp.getAllMv())));
-                resp.setAmtPct(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getAllAmt())));
+                resp.setCtPct(Double.parseDouble(String.format("%.2f",100*resp.getCt().doubleValue() / resp.getAllCt().doubleValue())));
+                resp.setMvPct(Double.parseDouble(String.format("%.2f",100*resp.getMv() / resp.getAllMv())));
+                resp.setAmtPct(Double.parseDouble(String.format("%.2f",100*resp.getAmt() / resp.getAllAmt())));
 
                 //换手率
                 resp.setTurnover(Double.parseDouble(String.format("%.2f",resp.getAmt() / resp.getMv())));

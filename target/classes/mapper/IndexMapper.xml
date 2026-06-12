@@ -312,6 +312,44 @@
         </if>
     </sql>
 
+    <sql id="asset_where">
+
+    </sql>
+
+    <sql id="group_by">
+        <if test="level == 'market'"></if>
+        <if test="level == 'L1'">
+            group by industry_name_l1
+        </if>
+        <if test="level == 'L2'">
+            group by industry_name_l2
+        </if>
+        <if test="level == 'L3'">
+            group by industry_name_l3
+        </if>
+    </sql>
+
+    <sql id="order_by">
+        <if test="sortId == 1">
+            order by mv
+        </if>
+        <if test="sortId== 2">
+            order by asset
+        </if>
+        <if test="sortId== 3">
+            order by ct
+        </if>
+        <if test="sortId== 4">
+            order by industry_name_l1 desc,mv
+        </if>
+        <if test="sortId== 5">
+            order by industry_name_l1 desc,industry_name_l2 desc,mv
+        </if>
+        <if test="sortId== 6">
+            order by industry_name_l1 desc,industry_name_l2 desc,industry_name_l3 desc,mv
+        </if>
+    </sql>
+
 <!--  获取行业基本面纵览  -->
     <select id="selectStatisticsAllExcel" resultType="com.example.springboot.index.vo.resp.StatisticsAllExcelResp">
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
@@ -544,21 +582,59 @@
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3,
         count(*) as ct,sum(b.total_mv) as mv,sum(b.amount) as amt,b.trade_date
         from stock_list.industry_member as a
-        left join common_daily.`20260605` as b on a.ts_code = b.ts_code
-        where b.pct_chg > 0
-        group by industry_name_l1 order by ct desc
+        left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
+        <where>
+--             b.pct_chg > 9 
+            <include refid="pct_where"></include>
+            and
+            <include refid="block_where"></include>
+        </where>
+        <include refid="group_by"></include>
+        <if test="sortId == 1">
+            order by ct
+        </if>
+        <if test="sortId == 2">
+            order by mv
+        </if>
+        <if test="sortId == 3">
+            order by industry_name_l1 desc,mv
+        </if>
+        <if test="sortId == 4">
+            order by industry_name_l1 desc,industry_name_l1 desc,mv
+        </if>
+        <if test="sortId == 5">
+            order by industry_name_l1 desc,industry_name_l2 desc,industry_name_l3 desc,mv
+        </if>
+        desc
     </select>
 
     <select id="selectLevelStatisticsExcel2" resultType="com.example.springboot.index.vo.vo.StatisticsExcelVo">
         select industry_name_l1,industry_name_l2,industry_name_l3,count(*) as all_ct,sum(total_mv) as all_mv,sum(amount) as all_amt
         from stock_list.industry_member as a
-        left join common_daily.`20260605` as b on a.ts_code = b.ts_code
-        group by industry_name_l1
+        left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
+        <where>
+            <include refid="block_where"></include>
+        </where>
+        <include refid="group_by"></include>
     </select>
     
     <select id="selectLevelShenWanDaily" resultType="com.example.springboot.index.vo.vo.ShenWanDailyVo">
-        select a.pct_change,a.name from shenwan_daily.`20260605` as a inner join stock_list.industry_list as b
-        on a.ts_code = b.index_code where level = 'L1'
+        select a.pct_change,a.name from shenwan_daily.`${tradeDate}` as a inner join stock_list.industry_list as b
+        on a.ts_code = b.index_code
+        where
+        <if test="level == 'market'">
+            1
+        </if>
+        <if test="level == 'L1'">
+            level = 'L1'
+        </if>
+        <if test="level == 'L2'">
+            level = 'L2'
+        </if>
+        <if test="level == 'L3'">
+            level = 'L3'
+        </if>
+
     </select>
 
 <!--  获取所有行情表格(L1,L2,L3)  -->
@@ -566,9 +642,16 @@
         select industry_name_l1,industry_name_l2,industry_name_l3,index_code_l1 ,index_code_l2 ,index_code_l3 ,count(*) as ct,sum(total_mv) as mv,sum(total_mv/pb) as asset,sum(total_mv/ps_ttm) as income,
                sum(total_mv/pe_ttm) as profit,sum(amount) as amt,amount/total_mv as turnover,b.trade_date
         from stock_list.industry_member as a
-        left join common_daily.`20260605` as b on a.ts_code = b.ts_code
+        left join common_daily.`${tradeDate}` as b on a.ts_code = b.ts_code
         left join stock_list.stock_company as c on b.ts_code = c.ts_code
-        group by industry_name_l1 order by mv desc
+        <where>
+            <include refid="block_where"></include>
+            and
+            <include refid="mv_where"></include>
+        </where>
+        <include refid="group_by"></include>
+        <include refid="order_by"></include>
+        desc
     </select>
 
 
