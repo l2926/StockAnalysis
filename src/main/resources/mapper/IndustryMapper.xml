@@ -170,6 +170,7 @@
                b.market,
                a.pb,
                a.total_mv,
+               a.pct_chg,
                c.province,
                c.city,
                c.introduction,
@@ -205,6 +206,9 @@
             <if test="sortId == 3">
                 order by asset desc;
             </if>
+            <if test="sortId == 4">
+                order by pct_chg desc;
+            </if>
         </where>
     </select>
 
@@ -215,6 +219,7 @@
                b.market,
                a.pb,
                a.total_mv,
+               a.pct_chg,
                c.province,
                c.city,
                c.main_business ,
@@ -250,6 +255,9 @@
             </if>
             <if test="sortId == 3">
                 order by asset desc;
+            </if>
+            <if test="sortId == 4">
+                order by pct_chg desc;
             </if>
         </where>
     </select>

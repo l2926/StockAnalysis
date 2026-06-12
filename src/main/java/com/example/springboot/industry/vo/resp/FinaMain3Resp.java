@@ -19,6 +19,7 @@ public class FinaMain3Resp {
     private String industryNameL1;
     private String industryNameL2;
     private String industryNameL3;
+    private Double pctChg;
     private String mainBusiness;
     private String businessScope;
     private String market;

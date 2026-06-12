@@ -387,6 +387,7 @@ public class IndustryServiceImpl implements IndustryService {
         finaMain2RespList.stream().forEach(resp->{
             resp.setIdx(idx.getAndIncrement());
             resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
             try{
                 //计算净资产
                 if(resp.getPb() != 0){
@@ -409,6 +410,7 @@ public class IndustryServiceImpl implements IndustryService {
         finaMain3RespList.stream().forEach(resp->{
             resp.setIdx(idx.getAndIncrement());
             resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+            resp.setPctChg(Double.parseDouble(String.format("%.2f",resp.getPctChg())));
             try{
                 //计算净资产
                 if(resp.getPb() != 0){
