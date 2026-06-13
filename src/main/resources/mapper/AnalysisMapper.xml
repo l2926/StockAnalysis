@@ -138,21 +138,22 @@
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
         <where>
-            <if test="selectId == 1">
-                a.pct_chg > 9
-            </if>
-            <if test="selectId == 2">
-                a.up10_count5 > 1
-            </if>
-            <if test="selectId == 3">
-                a.up10_count10 > 2
-            </if>
-            <if test="selectId == 4">
-                a.up10_count15 > 2
-            </if>
-            <if test="selectId == 5">
-                a.up10_count20 > 3
-            </if>
+            a.pct_chg > 9
+<!--            <if test="selectId == 1">-->
+<!--                a.pct_chg > 9-->
+<!--            </if>-->
+<!--            <if test="selectId == 2">-->
+<!--                a.up10_count5 > 1-->
+<!--            </if>-->
+<!--            <if test="selectId == 3">-->
+<!--                a.up10_count10 > 2-->
+<!--            </if>-->
+<!--            <if test="selectId == 4">-->
+<!--                a.up10_count15 > 2-->
+<!--            </if>-->
+<!--            <if test="selectId == 5">-->
+<!--                a.up10_count20 > 3-->
+<!--            </if>-->
         </where>
         order by industry_name_l1,industry_name_l2, industry_name_l3, total_mv desc;
     </select>
@@ -177,21 +178,22 @@
                  left join stock_list.stock_company as c
                            on b.ts_code = c.ts_code
         <where>
-            <if test="selectId == 1">
-                a.pct_chg > 9
-            </if>
-            <if test="selectId == 2">
-                a.up10_count5 > 1
-            </if>
-            <if test="selectId == 3">
-                a.up10_count10 > 2
-            </if>
-            <if test="selectId == 4">
-                a.up10_count15 > 2
-            </if>
-            <if test="selectId == 5">
-                a.up10_count20 > 3
-            </if>
+            a.pct_chg > 9
+<!--            <if test="selectId == 1">-->
+<!--                a.pct_chg > 9-->
+<!--            </if>-->
+<!--            <if test="selectId == 2">-->
+<!--                a.up10_count5 > 1-->
+<!--            </if>-->
+<!--            <if test="selectId == 3">-->
+<!--                a.up10_count10 > 2-->
+<!--            </if>-->
+<!--            <if test="selectId == 4">-->
+<!--                a.up10_count15 > 2-->
+<!--            </if>-->
+<!--            <if test="selectId == 5">-->
+<!--                a.up10_count20 > 3-->
+<!--            </if>-->
         </where>
         order by industry_name_l1,industry_name_l2, industry_name_l3, total_mv desc;
     </select>
@@ -219,35 +221,42 @@
 
     <!--  十日行情统计  -->
     <select id="getTenDaysMarket" resultType="com.example.springboot.analysis.vo.resp.TenDaysMarketResp">
-        select t.ts_code,
-               sl.name,
-               sl.industry_name_l1,
-               sl.industry_name_l2,
-               sl.industry_name_l3,
-               t.conti_up,
-               t.pct_chg,
-               t.y_pct1,
-               t.y_pct2,
-               t.y_pct3,
-               t.y_pct4,
-               t.y_pct5,
-               t.y_pct6,
-               t.y_pct7,
-               t.y_pct8,
-               t.y_pct9,
-               t.y_pct10,
-               t.y_pct11,
-               t.y_pct12,
-               t.y_pct13,
-               t.y_pct14,
-               sl.area,
-               sl.market,
-               t.total_mv,
-               t.pb,
-               t.trade_date
-        from common_daily.`${tradeDate}` t
-                 inner join stock_list.industry_member sl on t.ts_code = sl.ts_code
-        where y_pct10 > 9
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+               b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+               c.day_pct1 as y_pct1,c.day_pct2 as y_pct2,c.day_pct3 as y_pct3,c.day_pct4 as y_pct4,c.day_pct5 as y_pct5,
+               c.day_pct6 as y_pct6,c.day_pct7 as y_pct7,c.day_pct8 as y_pct8,c.day_pct9 as y_pct9,c.day_pct10 as y_pct10,
+               c.day_pct11 as y_pct11,c.day_pct12 as y_pct12,c.day_pct13 as y_pct13,c.day_pct14 as y_pct14,c.day_pct15 as y_pct15
+        from common_daily.`${tradeDate}` as a
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="paraId == 1">
+                c.day_pct11 > 9
+            </if>
+            <if test="paraId == 2">
+                c.day_pct6 > 9
+            </if>
+        </where>
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+
+    <select id="getTenDaysMarketOrigin" resultType="com.example.springboot.analysis.vo.resp.TenDaysMarketResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+               b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+               c.day_pct_origin1 as y_pct1,c.day_pct_origin2 as y_pct2,c.day_pct_origin3 as y_pct3,c.day_pct_origin4 as y_pct4,c.day_pct_origin5 as y_pct5,
+               c.day_pct_origin6 as y_pct6,c.day_pct_origin7 as y_pct7,c.day_pct_origin8 as y_pct8,c.day_pct_origin9 as y_pct9,c.day_pct_origin10 as y_pct10,
+               c.day_pct_origin11 as y_pct11,c.day_pct_origin12 as y_pct12,c.day_pct_origin13 as y_pct13,c.day_pct_origin14 as y_pct14,c.day_pct_origin15 as y_pct15
+        from common_daily.`${tradeDate}` as a
+                 inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+                 inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        <where>
+            <if test="paraId == 1">
+                c.day_pct11 > 9
+            </if>
+            <if test="paraId == 2">
+                c.day_pct6 > 9
+            </if>
+        </where>
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
 

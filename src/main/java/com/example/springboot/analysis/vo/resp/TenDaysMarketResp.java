@@ -29,6 +29,7 @@ public class TenDaysMarketResp {
     private Double yPct12;
     private Double yPct13;
     private Double yPct14;
+    private Double yPct15;
     private String market;
     private Double pb;
     private Double asset;

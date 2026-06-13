@@ -28,6 +28,7 @@ public interface AnalysisMapper {
     List<TopHoldResp> getTopHold(LimitReq limitReq);
 
     List<TenDaysMarketResp> getTenDaysMarket(LimitReq limitReq);
+    List<TenDaysMarketResp> getTenDaysMarketOrigin(LimitReq limitReq);
 
     List<CompanyInfoResp> getCompanyInfo(LimitReq limitReq);
 

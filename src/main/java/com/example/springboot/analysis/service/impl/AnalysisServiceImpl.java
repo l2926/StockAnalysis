@@ -195,7 +195,16 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<TenDaysMarketResp> getTenDaysMarket(LimitReq limitReq){
         System.out.println("----getAnalysisTenDaysMarket----");
-        List<TenDaysMarketResp> tenDaysMarketRespList = analysisMapper.getTenDaysMarket(limitReq);
+        List<TenDaysMarketResp> tenDaysMarketRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            tenDaysMarketRespList = analysisMapper.getTenDaysMarket(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            tenDaysMarketRespList = analysisMapper.getTenDaysMarketOrigin(limitReq);
+        }
+
         AtomicInteger index = new AtomicInteger(1);
         tenDaysMarketRespList.stream().forEach(resp->{
             resp.setIdx(index.getAndIncrement());
@@ -215,6 +224,7 @@ public class AnalysisServiceImpl implements AnalysisService {
                 resp.setYPct12(Double.parseDouble(String.format("%.2f",resp.getYPct12())));
                 resp.setYPct13(Double.parseDouble(String.format("%.2f",resp.getYPct13())));
                 resp.setYPct14(Double.parseDouble(String.format("%.2f",resp.getYPct14())));
+                resp.setYPct15(Double.parseDouble(String.format("%.2f",resp.getYPct15())));
 
                 //计算市值
                 resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
