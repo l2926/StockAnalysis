@@ -47,10 +47,14 @@ public interface AnalysisMapper {
     List<TwoDaysDifferResp> selectIndustryMember(LimitReq limitReq);
     List<LimitBoardResp> selectLimitBoard(LimitReq limitReq);
 
+    // 历史行情纵览
     List<WeekOverviewResp> selectWeekOverview(LimitReq limitReq);
     List<MonthOverviewResp> selectMonthOverview(LimitReq limitReq);
     List<SeasonOverviewResp> selectSeasonOverview(LimitReq limitReq);
     List<YearOverviewResp> selectYearOverview(LimitReq limitReq);
     List<DailyOverviewResp> selectDailyOverview(LimitReq limitReq);
+    List<DailyOverviewResp> selectDailyOriginOverview(LimitReq limitReq);
+    List<DailyOverviewResp> selectDailyPbOverview(LimitReq limitReq);
+    List<DailyOverviewResp> selectDailyGrowthOverview(LimitReq limitReq);
     List<HotMoneyResp> selectHotMoneyDetail(LimitReq limitReq);
 }

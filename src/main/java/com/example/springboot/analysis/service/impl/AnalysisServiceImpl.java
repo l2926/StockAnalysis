@@ -923,7 +923,23 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<DailyOverviewResp> getDailyOverview(LimitReq limitReq){
         System.out.println("----getDailyOverview Service----");
-        List<DailyOverviewResp> dailyOverviewRespList = analysisMapper.selectDailyOverview(limitReq);
+        List<DailyOverviewResp> dailyOverviewRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            dailyOverviewRespList = analysisMapper.selectDailyOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            dailyOverviewRespList = analysisMapper.selectDailyOriginOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 3){
+            dailyOverviewRespList = analysisMapper.selectDailyPbOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 4){
+            dailyOverviewRespList = analysisMapper.selectDailyGrowthOverview(limitReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         dailyOverviewRespList.stream().forEach(resp->{
