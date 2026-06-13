@@ -382,6 +382,43 @@
         where a.pct_chg > 9
         order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
     </select>
+    <select id="selectWeekOriginOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_pct_origin1 as week_pct1,c.week_pct_origin2 as week_pct2,c.week_pct_origin3 as week_pct3,c.week_pct_origin4 as week_pct4,c.week_pct_origin5 as week_pct5,
+        c.week_pct_origin6 as week_pct6,c.week_pct_origin7 as week_pct7,c.week_pct_origin8 as week_pct8,c.week_pct_origin9 as week_pct9,c.week_pct_origin10 as week_pct10,
+        c.week_pct_origin11 as week_pct11,c.week_pct_origin12 as week_pct12,c.week_pct_origin13 as week_pct13,c.week_pct_origin14 as week_pct14,c.week_pct_origin15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+        inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectWeekPbOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_pb1 as week_pct1,c.week_pb2 as week_pct2,c.week_pb3 as week_pct3,c.week_pb4 as week_pct4,c.week_pb5 as week_pct5,
+        c.week_pb6 as week_pct6,c.week_pb7 as week_pct7,c.week_pb8 as week_pct8,c.week_pb9 as week_pct9,c.week_pb10 as week_pct10,
+        c.week_pb11 as week_pct11,c.week_pb12 as week_pct12,c.week_pb13 as week_pct13,c.week_pb14 as week_pct14,c.week_pb15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+        inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+    <select id="selectWeekGrowthOverview" resultType="com.example.springboot.industry.vo.resp.WeekOverviewResp">
+        select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
+        b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,
+        c.week_growth_rate1 as week_pct1,c.week_growth_rate2 as week_pct2,c.week_growth_rate3 as week_pct3,c.week_growth_rate4 as week_pct4,c.week_growth_rate5 as week_pct5,
+        c.week_growth_rate6 as week_pct6,c.week_growth_rate7 as week_pct7,c.week_growth_rate8 as week_pct8,c.week_growth_rate9 as week_pct9,c.week_growth_rate10 as week_pct10,
+        c.week_growth_rate11 as week_pct11,c.week_growth_rate12 as week_pct12,c.week_growth_rate13 as week_pct13,c.week_growth_rate14 as week_pct14,c.week_growth_rate15 as week_pct15
+        from common_daily.`${tradeDate}` as a
+        inner join stock_list.industry_member as b on a.ts_code = b.ts_code
+        inner join hfq_daily.`${tradeDate}` as c on b.ts_code = c.ts_code
+        where a.pct_chg > 9
+        order by industry_name_l1, industry_name_l2, industry_name_l3, total_mv desc;
+    </select>
+
     <select id="selectMonthOverview" resultType="com.example.springboot.industry.vo.resp.MonthOverviewResp">
         select a.ts_code,a.trade_date,b.name,b.market,a.pb,a.total_mv,a.pct_chg ,
                b.area,b.industry_name_l1,b.industry_name_l2,b.industry_name_l3,

@@ -587,7 +587,23 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<WeekOverviewResp> getWeekOverview(LimitReq limitReq){
         System.out.println("----week_overview analysis Service----");
-        List<WeekOverviewResp> weekOverviewRespList = analysisMapper.selectWeekOverview(limitReq);
+        List<WeekOverviewResp> weekOverviewRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            weekOverviewRespList = analysisMapper.selectWeekOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            weekOverviewRespList = analysisMapper.selectWeekOriginOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 3){
+            weekOverviewRespList = analysisMapper.selectWeekPbOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 4){
+            weekOverviewRespList = analysisMapper.selectWeekGrowthOverview(limitReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         weekOverviewRespList.stream().forEach(resp->{

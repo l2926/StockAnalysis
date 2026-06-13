@@ -49,6 +49,9 @@ public interface AnalysisMapper {
 
     // 历史行情纵览
     List<WeekOverviewResp> selectWeekOverview(LimitReq limitReq);
+    List<WeekOverviewResp> selectWeekOriginOverview(LimitReq limitReq);
+    List<WeekOverviewResp> selectWeekPbOverview(LimitReq limitReq);
+    List<WeekOverviewResp> selectWeekGrowthOverview(LimitReq limitReq);
     List<MonthOverviewResp> selectMonthOverview(LimitReq limitReq);
     List<SeasonOverviewResp> selectSeasonOverview(LimitReq limitReq);
     List<YearOverviewResp> selectYearOverview(LimitReq limitReq);
