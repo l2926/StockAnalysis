@@ -690,8 +690,45 @@
     </select>
 
 
+    <sql id="data_base">
+        <if test="level == 'L1'">
+            stock_list.level1_list
+        </if>
+        <if test="level == 'L2'">
+            stock_list.level2_list
+        </if>
+        <if test="level == 'L3'">
+            stock_list.level3_list
+        </if>
+
+    </sql>
+
+    <sql id="col_base">
+        <if test="level == 'L1'">
+            d.index_code_l1
+        </if>
+        <if test="level == 'L2'">
+            d.index_code_l2
+        </if>
+        <if test="level == 'L3'">
+            d.index_code_l3
+        </if>
+    </sql>
+
+    <sql id="level_where">
+        <if test="level == 'L1'">
+            level = 'L1'
+        </if>
+        <if test="level == 'L2'">
+            level = 'L2'
+        </if>
+        <if test="level == 'L3'">
+            level = 'L3'
+        </if>
+    </sql>
 
 <!--  板块历史趋势概览  -->
+<!--  日线行情  -->
     <select id="selectDailyPctOverview" resultType="com.example.springboot.index.vo.resp.DailyOverviewResp">
         select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
                b.day_pct1 as day1,b.day_pct2 as day2,b.day_pct3 as day3,b.day_pct4 as day4,b.day_pct5 as day5,
@@ -700,8 +737,225 @@
         from stock_list.industry_list as a
                  left join index_history.`20260608` as b on a.index_code = b.ts_code
                  left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
-                 right join stock_list.level1_list as d on c.ts_code = d.index_code_l1
-        where a.`level` = 'L1'
+                 right join <include refid="data_base"></include>
+            as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectDailyPctOriginOverview" resultType="com.example.springboot.index.vo.resp.DailyOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.day_pct_origin1 as day1,b.day_pct_origin2 as day2,b.day_pct_origin3 as day3,b.day_pct_origin4 as day4,b.day_pct_origin5 as day5,
+        b.day_pct_origin6 as day6,b.day_pct_origin7 as day7,b.day_pct_origin8 as day8,b.day_pct_origin9 as day9,b.day_pct_origin10 as day10,
+        b.day_pct_origin11 as day11,b.day_pct_origin12 as day12,b.day_pct_origin13 as day13,b.day_pct_origin14 as day14,b.day_pct_origin15 as day15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectDailyPbOverview" resultType="com.example.springboot.index.vo.resp.DailyOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.day_pb1 as day1,b.day_pb2 as day2,b.day_pb3 as day3,b.day_pb4 as day4,b.day_pb5 as day5,
+        b.day_pb6 as day6,b.day_pb7 as day7,b.day_pb8 as day8,b.day_pb9 as day9,b.day_pb10 as day10,
+        b.day_pb11 as day11,b.day_pb12 as day12,b.day_pb13 as day13,b.day_pb14 as day14,b.day_pb15 as day15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <!--  周线行情  -->
+    <select id="selectWeekPctOverview" resultType="com.example.springboot.index.vo.resp.WeekOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.week_pct1 as week1,b.week_pct2 as week2,b.week_pct3 as week3,b.week_pct4 as week4,b.week_pct5 as week5,
+        b.week_pct6 as week6,b.week_pct7 as week7,b.week_pct8 as week8,b.week_pct9 as week9,b.week_pct10 as week10,
+        b.week_pct11 as week11,b.week_pct12 as week12,b.week_pct13 as week13,b.week_pct14 as week14,b.week_pct15 as week15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectWeekPctOriginOverview" resultType="com.example.springboot.index.vo.resp.WeekOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.week_pct_origin1 as week1,b.week_pct_origin2 as week2,b.week_pct_origin3 as week3,b.week_pct_origin4 as week4,b.week_pct_origin5 as week5,
+        b.week_pct_origin6 as week6,b.week_pct_origin7 as week7,b.week_pct_origin8 as week8,b.week_pct_origin9 as week9,b.week_pct_origin10 as week10,
+        b.week_pct_origin11 as week11,b.week_pct_origin12 as week12,b.week_pct_origin13 as week13,b.week_pct_origin14 as week14,b.week_pct_origin15 as week15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectWeekPbOverview" resultType="com.example.springboot.index.vo.resp.WeekOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.week_pb1 as week1,b.week_pb2 as week2,b.week_pb3 as week3,b.week_pb4 as week4,b.week_pb5 as week5,
+        b.week_pb6 as week6,b.week_pb7 as week7,b.week_pb8 as week8,b.week_pb9 as week9,b.week_pb10 as week10,
+        b.week_pb11 as week11,b.week_pb12 as week12,b.week_pb13 as week13,b.week_pb14 as week14,b.week_pb15 as week15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <!--  月线行情  -->
+    <select id="selectMonthPctOverview" resultType="com.example.springboot.index.vo.resp.MonthOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.month_pct1 as month1,b.month_pct2 as month2,b.month_pct3 as month3,b.month_pct4 as month4,b.month_pct5 as month5,
+        b.month_pct6 as month6,b.month_pct7 as month7,b.month_pct8 as month8,b.month_pct9 as month9,b.month_pct10 as month10,
+        b.month_pct11 as month11,b.month_pct12 as month12,b.month_pct13 as month13,b.month_pct14 as month14,b.month_pct15 as month15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectMonthPctOriginOverview" resultType="com.example.springboot.index.vo.resp.MonthOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.month_pct_origin1 as month1,b.month_pct_origin2 as month2,b.month_pct_origin3 as month3,b.month_pct_origin4 as month4,b.month_pct_origin5 as month5,
+        b.month_pct_origin6 as month6,b.month_pct_origin7 as month7,b.month_pct_origin8 as month8,b.month_pct_origin9 as month9,b.month_pct_origin10 as month10,
+        b.month_pct_origin11 as month11,b.month_pct_origin12 as month12,b.month_pct_origin13 as month13,b.month_pct_origin14 as month14,b.month_pct_origin15 as month15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectMonthPbOverview" resultType="com.example.springboot.index.vo.resp.MonthOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.month_pb1 as month1,b.month_pb2 as month2,b.month_pb3 as month3,b.month_pb4 as month4,b.month_pb5 as month5,
+        b.month_pb6 as month6,b.month_pb7 as month7,b.month_pb8 as month8,b.month_pb9 as month9,b.month_pb10 as month10,
+        b.month_pb11 as month11,b.month_pb12 as month12,b.month_pb13 as month13,b.month_pb14 as month14,b.month_pb15 as month15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <!--  季线行情  -->
+    <select id="selectSeasonPctOverview" resultType="com.example.springboot.index.vo.resp.SeasonOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.season_pct1 as season1,b.season_pct2 as season2,b.season_pct3 as season3,b.season_pct4 as season4,b.season_pct5 as season5,
+        b.season_pct6 as season6,b.season_pct7 as season7,b.season_pct8 as season8,b.season_pct9 as season9,b.season_pct10 as season10,
+        b.season_pct11 as season11,b.season_pct12 as season12,b.season_pct13 as season13,b.season_pct14 as season14,b.season_pct15 as season15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectSeasonPctOriginOverview" resultType="com.example.springboot.index.vo.resp.SeasonOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.season_pct_origin1 as season1,b.season_pct_origin2 as season2,b.season_pct_origin3 as season3,b.season_pct_origin4 as season4,b.season_pct_origin5 as season5,
+        b.season_pct_origin6 as season6,b.season_pct_origin7 as season7,b.season_pct_origin8 as season8,b.season_pct_origin9 as season9,b.season_pct_origin10 as season10,
+        b.season_pct_origin11 as season11,b.season_pct_origin12 as season12,b.season_pct_origin13 as season13,b.season_pct_origin14 as season14,b.season_pct_origin15 as season15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectSeasonPbOverview" resultType="com.example.springboot.index.vo.resp.SeasonOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.season_pb1 as season1,b.season_pb2 as season2,b.season_pb3 as season3,b.season_pb4 as season4,b.season_pb5 as season5,
+        b.season_pb6 as season6,b.season_pb7 as season7,b.season_pb8 as season8,b.season_pb9 as season9,b.season_pb10 as season10,
+        b.season_pb11 as season11,b.season_pb12 as season12,b.season_pb13 as season13,b.season_pb14 as season14,b.season_pb15 as season15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <!--  年线行情  -->
+    <select id="selectYearPctOverview" resultType="com.example.springboot.index.vo.resp.YearOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.year_pct1 as year1,b.year_pct2 as year2,b.year_pct3 as year3,b.year_pct4 as year4,b.year_pct5 as year5,
+        b.year_pct6 as year6,b.year_pct7 as year7,b.year_pct8 as year8,b.year_pct9 as year9,b.year_pct10 as year10,
+        b.year_pct11 as year11,b.year_pct12 as year12,b.year_pct13 as year13,b.year_pct14 as year14,b.year_pct15 as year15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectYearPctOriginOverview" resultType="com.example.springboot.index.vo.resp.YearOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.year_pct_origin1 as year1,b.year_pct_origin2 as year2,b.year_pct_origin3 as year3,b.year_pct_origin4 as year4,b.year_pct_origin5 as year5,
+        b.year_pct_origin6 as year6,b.year_pct_origin7 as year7,b.year_pct_origin8 as year8,b.year_pct_origin9 as year9,b.year_pct_origin10 as year10,
+        b.year_pct_origin11 as year11,b.year_pct_origin12 as year12,b.year_pct_origin13 as year13,b.year_pct_origin14 as year14,b.year_pct_origin15 as year15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
+    </select>
+
+    <select id="selectYearPbOverview" resultType="com.example.springboot.index.vo.resp.YearOverviewResp">
+        select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+        b.year_pb1 as year1,b.year_pb2 as year2,b.year_pb3 as year3,b.year_pb4 as year4,b.year_pb5 as year5,
+        b.year_pb6 as year6,b.year_pb7 as year7,b.year_pb8 as year8,b.year_pb9 as year9,b.year_pb10 as year10,
+        b.year_pb11 as year11,b.year_pb12 as year12,b.year_pb13 as year13,b.year_pb14 as year14,b.year_pb15 as year15
+        from stock_list.industry_list as a
+        left join index_history.`20260608` as b on a.index_code = b.ts_code
+        left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+        right join <include refid="data_base"></include>
+        as d on c.ts_code = <include refid="col_base"></include>
+        <where>
+            <include refid="level_where"></include>
+        </where>
     </select>
 
 </mapper>

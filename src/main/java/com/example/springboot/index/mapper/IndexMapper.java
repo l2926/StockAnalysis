@@ -91,4 +91,18 @@ public interface IndexMapper {
      * 历史行情概览
      */
     List<DailyOverviewResp> selectDailyPctOverview(IndexReq indexReq);
+    List<DailyOverviewResp> selectDailyPctOriginOverview(IndexReq indexReq);
+    List<DailyOverviewResp> selectDailyPbOverview(IndexReq indexReq);
+    List<WeekOverviewResp> selectWeekPctOverview(IndexReq indexReq);
+    List<WeekOverviewResp> selectWeekPctOriginOverview(IndexReq indexReq);
+    List<WeekOverviewResp> selectWeekPbOverview(IndexReq indexReq);
+    List<MonthOverviewResp> selectMonthPctOverview(IndexReq indexReq);
+    List<MonthOverviewResp> selectMonthPctOriginOverview(IndexReq indexReq);
+    List<MonthOverviewResp> selectMonthPbOverview(IndexReq indexReq);
+    List<SeasonOverviewResp> selectSeasonPctOverview(IndexReq indexReq);
+    List<SeasonOverviewResp> selectSeasonPctOriginOverview(IndexReq indexReq);
+    List<SeasonOverviewResp> selectSeasonPbOverview(IndexReq indexReq);
+    List<YearOverviewResp> selectYearPctOverview(IndexReq indexReq);
+    List<YearOverviewResp> selectYearPctOriginOverview(IndexReq indexReq);
+    List<YearOverviewResp> selectYearPbOverview(IndexReq indexReq);
 }

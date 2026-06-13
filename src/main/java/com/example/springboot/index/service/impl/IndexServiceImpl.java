@@ -944,11 +944,97 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public List<DailyOverviewResp> getDailyPctOverview(IndexReq indexReq){
         System.out.println("----daily_overview service----");
-        List<DailyOverviewResp> dailyOverviewRespList = indexMapper.selectDailyPctOverview(indexReq);
+
+        List<DailyOverviewResp> dailyOverviewRespList = null;
+        if(indexReq.getSelectId() == 1){
+            dailyOverviewRespList = indexMapper.selectDailyPctOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 2){
+            dailyOverviewRespList = indexMapper.selectDailyPctOriginOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 3){
+            dailyOverviewRespList = indexMapper.selectDailyPbOverview(indexReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         dailyOverviewRespList.stream().forEach(resp->{
             resp.setIdx(idx.getAndIncrement());
+
+            if(resp.getPctChange() != null){
+                if(resp.getPctChange() != null){
+                    resp.setPctChange(Double.parseDouble(String.format("%.2f",resp.getPctChange())));
+                }
+
+                if(resp.getDay1() != null){
+                    resp.setDay1(Double.parseDouble(String.format("%.2f",resp.getDay1())));
+                }
+
+                if(resp.getDay2() != null){
+                    resp.setDay2(Double.parseDouble(String.format("%.2f",resp.getDay2())));
+                }
+
+                if(resp.getDay3() != null){
+                    resp.setDay3(Double.parseDouble(String.format("%.2f",resp.getDay3())));
+                }
+
+                if(resp.getDay4() != null){
+                    resp.setDay4(Double.parseDouble(String.format("%.2f",resp.getDay4())));
+                }
+
+                if(resp.getDay5() != null){
+                    resp.setDay5(Double.parseDouble(String.format("%.2f",resp.getDay5())));
+                }
+
+                if(resp.getDay6() != null){
+                    resp.setDay6(Double.parseDouble(String.format("%.2f",resp.getDay6())));
+                }
+
+                if(resp.getDay7() != null){
+                    resp.setDay7(Double.parseDouble(String.format("%.2f",resp.getDay7())));
+                }
+
+                if(resp.getDay8() != null){
+                    resp.setDay8(Double.parseDouble(String.format("%.2f",resp.getDay8())));
+                }
+
+                if(resp.getDay9() != null){
+                    resp.setDay9(Double.parseDouble(String.format("%.2f",resp.getDay9())));
+                }
+
+                if(resp.getDay10() != null){
+                    resp.setDay10(Double.parseDouble(String.format("%.2f",resp.getDay10())));
+                }
+
+                if(resp.getDay11() != null){
+                    resp.setDay11(Double.parseDouble(String.format("%.2f",resp.getDay11())));
+                }
+
+                if(resp.getDay12() != null){
+                    resp.setDay12(Double.parseDouble(String.format("%.2f",resp.getDay12())));
+                }
+
+                if(resp.getDay13() != null){
+                    resp.setDay13(Double.parseDouble(String.format("%.2f",resp.getDay13())));
+                }
+
+                if(resp.getDay14() != null){
+                    resp.setDay14(Double.parseDouble(String.format("%.2f",resp.getDay14())));
+                }
+
+                if(resp.getDay15() != null){
+                    resp.setDay15(Double.parseDouble(String.format("%.2f",resp.getDay15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
         });
         return dailyOverviewRespList;
     }
@@ -956,24 +1042,391 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public List<WeekOverviewResp> getWeekOverview(IndexReq indexReq){
         System.out.println("----week_overview service----");
-        return null;
+        List<WeekOverviewResp> weekOverviewRespList = null;
+
+        if(indexReq.getSelectId() == 1){
+            weekOverviewRespList = indexMapper.selectWeekPctOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 2){
+            weekOverviewRespList = indexMapper.selectWeekPctOriginOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 3){
+            weekOverviewRespList = indexMapper.selectWeekPbOverview(indexReq);
+        }
+        AtomicInteger idx = new AtomicInteger(1);
+        weekOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+
+            if(resp.getPctChange() != null){
+                if(resp.getPctChange() != null){
+                    resp.setPctChange(Double.parseDouble(String.format("%.2f",resp.getPctChange())));
+                }
+
+                if(resp.getWeek1() != null){
+                    resp.setWeek1(Double.parseDouble(String.format("%.2f",resp.getWeek1())));
+                }
+
+                if(resp.getWeek2() != null){
+                    resp.setWeek2(Double.parseDouble(String.format("%.2f",resp.getWeek2())));
+                }
+
+                if(resp.getWeek3() != null){
+                    resp.setWeek3(Double.parseDouble(String.format("%.2f",resp.getWeek3())));
+                }
+
+                if(resp.getWeek4() != null){
+                    resp.setWeek4(Double.parseDouble(String.format("%.2f",resp.getWeek4())));
+                }
+
+                if(resp.getWeek5() != null){
+                    resp.setWeek5(Double.parseDouble(String.format("%.2f",resp.getWeek5())));
+                }
+
+                if(resp.getWeek6() != null){
+                    resp.setWeek6(Double.parseDouble(String.format("%.2f",resp.getWeek6())));
+                }
+
+                if(resp.getWeek7() != null){
+                    resp.setWeek7(Double.parseDouble(String.format("%.2f",resp.getWeek7())));
+                }
+
+                if(resp.getWeek8() != null){
+                    resp.setWeek8(Double.parseDouble(String.format("%.2f",resp.getWeek8())));
+                }
+
+                if(resp.getWeek9() != null){
+                    resp.setWeek9(Double.parseDouble(String.format("%.2f",resp.getWeek9())));
+                }
+
+                if(resp.getWeek10() != null){
+                    resp.setWeek10(Double.parseDouble(String.format("%.2f",resp.getWeek10())));
+                }
+
+                if(resp.getWeek11() != null){
+                    resp.setWeek11(Double.parseDouble(String.format("%.2f",resp.getWeek11())));
+                }
+
+                if(resp.getWeek12() != null){
+                    resp.setWeek12(Double.parseDouble(String.format("%.2f",resp.getWeek12())));
+                }
+
+                if(resp.getWeek13() != null){
+                    resp.setWeek13(Double.parseDouble(String.format("%.2f",resp.getWeek13())));
+                }
+
+                if(resp.getWeek14() != null){
+                    resp.setWeek14(Double.parseDouble(String.format("%.2f",resp.getWeek14())));
+                }
+
+                if(resp.getWeek15() != null){
+                    resp.setWeek15(Double.parseDouble(String.format("%.2f",resp.getWeek15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+        return weekOverviewRespList;
     }
 
     @Override
     public List<MonthOverviewResp> getMonthOverview(IndexReq indexReq){
         System.out.println("----month_overview service----");
-        return null;
+
+        List<MonthOverviewResp> monthOverviewRespList = null;
+        if(indexReq.getSelectId() == 1){
+            monthOverviewRespList = indexMapper.selectMonthPctOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 2){
+            monthOverviewRespList = indexMapper.selectMonthPctOriginOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 3){
+            monthOverviewRespList = indexMapper.selectMonthPbOverview(indexReq);
+        }
+
+        AtomicInteger idx = new AtomicInteger(1);
+        monthOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+
+            if(resp.getPctChange() != null){
+                if(resp.getPctChange() != null){
+                    resp.setPctChange(Double.parseDouble(String.format("%.2f",resp.getPctChange())));
+                }
+
+                if(resp.getMonth1() != null){
+                    resp.setMonth1(Double.parseDouble(String.format("%.2f",resp.getMonth1())));
+                }
+
+                if(resp.getMonth2() != null){
+                    resp.setMonth2(Double.parseDouble(String.format("%.2f",resp.getMonth2())));
+                }
+
+                if(resp.getMonth3() != null){
+                    resp.setMonth3(Double.parseDouble(String.format("%.2f",resp.getMonth3())));
+                }
+
+                if(resp.getMonth4() != null){
+                    resp.setMonth4(Double.parseDouble(String.format("%.2f",resp.getMonth4())));
+                }
+
+                if(resp.getMonth5() != null){
+                    resp.setMonth5(Double.parseDouble(String.format("%.2f",resp.getMonth5())));
+                }
+
+                if(resp.getMonth6() != null){
+                    resp.setMonth6(Double.parseDouble(String.format("%.2f",resp.getMonth6())));
+                }
+
+                if(resp.getMonth7() != null){
+                    resp.setMonth7(Double.parseDouble(String.format("%.2f",resp.getMonth7())));
+                }
+
+                if(resp.getMonth8() != null){
+                    resp.setMonth8(Double.parseDouble(String.format("%.2f",resp.getMonth8())));
+                }
+
+                if(resp.getMonth9() != null){
+                    resp.setMonth9(Double.parseDouble(String.format("%.2f",resp.getMonth9())));
+                }
+
+                if(resp.getMonth10() != null){
+                    resp.setMonth10(Double.parseDouble(String.format("%.2f",resp.getMonth10())));
+                }
+
+                if(resp.getMonth11() != null){
+                    resp.setMonth11(Double.parseDouble(String.format("%.2f",resp.getMonth11())));
+                }
+
+                if(resp.getMonth12() != null){
+                    resp.setMonth12(Double.parseDouble(String.format("%.2f",resp.getMonth12())));
+                }
+
+                if(resp.getMonth13() != null){
+                    resp.setMonth13(Double.parseDouble(String.format("%.2f",resp.getMonth13())));
+                }
+
+                if(resp.getMonth14() != null){
+                    resp.setMonth14(Double.parseDouble(String.format("%.2f",resp.getMonth14())));
+                }
+
+                if(resp.getMonth15() != null){
+                    resp.setMonth15(Double.parseDouble(String.format("%.2f",resp.getMonth15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+        return monthOverviewRespList;
     }
 
     @Override
     public List<SeasonOverviewResp> getSeasonOverview(IndexReq indexReq){
         System.out.println("----season_overview service----");
-        return null;
+        List<SeasonOverviewResp> seasonOverviewRespList = null;
+
+        if(indexReq.getSelectId() == 1){
+            seasonOverviewRespList = indexMapper.selectSeasonPctOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 2){
+            seasonOverviewRespList = indexMapper.selectSeasonPctOriginOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 3){
+            seasonOverviewRespList = indexMapper.selectSeasonPbOverview(indexReq);
+        }
+
+        AtomicInteger idx = new AtomicInteger(1);
+        seasonOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+
+            if(resp.getPctChange() != null){
+                if(resp.getPctChange() != null){
+                    resp.setPctChange(Double.parseDouble(String.format("%.2f",resp.getPctChange())));
+                }
+
+                if(resp.getSeason1() != null){
+                    resp.setSeason1(Double.parseDouble(String.format("%.2f",resp.getSeason1())));
+                }
+
+                if(resp.getSeason2() != null){
+                    resp.setSeason2(Double.parseDouble(String.format("%.2f",resp.getSeason2())));
+                }
+
+                if(resp.getSeason3() != null){
+                    resp.setSeason3(Double.parseDouble(String.format("%.2f",resp.getSeason3())));
+                }
+
+                if(resp.getSeason4() != null){
+                    resp.setSeason4(Double.parseDouble(String.format("%.2f",resp.getSeason4())));
+                }
+
+                if(resp.getSeason5() != null){
+                    resp.setSeason5(Double.parseDouble(String.format("%.2f",resp.getSeason5())));
+                }
+
+                if(resp.getSeason6() != null){
+                    resp.setSeason6(Double.parseDouble(String.format("%.2f",resp.getSeason6())));
+                }
+
+                if(resp.getSeason7() != null){
+                    resp.setSeason7(Double.parseDouble(String.format("%.2f",resp.getSeason7())));
+                }
+
+                if(resp.getSeason8() != null){
+                    resp.setSeason8(Double.parseDouble(String.format("%.2f",resp.getSeason8())));
+                }
+
+                if(resp.getSeason9() != null){
+                    resp.setSeason9(Double.parseDouble(String.format("%.2f",resp.getSeason9())));
+                }
+
+                if(resp.getSeason10() != null){
+                    resp.setSeason10(Double.parseDouble(String.format("%.2f",resp.getSeason10())));
+                }
+
+                if(resp.getSeason11() != null){
+                    resp.setSeason11(Double.parseDouble(String.format("%.2f",resp.getSeason11())));
+                }
+
+                if(resp.getSeason12() != null){
+                    resp.setSeason12(Double.parseDouble(String.format("%.2f",resp.getSeason12())));
+                }
+
+                if(resp.getSeason13() != null){
+                    resp.setSeason13(Double.parseDouble(String.format("%.2f",resp.getSeason13())));
+                }
+
+                if(resp.getSeason14() != null){
+                    resp.setSeason14(Double.parseDouble(String.format("%.2f",resp.getSeason14())));
+                }
+
+                if(resp.getSeason15() != null){
+                    resp.setSeason15(Double.parseDouble(String.format("%.2f",resp.getSeason15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+        return seasonOverviewRespList;
     }
 
     @Override
     public List<YearOverviewResp> getYearOverview(IndexReq indexReq){
         System.out.println("----year_overview service----");
-        return null;
+        List<YearOverviewResp> yearOverviewRespList = null;
+
+        if(indexReq.getSelectId() == 1){
+            yearOverviewRespList = indexMapper.selectYearPctOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 2){
+            yearOverviewRespList = indexMapper.selectYearPctOriginOverview(indexReq);
+        }
+
+        if(indexReq.getSelectId() == 3){
+            yearOverviewRespList = indexMapper.selectYearPbOverview(indexReq);
+        }
+
+        AtomicInteger idx = new AtomicInteger(1);
+        yearOverviewRespList.stream().forEach(resp->{
+            resp.setIdx(idx.getAndIncrement());
+
+            if(resp.getPctChange() != null){
+                if(resp.getPctChange() != null){
+                    resp.setPctChange(Double.parseDouble(String.format("%.2f",resp.getPctChange())));
+                }
+
+                if(resp.getYear1() != null){
+                    resp.setYear1(Double.parseDouble(String.format("%.2f",resp.getYear1())));
+                }
+
+                if(resp.getYear2() != null){
+                    resp.setYear2(Double.parseDouble(String.format("%.2f",resp.getYear2())));
+                }
+
+                if(resp.getYear3() != null){
+                    resp.setYear3(Double.parseDouble(String.format("%.2f",resp.getYear3())));
+                }
+
+                if(resp.getYear4() != null){
+                    resp.setYear4(Double.parseDouble(String.format("%.2f",resp.getYear4())));
+                }
+
+                if(resp.getYear5() != null){
+                    resp.setYear5(Double.parseDouble(String.format("%.2f",resp.getYear5())));
+                }
+
+                if(resp.getYear6() != null){
+                    resp.setYear6(Double.parseDouble(String.format("%.2f",resp.getYear6())));
+                }
+
+                if(resp.getYear7() != null){
+                    resp.setYear7(Double.parseDouble(String.format("%.2f",resp.getYear7())));
+                }
+
+                if(resp.getYear8() != null){
+                    resp.setYear8(Double.parseDouble(String.format("%.2f",resp.getYear8())));
+                }
+
+                if(resp.getYear9() != null){
+                    resp.setYear9(Double.parseDouble(String.format("%.2f",resp.getYear9())));
+                }
+
+                if(resp.getYear10() != null){
+                    resp.setYear10(Double.parseDouble(String.format("%.2f",resp.getYear10())));
+                }
+
+                if(resp.getYear11() != null){
+                    resp.setYear11(Double.parseDouble(String.format("%.2f",resp.getYear11())));
+                }
+
+                if(resp.getYear12() != null){
+                    resp.setYear12(Double.parseDouble(String.format("%.2f",resp.getYear12())));
+                }
+
+                if(resp.getYear13() != null){
+                    resp.setYear13(Double.parseDouble(String.format("%.2f",resp.getYear13())));
+                }
+
+                if(resp.getYear14() != null){
+                    resp.setYear14(Double.parseDouble(String.format("%.2f",resp.getYear14())));
+                }
+
+                if(resp.getYear15() != null){
+                    resp.setYear15(Double.parseDouble(String.format("%.2f",resp.getYear15())));
+                }
+
+                //计算市值
+                resp.setTotalMv(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / 10000)));
+                //计算净资产
+                if(resp.getPb() != null && resp.getPb() != 0){
+                    resp.setAsset(Double.parseDouble(String.format("%.2f",resp.getTotalMv() / resp.getPb())));
+                }
+            }
+
+        });
+        return yearOverviewRespList;
     }
 }

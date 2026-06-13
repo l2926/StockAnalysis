@@ -76,3 +76,16 @@ from stock_list.industry_member as a
          left join stock_list.stock_company as c on b.ts_code = c.ts_code
 where total_mv/pb > 10000000
 group by industry_name_l1 ;
+
+
+-- 历史行情
+
+select a.index_code ,d.industry_name_l1,d.industry_name_l2,d.industry_name_l3,c.pct_change,c.pb ,c.total_mv ,c.trade_date ,
+       b.day_pct1 as day1,b.day_pct2 as day2,b.day_pct3 as day3,b.day_pct4 as day4,b.day_pct5 as day5,
+       b.day_pct6 as day6,b.day_pct7 as day7,b.day_pct8 as day8,b.day_pct9 as day9,b.day_pct10 as day10,
+       b.day_pct11 as day11,b.day_pct12 as day12,b.day_pct13 as day13,b.day_pct14 as day14,b.day_pct15 as day15
+from stock_list.industry_list as a
+         left join index_history.`20260608` as b on a.index_code = b.ts_code
+         left join shenwan_daily.`20260608` as c on b.ts_code = c.ts_code
+         right join stock_list.level1_list as d on c.ts_code = d.index_code_l1
+WHERE level = 'L1';

@@ -30,6 +30,7 @@ public class SeasonOverviewResp {
     private Double season1;
     private Double pctChange;
     private Double pb;
+    private Double asset;
     private Double totalMv;
     private String tradeDate;
 }
