@@ -48,35 +48,40 @@ public class CompareServiceImpl implements CompareService {
             int coefficient2 = 1;
             if(compareReq.getSelectId1() == 1){
                 coefficient1 = 1000;
-            }else{
+            }
+            if(compareReq.getSelectId1() == 2){
                 coefficient1 = 10;
             }
 
             if(compareReq.getSelectId2() == 1){
                 coefficient2 = 1000;
-            }else{
+            }
+            if(compareReq.getSelectId2() == 2){
                 coefficient2 = 10;
             }
 
+            try{
+                //对比1的行情数据
+                DailyVo dailyVo1 = dailyVoMap1.get(tradeDate);
+                if(dailyVo1 != null){
+                    compare.setOpen1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getOpen()/openFirstDay1)));
+                    compare.setClose1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getClose()/openFirstDay1)));
+                    compare.setLow1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getLow()/openFirstDay1)));
+                    compare.setHigh1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getHigh()/openFirstDay1)));
+                    compare.setPctChg1(Double.parseDouble(String.format("%.2f",dailyVo1.getPctChg())));
+                }
 
-            //对比1的行情数据
-            DailyVo dailyVo1 = dailyVoMap1.get(tradeDate);
-            if(dailyVo1 != null){
-                compare.setOpen1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getOpen()/openFirstDay1)));
-                compare.setClose1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getClose()/openFirstDay1)));
-                compare.setLow1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getLow()/openFirstDay1)));
-                compare.setHigh1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getHigh()/openFirstDay1)));
-                compare.setPctChg1(Double.parseDouble(String.format("%.2f",dailyVo1.getPctChg())));
-            }
-
-            //对比2的行情数据
-            DailyVo dailyVo2 = dailyVoMap2.get(tradeDate);
-            if(dailyVo2 != null){
-                compare.setOpen2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getOpen()/openFirstDay2)));
-                compare.setClose2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getClose()/openFirstDay2)));
-                compare.setLow2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getLow()/openFirstDay2)));
-                compare.setHigh2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getHigh()/openFirstDay2)));
-                compare.setPctChg2(Double.parseDouble(String.format("%.2f",dailyVo2.getPctChg())));
+                //对比2的行情数据
+                DailyVo dailyVo2 = dailyVoMap2.get(tradeDate);
+                if(dailyVo2 != null){
+                    compare.setOpen2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getOpen()/openFirstDay2)));
+                    compare.setClose2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getClose()/openFirstDay2)));
+                    compare.setLow2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getLow()/openFirstDay2)));
+                    compare.setHigh2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getHigh()/openFirstDay2)));
+                    compare.setPctChg2(Double.parseDouble(String.format("%.2f",dailyVo2.getPctChg())));
+                }
+            }catch(Exception e){
+                System.out.println("行情异常:"+e);
             }
         });
 
