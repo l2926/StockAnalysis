@@ -30,6 +30,9 @@ public class CompareServiceImpl implements CompareService {
         List<DailyVo> dailyVoList1 = compareMapper.selectUpDaily(compareReq);
         List<DailyVo> dailyVoList2 = compareMapper.selectDownDaily(compareReq);
 
+        Double openFirstDay1 = dailyVoList1.get(0).getOpen();
+        Double openFirstDay2 = dailyVoList2.get(0).getOpen();
+
         //将对比的两条K线，先转成map
         Map<String,DailyVo> dailyVoMap1 = dailyVoList1.stream()
                 .collect(Collectors.toMap(DailyVo::getTradeDate,vo->vo));
@@ -41,36 +44,39 @@ public class CompareServiceImpl implements CompareService {
         dailyCompareVoList.stream().forEach(compare->{
             String tradeDate = compare.getTradeDate();
 
+            int coefficient1 = 1;
+            int coefficient2 = 1;
+            if(compareReq.getSelectId1() == 1){
+                coefficient1 = 1000;
+            }else{
+                coefficient1 = 10;
+            }
+
+            if(compareReq.getSelectId2() == 1){
+                coefficient2 = 1000;
+            }else{
+                coefficient2 = 10;
+            }
+
+
             //对比1的行情数据
             DailyVo dailyVo1 = dailyVoMap1.get(tradeDate);
             if(dailyVo1 != null){
-                compare.setOpen1(dailyVo1.getOpen());
-                compare.setClose1(dailyVo1.getClose());
-                compare.setLow1(dailyVo1.getLow());
-                compare.setHigh1(dailyVo1.getHigh());
-                compare.setAmount1(dailyVo1.getAmount());
-                compare.setTurnOverRate1(dailyVo1.getTurnOverRate());
-                compare.setTurnOverRateF1(dailyVo1.getTurnOverRateF());
-                compare.setPctChg1(dailyVo1.getPctChg());
-                compare.setPb1(dailyVo1.getPb());
-                compare.setPe1(dailyVo1.getPe());
-                compare.setTotalMv1(dailyVo1.getTotalMv());
+                compare.setOpen1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getOpen()/openFirstDay1)));
+                compare.setClose1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getClose()/openFirstDay1)));
+                compare.setLow1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getLow()/openFirstDay1)));
+                compare.setHigh1(Double.parseDouble(String.format("%.2f",coefficient1*dailyVo1.getHigh()/openFirstDay1)));
+                compare.setPctChg1(Double.parseDouble(String.format("%.2f",dailyVo1.getPctChg())));
             }
 
             //对比2的行情数据
             DailyVo dailyVo2 = dailyVoMap2.get(tradeDate);
             if(dailyVo2 != null){
-                compare.setOpen2(dailyVo2.getOpen());
-                compare.setClose2(dailyVo2.getClose());
-                compare.setLow2(dailyVo2.getLow());
-                compare.setHigh2(dailyVo2.getHigh());
-                compare.setAmount2(dailyVo2.getAmount());
-                compare.setTurnOverRate2(dailyVo2.getTurnOverRate());
-                compare.setTurnOverRateF2(dailyVo2.getTurnOverRateF());
-                compare.setPctChg2(dailyVo2.getPctChg());
-                compare.setPb2(dailyVo2.getPb());
-                compare.setPe2(dailyVo2.getPe());
-                compare.setTotalMv2(dailyVo2.getTotalMv());
+                compare.setOpen2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getOpen()/openFirstDay2)));
+                compare.setClose2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getClose()/openFirstDay2)));
+                compare.setLow2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getLow()/openFirstDay2)));
+                compare.setHigh2(Double.parseDouble(String.format("%.2f",coefficient2*dailyVo2.getHigh()/openFirstDay2)));
+                compare.setPctChg2(Double.parseDouble(String.format("%.2f",dailyVo2.getPctChg())));
             }
         });
 
