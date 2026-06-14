@@ -9,6 +9,7 @@ import com.example.springboot.industry.vo.req.IndustryReq;
 import com.example.springboot.industry.vo.resp.*;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.time.Month;
 import java.util.List;
 
 /**
@@ -53,8 +54,17 @@ public interface AnalysisMapper {
     List<WeekOverviewResp> selectWeekPbOverview(LimitReq limitReq);
     List<WeekOverviewResp> selectWeekGrowthOverview(LimitReq limitReq);
     List<MonthOverviewResp> selectMonthOverview(LimitReq limitReq);
+    List<MonthOverviewResp> selectMonthOriginOverview(LimitReq limitReq);
+    List<MonthOverviewResp> selectMonthPbOverview(LimitReq limitReq);
+    List<MonthOverviewResp> selectMonthGrowthOverview(LimitReq limitReq);
     List<SeasonOverviewResp> selectSeasonOverview(LimitReq limitReq);
+    List<SeasonOverviewResp> selectSeasonOriginOverview(LimitReq limitReq);
+    List<SeasonOverviewResp> selectSeasonPbOverview(LimitReq limitReq);
+    List<SeasonOverviewResp> selectSeasonGrowthOverview(LimitReq limitReq);
     List<YearOverviewResp> selectYearOverview(LimitReq limitReq);
+    List<YearOverviewResp> selectYearOriginOverview(LimitReq limitReq);
+    List<YearOverviewResp> selectYearPbOverview(LimitReq limitReq);
+    List<YearOverviewResp> selectYearGrowthOverview(LimitReq limitReq);
     List<DailyOverviewResp> selectDailyOverview(LimitReq limitReq);
     List<DailyOverviewResp> selectDailyOriginOverview(LimitReq limitReq);
     List<DailyOverviewResp> selectDailyPbOverview(LimitReq limitReq);

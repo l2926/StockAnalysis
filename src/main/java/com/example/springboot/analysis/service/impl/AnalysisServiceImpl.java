@@ -685,7 +685,23 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<MonthOverviewResp> getMonthOverview(LimitReq limitReq){
         System.out.println("----month_overview analysis Service----");
-        List<MonthOverviewResp> monthOverviewRespList = analysisMapper.selectMonthOverview(limitReq);
+        List<MonthOverviewResp> monthOverviewRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            monthOverviewRespList = analysisMapper.selectMonthOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            monthOverviewRespList = analysisMapper.selectMonthOriginOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 3){
+            monthOverviewRespList = analysisMapper.selectMonthPbOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 4){
+            monthOverviewRespList = analysisMapper.selectMonthGrowthOverview(limitReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         monthOverviewRespList.stream().forEach(resp->{
@@ -769,7 +785,23 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<SeasonOverviewResp> getSeasonOverview(LimitReq limitReq){
         System.out.println("----season_overview analysis Service----");
-        List<SeasonOverviewResp> seasonOverviewRespList = analysisMapper.selectSeasonOverview(limitReq);
+        List<SeasonOverviewResp> seasonOverviewRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            seasonOverviewRespList = analysisMapper.selectSeasonOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            seasonOverviewRespList = analysisMapper.selectSeasonOriginOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 3){
+            seasonOverviewRespList = analysisMapper.selectSeasonPbOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 4){
+            seasonOverviewRespList = analysisMapper.selectSeasonGrowthOverview(limitReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         seasonOverviewRespList.stream().forEach(resp->{
@@ -853,7 +885,23 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public List<YearOverviewResp> getYearOverview(LimitReq limitReq){
         System.out.println("----year_overview analysis Service----");
-        List<YearOverviewResp> yearOverviewRespList = analysisMapper.selectYearOverview(limitReq);
+        List<YearOverviewResp> yearOverviewRespList = null;
+
+        if(limitReq.getSelectId() == 1){
+            yearOverviewRespList = analysisMapper.selectYearOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 2){
+            yearOverviewRespList = analysisMapper.selectYearOriginOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 3){
+            yearOverviewRespList = analysisMapper.selectYearPbOverview(limitReq);
+        }
+
+        if(limitReq.getSelectId() == 4){
+            yearOverviewRespList = analysisMapper.selectYearGrowthOverview(limitReq);
+        }
 
         AtomicInteger idx = new AtomicInteger(1);
         yearOverviewRespList.stream().forEach(resp->{
